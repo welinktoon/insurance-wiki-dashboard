@@ -5,6 +5,7 @@
 - [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) — вся цепочка: цель, хронология, аналитика, решения, противоречия и источники.
 - [BACKLOG_SNAPSHOT.md](BACKLOG_SNAPSHOT.md) — полный снимок бэклога Адрианы на 21.08.2026.
 - [insurance-docs-dashboard.html](insurance-docs-dashboard.html) — интерактивная статистика, план действий, пробелы и варианты обновления документации.
+- [Опубликованный дашборд](https://welinktoon.github.io/insurance-wiki-dashboard/insurance-docs-dashboard.html) — версия на GitHub Pages с экраном доступа.
 
 Основные онлайн-источники:
 

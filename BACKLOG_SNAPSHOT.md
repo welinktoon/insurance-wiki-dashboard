@@ -64,7 +64,7 @@
 - Дата: 20.08.2026
 - Дедлайн: 21.08.2026
 - Ответственная: Адриана — оценка объёма и скорости
-- Статус: Беклог
+- Статус: Готово
 - Приоритет: Срочно
 - Оценка: 1–2 ч
 - Ссылка: <https://docs.google.com/spreadsheets/d/1xqoph_7c3NWHfaCjEHKRVsRXppFB1abuxyOYHfRWMhM/edit>
@@ -75,6 +75,9 @@
   3. Разбить объём по продуктам и сложности.
   4. Назвать общий срок и ближайший план.
   5. Примечание: последующий анализ показывает 164 страховые карточки, 59 пакетов и 222 часа.
+- Результат:
+  - Дашборд: <https://welinktoon.github.io/insurance-wiki-dashboard/insurance-docs-dashboard.html>
+  - GitHub: <https://github.com/welinktoon/insurance-wiki-dashboard>
 
 ## 5. Собрать примеры и правила документации у тестировщиков
 
