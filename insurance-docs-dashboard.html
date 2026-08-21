@@ -1,0 +1,1211 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Статистика и план обновления страховой документации по доске 89">
+  <title>Страховая документация — план обновления</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #ffffff;
+      --surface-soft: #f7f9fc;
+      --surface-blue: #f2f7ff;
+      --ink: #0b1739;
+      --muted: #5b6782;
+      --line: #dce3ee;
+      --line-strong: #c6d0df;
+      --blue: #0866e8;
+      --blue-dark: #064eaf;
+      --blue-soft: #dbeaff;
+      --coral: #e54837;
+      --amber: #e99216;
+      --teal: #0f8f8a;
+      --radius: 10px;
+      --space: clamp(18px, 2.2vw, 32px);
+      --shadow: 0 10px 30px rgba(11, 23, 57, 0.06);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.45;
+      text-rendering: optimizeLegibility;
+    }
+
+    button, select, input { font: inherit; }
+    button { color: inherit; }
+
+    .page {
+      width: min(1540px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: minmax(410px, 1fr) auto;
+      align-items: end;
+      gap: 24px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 6px;
+      font-size: clamp(30px, 3.2vw, 54px);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+      max-width: 940px;
+    }
+
+    .headline-stats {
+      margin: 0 0 4px;
+      color: var(--ink);
+      font-size: clamp(18px, 1.6vw, 25px);
+      font-weight: 720;
+      letter-spacing: -0.02em;
+    }
+
+    .source-note { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .controls {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .control { display: grid; gap: 7px; }
+    .control-label { color: var(--muted); font-size: 12px; font-weight: 650; }
+
+    .tabs {
+      display: inline-flex;
+      border: 1px solid var(--line-strong);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--surface);
+    }
+
+    .tab {
+      min-height: 38px;
+      padding: 0 15px;
+      border: 0;
+      border-right: 1px solid var(--line);
+      background: transparent;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .tab:last-child { border-right: 0; }
+    .tab:hover { background: var(--surface-soft); }
+    .tab.is-active { background: var(--blue); color: white; }
+
+    select {
+      min-height: 38px;
+      min-width: 190px;
+      padding: 0 36px 0 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: 8px;
+      background: white;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .toggle-row { display: flex; align-items: center; gap: 9px; min-height: 38px; }
+    .toggle { position: relative; width: 42px; height: 24px; }
+    .toggle input { position: absolute; opacity: 0; pointer-events: none; }
+    .toggle span {
+      position: absolute; inset: 0;
+      border-radius: 999px;
+      background: #c8d1e0;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+    .toggle span::after {
+      content: "";
+      position: absolute;
+      width: 18px; height: 18px;
+      top: 3px; left: 3px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 1px 4px rgba(11,23,57,.25);
+      transition: .2s ease;
+    }
+    .toggle input:checked + span { background: var(--blue); }
+    .toggle input:checked + span::after { transform: translateX(18px); }
+
+    .section { margin-top: var(--space); }
+
+    .strategy-impact {
+      display: grid;
+      grid-template-columns: minmax(210px, .7fr) repeat(3, minmax(150px, 1fr));
+      align-items: center;
+      gap: 1px;
+      margin-top: 14px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--line);
+    }
+    .strategy-impact > div { min-height: 74px; padding: 14px 18px; background: var(--surface-blue); }
+    .strategy-impact-kicker { display: block; color: var(--blue); font-size: 11px; font-weight: 800; }
+    .strategy-impact strong { display: block; margin-top: 2px; font-size: 17px; }
+    .strategy-impact-label { display: block; color: var(--muted); font-size: 11px; }
+    .strategy-impact-value { display: block; margin-top: 3px; font-size: 14px; font-weight: 760; }
+    .section-title {
+      margin-bottom: 14px;
+      font-size: 20px;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+    }
+
+    .panel {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .overview {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) 170px minmax(360px, 1fr);
+      min-height: 400px;
+    }
+
+    .overview > * { padding: 20px; }
+    .overview > * + * { border-left: 1px solid var(--line); }
+
+    .chart-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .chart-toolbar h2, .expectations h2 { margin: 0; font-size: 19px; }
+    .chart-toolbar span { color: var(--muted); font-size: 12px; }
+
+    .bars { display: grid; gap: 14px; }
+    .bar-row {
+      display: grid;
+      grid-template-columns: minmax(180px, 280px) minmax(220px, 1fr) 72px;
+      gap: 14px;
+      align-items: center;
+    }
+    .bar-label { min-width: 0; }
+    .bar-label strong { display: block; font-size: 13px; }
+    .bar-label span { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
+    .bar-track {
+      position: relative;
+      height: 14px;
+      background: #edf1f7;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      width: 0;
+      background: var(--blue);
+      border-radius: 3px;
+      transition: width .45s ease;
+    }
+    .bar-value { font-size: 13px; font-weight: 750; }
+
+    .metric-stack { display: grid; align-content: start; }
+    .metric {
+      padding: 10px 0 14px;
+      border-bottom: 1px solid var(--line);
+    }
+    .metric:first-child { padding-top: 0; }
+    .metric:last-child { border-bottom: 0; }
+    .metric-label { color: var(--muted); font-size: 11px; font-weight: 650; }
+    .metric-value { margin-top: 2px; color: var(--blue); font-size: 23px; font-weight: 780; letter-spacing: -0.03em; }
+    .metric-sub { color: var(--muted); font-size: 11px; }
+
+    .expectations h2 { margin-bottom: 12px; }
+    .expectation-list { list-style: none; padding: 0; margin: 0; counter-reset: item; }
+    .expectation-list li {
+      counter-increment: item;
+      display: grid;
+      grid-template-columns: 26px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .expectation-list li:last-child { border-bottom: 0; }
+    .expectation-list li::before {
+      content: counter(item);
+      display: grid; place-items: center;
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: white;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .selected-product {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+    }
+    .selected-product h3 { margin-bottom: 8px; font-size: 14px; }
+    .change-list { margin: 0; padding-left: 18px; color: var(--muted); font-size: 12px; }
+    .change-list li + li { margin-top: 5px; }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: minmax(310px, .8fr) minmax(540px, 1.5fr);
+      gap: 12px;
+    }
+
+    .work-grid > .panel { padding: 20px; }
+
+    .steps { list-style: none; padding: 0; margin: 0; counter-reset: step; }
+    .steps li {
+      counter-increment: step;
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      gap: 12px;
+      position: relative;
+      padding: 0 0 18px;
+    }
+    .steps li:last-child { padding-bottom: 0; }
+    .steps li:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      left: 14px; top: 29px; bottom: 2px;
+      width: 1px;
+      background: var(--blue-soft);
+    }
+    .steps li::before {
+      content: counter(step);
+      z-index: 1;
+      display: grid; place-items: center;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: white;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .steps strong { display: block; font-size: 14px; }
+    .steps span { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
+
+    .table-wrap { max-width: 100%; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td {
+      padding: 12px 13px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+    th { color: var(--muted); font-size: 11px; font-weight: 760; letter-spacing: .01em; }
+    td { font-size: 13px; }
+    tbody tr:last-child td { border-bottom: 0; }
+    .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 7px; }
+    .status-dot.urgent { background: var(--coral); }
+    .status-dot.open { background: var(--amber); }
+    .status-dot.ok { background: var(--teal); }
+    .nowrap { white-space: nowrap; }
+    .muted { color: var(--muted); }
+
+    .strategy-table { table-layout: fixed; }
+    .strategy-table th:first-child, .strategy-table td:first-child { width: 19%; }
+    .strategy-cell { transition: background .2s ease, box-shadow .2s ease; }
+    .strategy-cell.is-selected {
+      background: var(--surface-blue);
+      box-shadow: inset 2px 0 var(--blue), inset -2px 0 var(--blue);
+    }
+    .strategy-table thead .strategy-cell.is-selected { box-shadow: inset 2px 2px var(--blue), inset -2px 0 var(--blue); color: var(--blue-dark); }
+    .strategy-table tbody tr:last-child .strategy-cell.is-selected { box-shadow: inset 2px 0 var(--blue), inset -2px -2px var(--blue); }
+    .risk { display: inline-flex; align-items: center; gap: 7px; font-weight: 700; }
+    .risk::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+    .risk.high { color: var(--coral); }
+    .risk.medium { color: var(--amber); }
+    .risk.low { color: var(--teal); }
+    .recommended { color: var(--blue); font-weight: 800; }
+
+    .product-layout {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 12px;
+    }
+    .product-layout > .panel { overflow: hidden; }
+    .product-heading { padding: 18px 20px 0; }
+    .product-heading h2 { margin-bottom: 4px; font-size: 19px; }
+    .product-heading p { margin-bottom: 12px; color: var(--muted); font-size: 12px; }
+    .num { text-align: right; font-variant-numeric: tabular-nums; }
+    .total-row td { font-weight: 800; background: var(--surface-soft); }
+
+    .recommendation { padding: 20px; }
+    .recommendation-box {
+      border: 1.5px solid var(--blue);
+      border-radius: 9px;
+      padding: 24px;
+      background: var(--surface-blue);
+    }
+    .recommendation-kicker { margin: 0 0 5px; color: var(--muted); font-size: 12px; font-weight: 700; }
+    .recommendation-box h3 { margin-bottom: 18px; color: var(--blue-dark); font-size: 25px; }
+    .start-plan { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; padding: 0; list-style: none; }
+    .start-plan li { padding: 0 18px; text-align: center; font-weight: 720; }
+    .start-plan li + li { border-left: 1px solid var(--line-strong); }
+    .start-plan svg { display: block; width: 28px; height: 28px; margin: 0 auto 9px; color: var(--blue); }
+
+    .actions { display: flex; gap: 12px; margin-top: 18px; }
+    .btn {
+      min-height: 42px;
+      padding: 0 18px;
+      border-radius: 8px;
+      border: 1px solid var(--line-strong);
+      background: white;
+      color: var(--blue-dark);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 760;
+    }
+    .btn:hover { border-color: var(--blue); }
+    .btn.primary { background: var(--blue); color: white; border-color: var(--blue); flex: 1; }
+    .btn.primary:hover { background: var(--blue-dark); }
+    .btn.is-confirmed { background: var(--teal); border-color: var(--teal); }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 22px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .footer a { color: var(--blue-dark); }
+
+    .hidden-by-gaps { display: none !important; }
+
+    .password-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: rgba(11, 23, 57, .72);
+      backdrop-filter: blur(12px);
+    }
+    body:not(.locked) .password-gate { display: none; }
+    body.locked .page { filter: blur(10px); pointer-events: none; user-select: none; }
+    .password-card {
+      width: min(420px, 100%);
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      box-shadow: 0 24px 70px rgba(11, 23, 57, .24);
+    }
+    .password-card h2 { margin-bottom: 8px; font-size: 26px; }
+    .password-card p { margin-bottom: 20px; color: var(--muted); }
+    .password-form { display: grid; gap: 12px; }
+    .password-form label { color: var(--muted); font-size: 12px; font-weight: 700; }
+    .password-form input {
+      width: 100%;
+      min-height: 46px;
+      padding: 0 13px;
+      border: 1px solid var(--line-strong);
+      border-radius: 8px;
+      color: var(--ink);
+      background: white;
+    }
+    .password-error { min-height: 18px; margin: 0 !important; color: var(--coral) !important; font-size: 12px; }
+
+    .analytics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .analytics-card { padding: 20px; }
+    .analytics-card h2 { margin-bottom: 4px; }
+    .analytics-note { margin-bottom: 18px; color: var(--muted); font-size: 12px; }
+    .donut-layout {
+      display: grid;
+      grid-template-columns: 190px minmax(0, 1fr);
+      gap: 22px;
+      align-items: center;
+    }
+    .donut {
+      position: relative;
+      width: 180px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: conic-gradient(var(--blue) 0 100%);
+    }
+    .donut::after {
+      content: "";
+      position: absolute;
+      inset: 37px;
+      border-radius: 50%;
+      background: var(--surface);
+    }
+    .donut-center {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: grid;
+      place-content: center;
+      text-align: center;
+      pointer-events: none;
+    }
+    .donut-center strong { font-size: 29px; line-height: 1; letter-spacing: -.04em; }
+    .donut-center span { margin-top: 5px; color: var(--muted); font-size: 11px; }
+    .legend { display: grid; gap: 9px; }
+    .legend-row { display: grid; grid-template-columns: 10px minmax(0, 1fr) auto; gap: 9px; align-items: center; font-size: 12px; }
+    .legend-swatch { width: 10px; height: 10px; border-radius: 2px; }
+    .legend-value { font-weight: 760; font-variant-numeric: tabular-nums; }
+
+    .time-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(320px, .75fr);
+      gap: 12px;
+    }
+    .time-grid > .panel { padding: 20px; }
+    .time-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin: 16px 0 22px; background: var(--line); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+    .time-stat { padding: 16px; background: var(--surface-soft); }
+    .time-stat span { display: block; color: var(--muted); font-size: 11px; }
+    .time-stat strong { display: block; margin-top: 2px; color: var(--blue-dark); font-size: 23px; letter-spacing: -.03em; }
+    .average-bars { display: grid; gap: 11px; }
+    .average-row { display: grid; grid-template-columns: minmax(160px, 260px) minmax(150px, 1fr) 76px; gap: 12px; align-items: center; }
+    .average-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; font-weight: 650; }
+    .average-track { height: 10px; border-radius: 3px; overflow: hidden; background: #edf1f7; }
+    .average-fill { height: 100%; border-radius: 3px; background: var(--teal); }
+    .average-value { text-align: right; font-size: 12px; font-weight: 760; }
+    .estimate-box { padding: 18px; border-radius: 8px; background: var(--surface-blue); }
+    .estimate-box label { display: flex; justify-content: space-between; gap: 12px; font-weight: 720; }
+    .estimate-box input { width: 100%; margin: 16px 0 18px; accent-color: var(--blue); }
+    .estimate-result { display: grid; gap: 12px; }
+    .estimate-line { display: flex; justify-content: space-between; gap: 14px; padding-top: 12px; border-top: 1px solid var(--line-strong); }
+    .estimate-line span { color: var(--muted); font-size: 12px; }
+    .estimate-line strong { text-align: right; font-size: 16px; }
+    .estimate-warning { margin: 16px 0 0; color: var(--blue-dark); font-size: 12px; font-weight: 650; }
+
+    .approach-panel { padding: 20px; }
+    .verdict {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 18px;
+      border-left: 4px solid var(--amber);
+      background: #fff9ee;
+    }
+    .verdict strong { display: block; margin-bottom: 4px; font-size: 18px; }
+    .verdict p { margin: 0; color: var(--muted); }
+    .verdict-mark { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--amber); color: white; font-weight: 850; }
+    .approach-columns { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; margin-top: 24px; }
+    .approach-columns h3 { margin-bottom: 10px; font-size: 15px; }
+    .decision-list { margin: 0; padding-left: 20px; }
+    .decision-list li + li { margin-top: 8px; }
+    .decision-list span { color: var(--muted); }
+    .wave-plan { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: 24px; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--line); }
+    .wave { padding: 16px; background: var(--surface); }
+    .wave small { color: var(--blue); font-weight: 800; }
+    .wave strong { display: block; margin: 4px 0; font-size: 13px; }
+    .wave span { color: var(--muted); font-size: 11px; }
+
+    :focus-visible { outline: 3px solid rgba(8, 102, 232, .25); outline-offset: 2px; }
+
+    @media (max-width: 1180px) {
+      .topbar { grid-template-columns: 1fr; align-items: start; }
+      .controls { justify-content: flex-start; }
+      .overview { grid-template-columns: minmax(0, 1fr) 150px; }
+      .expectations { grid-column: 1 / -1; border-left: 0 !important; border-top: 1px solid var(--line); }
+      .work-grid, .product-layout { grid-template-columns: 1fr; }
+      .time-grid { grid-template-columns: 1fr; }
+      .strategy-impact { grid-template-columns: repeat(2, 1fr); }
+      .donut-layout { grid-template-columns: 160px minmax(0, 1fr); }
+      .donut { width: 150px; }
+      .donut::after { inset: 31px; }
+    }
+
+    @media (max-width: 760px) {
+      .page { width: min(100% - 20px, 1540px); padding-top: 15px; }
+      h1 { font-size: 34px; }
+      .controls { display: grid; grid-template-columns: 1fr; width: 100%; }
+      .tabs { width: 100%; overflow-x: auto; }
+      .tab { flex: 1; min-width: max-content; }
+      select { width: 100%; }
+      .overview { grid-template-columns: 1fr; }
+      .overview > * + * { border-left: 0; border-top: 1px solid var(--line); }
+      .bar-row { grid-template-columns: 1fr 58px; }
+      .bar-track { grid-column: 1 / -1; grid-row: 2; }
+      .bar-value { grid-column: 2; grid-row: 1; text-align: right; }
+      .strategy-table { min-width: 780px; }
+      .product-table { min-width: 780px; }
+      .gap-table { min-width: 720px; }
+      .start-plan { grid-template-columns: 1fr; gap: 16px; }
+      .start-plan li + li { border-left: 0; border-top: 1px solid var(--line-strong); padding-top: 16px; }
+      .actions { flex-direction: column; }
+      .footer { flex-direction: column; }
+      .analytics-grid, .approach-columns { grid-template-columns: 1fr; }
+      .donut-layout { grid-template-columns: 1fr; justify-items: center; }
+      .legend { width: 100%; }
+      .time-summary { grid-template-columns: 1fr; }
+      .average-row { grid-template-columns: minmax(0, 1fr) 70px; }
+      .average-track { grid-column: 1 / -1; grid-row: 2; }
+      .average-value { grid-column: 2; grid-row: 1; }
+      .wave-plan { grid-template-columns: 1fr; }
+      .strategy-impact { grid-template-columns: 1fr; }
+      .strategy-impact > div { min-height: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body class="locked">
+  <section class="password-gate" id="passwordGate" aria-labelledby="passwordTitle">
+    <div class="password-card">
+      <h2 id="passwordTitle">Доступ к дашборду</h2>
+      <p>Введите код, чтобы открыть статистику обновления Wiki.</p>
+      <form class="password-form" id="passwordForm">
+        <label for="passwordInput">Код доступа</label>
+        <input id="passwordInput" type="password" inputmode="numeric" autocomplete="off" required autofocus>
+        <p class="password-error" id="passwordError" role="alert"></p>
+        <button class="btn primary" type="submit">Открыть</button>
+      </form>
+    </div>
+  </section>
+  <main class="page">
+    <header class="topbar">
+      <div>
+        <h1>Страховая документация — план обновления</h1>
+        <p class="headline-stats">164 задачи → 59 пакетов → 222 часа</p>
+        <p class="source-note">Срез 20.08.2026 · Tracker-доска 89 · МФО исключено</p>
+      </div>
+
+      <div class="controls" aria-label="Фильтры дашборда">
+        <div class="control">
+          <span class="control-label">Фильтр по продукту</span>
+          <div class="tabs" role="group" aria-label="Выбор продукта">
+            <button class="tab is-active" type="button" data-filter="all">Все</button>
+            <button class="tab" type="button" data-filter="osago">ОСАГО</button>
+            <button class="tab" type="button" data-filter="kasko">КАСКО</button>
+            <button class="tab" type="button" data-filter="shared">Сквозные</button>
+          </div>
+        </div>
+
+        <label class="control">
+          <span class="control-label">Стратегия</span>
+          <select id="strategySelect">
+            <option value="fast">Быстро</option>
+            <option value="balanced" selected>Сбалансированно</option>
+            <option value="thorough">Основательно</option>
+          </select>
+        </label>
+
+        <div class="control">
+          <span class="control-label">Показать только пробелы</span>
+          <div class="toggle-row">
+            <label class="toggle" aria-label="Показать только пробелы">
+              <input id="gapsToggle" type="checkbox">
+              <span aria-hidden="true"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="strategy-impact" id="strategyImpact" aria-live="polite" aria-label="Влияние выбранной стратегии">
+      <div><span class="strategy-impact-kicker">Выбранная стратегия</span><strong id="strategyImpactTitle">Сбалансированно</strong></div>
+      <div><span class="strategy-impact-label">Охват</span><span class="strategy-impact-value" id="strategyImpactScope">Все 59 пакетов</span></div>
+      <div><span class="strategy-impact-label">Сценарный объём</span><span class="strategy-impact-value" id="strategyImpactHours">222 часа</span></div>
+      <div><span class="strategy-impact-label">Срок с ревью</span><span class="strategy-impact-value" id="strategyImpactWeeks">6,4 недели</span></div>
+    </section>
+
+    <section class="section panel overview" id="overviewSection">
+      <div>
+        <div class="chart-toolbar">
+          <h2>Нагрузка по продуктам</h2>
+          <span>Длина полосы = часы</span>
+        </div>
+        <div class="bars" id="bars" aria-live="polite"></div>
+      </div>
+
+      <aside class="metric-stack" aria-label="Сводные показатели">
+        <div class="metric">
+          <div class="metric-label">Пакетов</div>
+          <div class="metric-value" id="metricPackages">59</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Задач</div>
+          <div class="metric-value" id="metricTasks">164</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Часов</div>
+          <div class="metric-value" id="metricHours">222</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Создать новые</div>
+          <div class="metric-value" id="metricNew">97</div>
+          <div class="metric-sub" id="metricNewPct">59% задач</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Обновить</div>
+          <div class="metric-value" id="metricUpdate">67</div>
+          <div class="metric-sub" id="metricUpdatePct">41% задач</div>
+        </div>
+      </aside>
+
+      <aside class="expectations">
+        <h2>Что хотят от меня</h2>
+        <ol class="expectation-list">
+          <li>Понять, какие продукты изменились и какую документацию нужно создать или обновить.</li>
+          <li>Показать реальный объём: пакеты, задачи, часы и зависимости.</li>
+          <li>Начать с 2–3 пакетов, выработать один шаблон и измерить скорость.</li>
+          <li>Подсветить блокеры: доступы к Tracker и Wiki, владельцев ревью и приоритеты.</li>
+          <li>Предложить рабочую стратегию и довести изменения до опубликованных статей Wiki.</li>
+        </ol>
+        <div class="selected-product">
+          <h3 id="selectedProductTitle">Фокус: весь страховой контур</h3>
+          <ul class="change-list" id="changeList"></ul>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section analytics-grid" id="analyticsSection" aria-label="Распределение задач и трудозатрат">
+      <article class="panel analytics-card">
+        <h2 class="section-title">Какие продукты занимают доску</h2>
+        <p class="analytics-note" id="taskChartNote">Доля от 164 страховых задач. Сегменты обновляются вместе с фильтром продукта.</p>
+        <div class="donut-layout">
+          <div class="donut" id="taskDonut" role="img" aria-label="Распределение задач по продуктам">
+            <div class="donut-center"><strong id="taskDonutTotal">164</strong><span>задачи</span></div>
+          </div>
+          <div class="legend" id="taskLegend"></div>
+        </div>
+      </article>
+
+      <article class="panel analytics-card">
+        <h2 class="section-title">Где лежат трудозатраты</h2>
+        <p class="analytics-note" id="hourChartNote">Доля от 222 часов. ОСАГО — 36% задач, но 42,6% всей работы.</p>
+        <div class="donut-layout">
+          <div class="donut" id="hourDonut" role="img" aria-label="Распределение часов по продуктам">
+            <div class="donut-center"><strong id="hourDonutTotal">222</strong><span>часа</span></div>
+          </div>
+          <div class="legend" id="hourLegend"></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="section time-grid" id="timeSection">
+      <article class="panel">
+        <h2 class="section-title">Сколько времени занимает работа</h2>
+        <p class="analytics-note">Средние значения нужны для планирования: это не SLA. После пилота их следует заменить фактом.</p>
+        <div class="time-summary">
+          <div class="time-stat"><span>В среднем на задачу</span><strong id="avgTaskTime">1 ч 21 мин</strong></div>
+          <div class="time-stat"><span>В среднем на пакет / статью</span><strong id="avgPackageTime">3 ч 46 мин</strong></div>
+          <div class="time-stat"><span>Объём выбранной стратегии</span><strong id="baseHours">222 ч</strong></div>
+        </div>
+        <h3 class="section-title">Среднее на одну задачу по продукту</h3>
+        <div class="average-bars" id="averageBars" aria-live="polite"></div>
+      </article>
+
+      <aside class="panel">
+        <h2 class="section-title">Календарная оценка</h2>
+        <p class="analytics-note">Выберите реальную доступность на документацию, а не продолжительность рабочего дня.</p>
+        <div class="estimate-box">
+          <label for="capacityRange"><span>Доступность</span><strong><span id="capacityValue">40</span> ч/нед</strong></label>
+          <input id="capacityRange" type="range" min="10" max="40" step="5" value="40">
+          <div class="estimate-result" aria-live="polite">
+            <div class="estimate-line"><span>Чистое производство</span><strong id="pureWeeks">5,6 недели</strong></div>
+            <div class="estimate-line"><span>С ревью и публикацией (+15%)</span><strong id="bufferWeeks">6,4 недели</strong></div>
+            <div class="estimate-line"><span>Ориентир в месяцах</span><strong id="calendarMonths">≈ 1,5 месяца</strong></div>
+          </div>
+          <p class="estimate-warning" id="capacityWarning">Полная загрузка: реалистично только при закреплённом приоритете и быстром ревью.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section panel approach-panel" id="approachSection">
+      <h2 class="section-title">Правильно ли поставлена задача</h2>
+      <div class="verdict">
+        <div class="verdict-mark" aria-hidden="true">!</div>
+        <div><strong>Цель правильная, но способ выполнения нужно пересобрать</strong><p>Не стоит «переписывать 164 задачи». Единица результата — 59 актуальных пакетов / статей, а задачи Tracker служат доказательной базой изменений.</p></div>
+      </div>
+      <div class="approach-columns">
+        <div>
+          <h3>Что оставить</h3>
+          <ul class="decision-list">
+            <li>Сгруппировать задачи в пакеты и продуктовые волны.</li>
+            <li>Начать с 2–3 разных пилотных пакетов.</li>
+            <li>Сверять задачи Tracker, связанные изменения и текущие статьи Wiki.</li>
+            <li>Зафиксировать единый шаблон и цикл ревью.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Что пересмотреть до массового обновления</h3>
+          <ul class="decision-list">
+            <li>Согласовать разделы, шаблон и правила размещения новых статей в Wiki.</li>
+            <li>Расставить приоритеты по ценности и активности интеграций, а не по возрасту задач.</li>
+            <li>Не смешивать обновление Wiki с отдельными платформенными и автоматизационными инициативами.</li>
+            <li>Согласовать Definition of Done, владельца ревью и срок обратной связи.</li>
+            <li>Не планировать по 2 часа в день: <span>это растянет базовый объём примерно на 5–6 месяцев.</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="wave-plan" aria-label="Рекомендуемый порядок работы">
+        <div class="wave"><small>Шаг 0 · 1–2 дня</small><strong>Решения до старта</strong><span>Разделы Wiki, шаблон, владельцы, приоритеты.</span></div>
+        <div class="wave"><small>Шаг 1 · 2–3 дня</small><strong>Три пилота</strong><span>Новый, обновляемый и кросс-продуктовый пакет.</span></div>
+        <div class="wave"><small>Шаг 2 · 4–5 недель</small><strong>Продуктовые волны</strong><span>ОСАГО → сквозные → КАСКО → остаток.</span></div>
+        <div class="wave"><small>Шаг 3 · 3–5 дней</small><strong>Закрепление процесса</strong><span>Ревью, публикация и правило поддержки статей Wiki.</span></div>
+      </div>
+    </section>
+
+    <section class="section work-grid" id="workSection">
+      <article class="panel">
+        <h2 class="section-title">План действий</h2>
+        <ol class="steps">
+          <li><div><strong>Подтвердить структуру Wiki</strong><span>Разделы, шаблон статьи, правила именования и публикации.</span></div></li>
+          <li><div><strong>Получить доступы</strong><span>Tracker, Wiki и связанные материалы задач.</span></div></li>
+          <li><div><strong>Выбрать 2–3 пакета</strong><span>Приоритет — ОСАГО; взять разные типы изменений.</span></div></li>
+          <li><div><strong>Сделать пилот</strong><span>Один шаблон: назначение, контракт, примеры, ограничения, ошибки.</span></div></li>
+          <li><div><strong>Измерить скорость и качество</strong><span>Фактическое время, число правок, полнота и понятность статьи для команды.</span></div></li>
+          <li><div><strong>Масштабировать</strong><span>Обрабатывать по продуктам и пакетам, а не хаотично по отдельным задачам.</span></div></li>
+        </ol>
+      </article>
+
+      <article class="panel">
+        <h2 class="section-title">Чего не хватает</h2>
+        <div class="table-wrap">
+          <table class="gap-table">
+            <thead><tr><th>Пробел</th><th>Кто должен решить</th><th>Последствие</th></tr></thead>
+            <tbody>
+              <tr><td><span class="status-dot urgent"></span>Разделы и правила публикации в Wiki</td><td>Владелец Wiki / страховая команда</td><td>Статьи могут оказаться в разных местах и с разной структурой</td></tr>
+              <tr><td><span class="status-dot urgent"></span>Фактическая загрузка и оплата</td><td>Руководитель страхования / Гоша / Адриана</td><td>Оценка 5–6 недель не превращается в календарный план</td></tr>
+              <tr><td><span class="status-dot open"></span>Ссылки Tracker → целевые статьи Wiki</td><td>Адриана / владелец доски</td><td>Сложно проверить покрытие задач документацией и статус публикации</td></tr>
+              <tr><td><span class="status-dot open"></span>Владелец ревью и срок обратной связи</td><td>Страховая команда / тестировщики</td><td>Готовые статьи будут ждать проверки, а календарный срок вырастет</td></tr>
+              <tr><td><span class="status-dot open"></span>Приоритет КАСКО с Tinkoff</td><td>Коля / продуктовая команда</td><td>Работа может начаться не с того продукта</td></tr>
+              <tr><td><span class="status-dot open"></span>Единый стандарт статьи</td><td>Адриана + тестировщики</td><td>Разная глубина описания и дорогой повторный ревью</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <section class="section panel" id="strategySection">
+      <div style="padding: 20px 20px 0"><h2 class="section-title">Три режима обновления</h2></div>
+      <div class="table-wrap">
+        <table class="strategy-table">
+          <thead>
+            <tr><th>Критерий</th><th class="strategy-cell" data-strategy-cell="fast">Быстро</th><th class="strategy-cell is-selected" data-strategy-cell="balanced">Сбалансированно</th><th class="strategy-cell" data-strategy-cell="thorough">Основательно</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Охват</td><td class="strategy-cell" data-strategy-cell="fast">Только критичные методы и горячие продукты</td><td class="strategy-cell is-selected" data-strategy-cell="balanced">Все 59 пакетов по приоритетным волнам</td><td class="strategy-cell" data-strategy-cell="thorough">Все 59 пакетов Wiki с расширенными примерами и проверками</td></tr>
+            <tr><td>Старт</td><td class="strategy-cell" data-strategy-cell="fast">2–3 пакета ОСАГО сразу</td><td class="strategy-cell is-selected" data-strategy-cell="balanced">Пилот → шаблон → поток по продуктам</td><td class="strategy-cell" data-strategy-cell="thorough">Сначала архитектура и стандарт, затем производство</td></tr>
+            <tr><td>Контроль качества</td><td class="strategy-cell" data-strategy-cell="fast">Чек-лист и выборочный ревью</td><td class="strategy-cell is-selected" data-strategy-cell="balanced">Ревью каждого пакета в первой волне, затем выборочно</td><td class="strategy-cell" data-strategy-cell="thorough">Полный ревью каждой статьи и проверка всех примеров</td></tr>
+            <tr><td>Ориентир</td><td class="strategy-cell" data-strategy-cell="fast">4–5 недель при полной загрузке</td><td class="strategy-cell is-selected" data-strategy-cell="balanced">5–6 недель при полной загрузке</td><td class="strategy-cell" data-strategy-cell="thorough">8–10 недель с полным контролем качества</td></tr>
+            <tr><td>Риск</td><td class="strategy-cell" data-strategy-cell="fast"><span class="risk high">Высокий</span></td><td class="strategy-cell is-selected" data-strategy-cell="balanced"><span class="risk medium">Средний</span></td><td class="strategy-cell" data-strategy-cell="thorough"><span class="risk low">Низкий</span></td></tr>
+            <tr><td>Когда выбирать</td><td class="strategy-cell" data-strategy-cell="fast">Нужен результат сейчас, долг допустим</td><td class="strategy-cell is-selected recommended" data-strategy-cell="balanced">Рекомендуется: скорость без потери управляемости</td><td class="strategy-cell" data-strategy-cell="thorough">Есть стабильная команда и время на глубокий ревью Wiki</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section product-layout" id="detailSection">
+      <article class="panel">
+        <div class="product-heading">
+          <h2>Детализация по продуктам</h2>
+          <p>«Создать» и «обновить» показаны в пакетах; задачи и часы — фактический объём анализа.</p>
+        </div>
+        <div class="table-wrap">
+          <table class="product-table">
+            <thead><tr><th>Продукт</th><th class="num">Пакеты</th><th class="num">Задачи</th><th class="num">Часы</th><th class="num">Создать</th><th class="num">Обновить</th></tr></thead>
+            <tbody id="productTable"></tbody>
+            <tfoot><tr class="total-row"><td>Итого</td><td class="num" id="totalPackages">59</td><td class="num" id="totalTasks">164</td><td class="num" id="totalHours">222</td><td class="num" id="totalNewPackages">34</td><td class="num" id="totalUpdatePackages">25</td></tr></tfoot>
+          </table>
+        </div>
+      </article>
+
+      <article class="panel recommendation">
+        <h2 class="section-title">Рекомендация на старт</h2>
+        <div class="recommendation-box">
+          <p class="recommendation-kicker">Стартуем по стратегии</p>
+          <h3 id="recommendationTitle">Сбалансированно</h3>
+          <ul class="start-plan" id="startPlan">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6.5 12 2l8 4.5v11L12 22l-8-4.5z"/><path d="m4 6.5 8 4.5 8-4.5M12 11v11"/></svg>
+              <span>2–3 пакета ОСАГО</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2.5h8l4 4V21.5H6z"/><path d="M14 2.5v4h4M9 11h6M9 15h6"/></svg>
+              <span>1 единый шаблон</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 18.5c2.6 0 4.5-1 4.5-2.5s-1.9-2.5-4.5-2.5-4.5 1-4.5 2.5 1.9 2.5 4.5 2.5Z"/><circle cx="16" cy="7.5" r="3"/><path d="M8 13.5c-2.6 0-4.5 1-4.5 2.5S5.4 18.5 8 18.5M8 10.5a3 3 0 1 0 0-6"/></svg>
+              <span>1 цикл ревью</span>
+            </li>
+          </ul>
+        </div>
+        <div class="actions">
+          <button class="btn primary" id="confirmButton" type="button">Подтвердить план старта</button>
+          <button class="btn" id="downloadButton" type="button">Скачать план CSV</button>
+        </div>
+      </article>
+    </section>
+
+    <footer class="footer">
+      <span>Источник: аналитика доски 89, встречи 20.08.2026 и текущий бэклог Адрианы.</span>
+      <span><a href="https://docs.google.com/spreadsheets/d/1xqoph_7c3NWHfaCjEHKRVsRXppFB1abuxyOYHfRWMhM/edit?gid=1334092670" target="_blank" rel="noreferrer">Открыть аналитику</a> · <a href="https://docs.google.com/spreadsheets/d/1irHH05Nt5XozPcsyNY6TYnZYLEkMo-8EMEotZR4H814/edit?gid=1801911042" target="_blank" rel="noreferrer">Открыть бэклог</a></span>
+    </footer>
+  </main>
+
+  <script>
+    const products = [
+      {
+        id: "osago", name: "ОСАГО", packages: 28, tasks: 59, hours: 94.5,
+        newPackages: 17, updatePackages: 11, newTasks: 35, updateTasks: 24,
+        changes: ["Новые и обновлённые методы API", "Отчёты, платежи и логирование", "Главный продуктовый приоритет"]
+      },
+      {
+        id: "shared", name: "Сквозные страховые продукты", packages: 11, tasks: 63, hours: 61.5,
+        newPackages: 6, updatePackages: 5, newTasks: 36, updateTasks: 27,
+        changes: ["Общие API-методы и настройки", "АРМ, отчёты и операционный мониторинг", "Виджет и партнёрские ключи"]
+      },
+      {
+        id: "kasko", name: "КАСКО", packages: 8, tasks: 13, hours: 23,
+        newPackages: 4, updatePackages: 4, newTasks: 7, updateTasks: 6,
+        changes: ["GetKaskoOffers и ранжирование", "UploadDocument и документы", "Виджет, АРМ и интеграции со страховыми"]
+      },
+      {
+        id: "cross", name: "ОСАГО + кроссы КАСКО", packages: 5, tasks: 17, hours: 19,
+        newPackages: 2, updatePackages: 3, newTasks: 9, updateTasks: 8,
+        changes: ["Продажа КАСКО после ОСАГО", "Доступность и отмена кросс-продуктов", "Черновики и маскирование данных"]
+      },
+      {
+        id: "arm", name: "АРМ / CRM", packages: 4, tasks: 7, hours: 12,
+        newPackages: 2, updatePackages: 2, newTasks: 5, updateTasks: 2,
+        changes: ["Документы, черновики и архивы", "Быстрый поиск заявок", "Отчёты по оплаченным заявкам"]
+      },
+      {
+        id: "clarify", name: "Требует уточнения", packages: 2, tasks: 2, hours: 7,
+        newPackages: 2, updatePackages: 0, newTasks: 2, updateTasks: 0,
+        changes: ["GetModels", "Предмет одной статьи ещё не определён", "Нужен владелец решения"]
+      },
+      {
+        id: "mortgage", name: "Ипотека", packages: 1, tasks: 3, hours: 5,
+        newPackages: 1, updatePackages: 0, newTasks: 3, updateTasks: 0,
+        changes: ["Оформление", "Валидации", "Интеграционные сценарии"]
+      }
+    ];
+
+    const strategies = {
+      fast: {
+        title: "Быстро",
+        plan: ["2–3 пакета ОСАГО", "Короткий чек-лист", "Выборочный ревью"],
+        multiplier: 0.65,
+        scope: "Критичные методы и горячие продукты"
+      },
+      balanced: {
+        title: "Сбалансированно",
+        plan: ["2–3 пакета ОСАГО", "1 единый шаблон", "1 цикл ревью"],
+        multiplier: 1,
+        scope: "Все 59 пакетов по волнам"
+      },
+      thorough: {
+        title: "Основательно",
+        plan: ["Карта разделов Wiki", "Полный стандарт", "Ревью + тесты"],
+        multiplier: 1.35,
+        scope: "59 пакетов Wiki + полный ревью"
+      }
+    };
+
+    const state = { filter: "all", strategy: "balanced", gapsOnly: false };
+
+    const productColors = {
+      osago: "#0866e8",
+      shared: "#0f8f8a",
+      kasko: "#e99216",
+      cross: "#7656c7",
+      arm: "#e54837",
+      clarify: "#7b879d",
+      mortgage: "#33a1c9"
+    };
+
+    const fmt = (value) => {
+      const normalized = Math.round(value * 10) / 10;
+      return Number.isInteger(normalized) ? String(normalized) : String(normalized).replace(".", ",");
+    };
+    const sum = (rows, field) => rows.reduce((acc, row) => acc + row[field], 0);
+
+    function filteredProducts() {
+      if (state.filter === "all") return products;
+      if (state.filter === "osago") return products.filter(p => ["osago", "cross"].includes(p.id));
+      if (state.filter === "kasko") return products.filter(p => ["kasko", "cross"].includes(p.id));
+      if (state.filter === "shared") return products.filter(p => ["shared", "arm", "clarify"].includes(p.id));
+      return products;
+    }
+
+    function renderBars(rows) {
+      const max = Math.max(...rows.map(p => p.hours), 1);
+      const root = document.getElementById("bars");
+      root.innerHTML = rows.map(p => `
+        <div class="bar-row">
+          <div class="bar-label"><strong>${p.name}</strong><span>${p.packages} пак. · ${p.tasks} задач</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:${(p.hours / max * 100).toFixed(2)}%"></div></div>
+          <div class="bar-value">${fmt(p.hours)} ч</div>
+        </div>`).join("");
+    }
+
+    function formatDuration(hours) {
+      const totalMinutes = Math.round(hours * 60);
+      const wholeHours = Math.floor(totalMinutes / 60);
+      const minutes = totalMinutes % 60;
+      if (!wholeHours) return `${minutes} мин`;
+      return minutes ? `${wholeHours} ч ${minutes} мин` : `${wholeHours} ч`;
+    }
+
+    function renderDonut(rows, field, donutId, legendId, totalId, unit) {
+      const total = sum(rows, field);
+      let cursor = 0;
+      const segments = rows.map(product => {
+        const start = cursor;
+        cursor += total ? product[field] / total * 100 : 0;
+        return `${productColors[product.id]} ${start.toFixed(2)}% ${cursor.toFixed(2)}%`;
+      });
+      const donut = document.getElementById(donutId);
+      donut.style.background = total ? `conic-gradient(${segments.join(",")})` : "#edf1f7";
+      donut.setAttribute("aria-label", rows.map(product => `${product.name}: ${(product[field] / total * 100).toFixed(1)}%`).join("; "));
+      document.getElementById(totalId).textContent = fmt(total);
+      document.querySelector(`#${totalId} + span`).textContent = unit;
+      document.getElementById(legendId).innerHTML = rows.map(product => {
+        const share = total ? product[field] / total * 100 : 0;
+        return `<div class="legend-row"><span class="legend-swatch" style="background:${productColors[product.id]}"></span><span>${product.name}</span><span class="legend-value">${share.toFixed(1).replace(".", ",")}% · ${fmt(product[field])}</span></div>`;
+      }).join("");
+    }
+
+    function renderTimeAnalysis(rows) {
+      const sourceHours = sum(rows, "hours");
+      const hours = sourceHours * strategies[state.strategy].multiplier;
+      const tasks = sum(rows, "tasks");
+      const packages = sum(rows, "packages");
+      document.getElementById("avgTaskTime").textContent = tasks ? formatDuration(sourceHours / tasks) : "—";
+      document.getElementById("avgPackageTime").textContent = packages ? formatDuration(sourceHours / packages) : "—";
+      document.getElementById("baseHours").textContent = `${fmt(hours)} ч`;
+
+      const maxAverage = Math.max(...rows.map(product => product.hours / product.tasks), 1);
+      document.getElementById("averageBars").innerHTML = rows.map(product => {
+        const average = product.hours / product.tasks;
+        return `<div class="average-row"><div class="average-label">${product.name}</div><div class="average-track"><div class="average-fill" style="width:${(average / maxAverage * 100).toFixed(2)}%"></div></div><div class="average-value">${formatDuration(average)}</div></div>`;
+      }).join("");
+      renderCapacity();
+    }
+
+    function renderAnalytics(rows) {
+      const tasks = sum(rows, "tasks");
+      const hours = sum(rows, "hours");
+      renderDonut(rows, "tasks", "taskDonut", "taskLegend", "taskDonutTotal", tasks === 1 ? "задача" : "задач");
+      renderDonut(rows, "hours", "hourDonut", "hourLegend", "hourDonutTotal", "часов");
+      document.getElementById("taskChartNote").textContent = `Доля от ${tasks} задач в выбранном контуре. На всей доске лидируют сквозные продукты — 38,4%.`;
+      document.getElementById("hourChartNote").textContent = state.filter === "all"
+        ? "Доля от 222 часов. ОСАГО — 36% задач, но 42,6% всей работы."
+        : `Доля от ${fmt(hours)} часов в выбранном контуре.`;
+      renderTimeAnalysis(rows);
+    }
+
+    function renderCapacity() {
+      const capacity = Number(document.getElementById("capacityRange").value);
+      const hours = sum(filteredProducts(), "hours") * strategies[state.strategy].multiplier;
+      const pureWeeks = hours / capacity;
+      const bufferedWeeks = hours * 1.15 / capacity;
+      const months = bufferedWeeks / 4.345;
+      document.getElementById("capacityValue").textContent = capacity;
+      document.getElementById("pureWeeks").textContent = `${pureWeeks.toFixed(1).replace(".", ",")} недели`;
+      document.getElementById("bufferWeeks").textContent = `${bufferedWeeks.toFixed(1).replace(".", ",")} недели`;
+      document.getElementById("calendarMonths").textContent = `≈ ${months.toFixed(1).replace(".", ",")} месяца`;
+      document.getElementById("strategyImpactWeeks").textContent = `${bufferedWeeks.toFixed(1).replace(".", ",")} недели`;
+      const monthsText = months.toFixed(1).replace(".", ",");
+      const warning = capacity <= 10
+        ? `Около 2 часов в день: выбранный объём займёт примерно ${monthsText} месяца с ревью.`
+        : capacity <= 20
+          ? `Около половины загрузки: выбранный объём займёт примерно ${monthsText} месяца.`
+          : state.strategy === "fast"
+            ? "Срок короче за счёт неполного охвата: непройденные пакеты останутся документным долгом."
+            : state.strategy === "thorough"
+              ? "В объём включён сценарный резерв 35% на расширенные примеры, тесты и полный контроль качества Wiki."
+              : state.filter === "all"
+                ? `Расчёт даёт ${bufferedWeeks.toFixed(1).replace(".", ",")} недели. Уложиться в 5–6 можно, если ревью идёт параллельно и пилот снизит среднее время.`
+                : "Полная или почти полная загрузка: реалистично только при закреплённом приоритете и быстром ревью.";
+      document.getElementById("capacityWarning").textContent = warning;
+    }
+
+    function renderMetrics(rows) {
+      const packages = sum(rows, "packages");
+      const tasks = sum(rows, "tasks");
+      const hours = sum(rows, "hours");
+      const newTasks = sum(rows, "newTasks");
+      const updateTasks = sum(rows, "updateTasks");
+      document.getElementById("metricPackages").textContent = packages;
+      document.getElementById("metricTasks").textContent = tasks;
+      document.getElementById("metricHours").textContent = fmt(hours);
+      document.getElementById("metricNew").textContent = newTasks;
+      document.getElementById("metricUpdate").textContent = updateTasks;
+      document.getElementById("metricNewPct").textContent = tasks ? `${Math.round(newTasks / tasks * 100)}% задач` : "0% задач";
+      document.getElementById("metricUpdatePct").textContent = tasks ? `${Math.round(updateTasks / tasks * 100)}% задач` : "0% задач";
+    }
+
+    function renderProductTable(rows) {
+      document.getElementById("productTable").innerHTML = rows.map(p => `
+        <tr>
+          <td><strong>${p.name}</strong></td>
+          <td class="num">${p.packages}</td>
+          <td class="num">${p.tasks}</td>
+          <td class="num">${fmt(p.hours)}</td>
+          <td class="num">${p.newPackages}</td>
+          <td class="num">${p.updatePackages}</td>
+        </tr>`).join("");
+
+      document.getElementById("totalPackages").textContent = sum(rows, "packages");
+      document.getElementById("totalTasks").textContent = sum(rows, "tasks");
+      document.getElementById("totalHours").textContent = fmt(sum(rows, "hours"));
+      document.getElementById("totalNewPackages").textContent = sum(rows, "newPackages");
+      document.getElementById("totalUpdatePackages").textContent = sum(rows, "updatePackages");
+    }
+
+    function renderSelectedFocus(rows) {
+      const filterTitles = {
+        all: "Фокус: весь страховой контур",
+        osago: "Фокус: ОСАГО и связанные кроссы КАСКО",
+        kasko: "Фокус: КАСКО и кросс-продуктовые сценарии",
+        shared: "Фокус: сквозные продукты и внутренние инструменты"
+      };
+      const title = filterTitles[state.filter];
+      document.getElementById("selectedProductTitle").textContent = title;
+      const changes = rows.flatMap(p => p.changes.map(change => `${p.name}: ${change}`)).slice(0, 5);
+      document.getElementById("changeList").innerHTML = changes.map(item => `<li>${item}</li>`).join("");
+    }
+
+    function renderFilter() {
+      const rows = filteredProducts();
+      renderBars(rows);
+      renderAnalytics(rows);
+      renderMetrics(rows);
+      renderProductTable(rows);
+      renderSelectedFocus(rows);
+      document.querySelectorAll(".tab").forEach(tab => tab.classList.toggle("is-active", tab.dataset.filter === state.filter));
+    }
+
+    function renderStrategy() {
+      document.querySelectorAll("[data-strategy-cell]").forEach(cell => {
+        cell.classList.toggle("is-selected", cell.dataset.strategyCell === state.strategy);
+      });
+      const strategy = strategies[state.strategy];
+      document.getElementById("recommendationTitle").textContent = strategy.title;
+      document.querySelectorAll("#startPlan li span").forEach((node, index) => node.textContent = strategy.plan[index]);
+      document.getElementById("strategyImpactTitle").textContent = strategy.title;
+      document.getElementById("strategyImpactScope").textContent = strategy.scope;
+      const projectedHours = sum(filteredProducts(), "hours") * strategy.multiplier;
+      document.getElementById("strategyImpactHours").textContent = `${fmt(projectedHours)} часа`;
+      renderTimeAnalysis(filteredProducts());
+    }
+
+    function renderGapsMode() {
+      ["overviewSection", "analyticsSection", "timeSection", "approachSection", "workSection", "strategySection", "detailSection"].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (id === "workSection") return el.classList.remove("hidden-by-gaps");
+        el.classList.toggle("hidden-by-gaps", state.gapsOnly);
+      });
+      const work = document.getElementById("workSection");
+      work.style.gridTemplateColumns = state.gapsOnly ? "1fr" : "";
+      work.querySelector("article:first-child").classList.toggle("hidden-by-gaps", state.gapsOnly);
+      if (state.gapsOnly) work.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    document.querySelectorAll(".tab").forEach(tab => tab.addEventListener("click", () => {
+      state.filter = tab.dataset.filter;
+      renderFilter();
+    }));
+
+    document.getElementById("strategySelect").addEventListener("change", event => {
+      state.strategy = event.target.value;
+      renderStrategy();
+    });
+
+    document.getElementById("gapsToggle").addEventListener("change", event => {
+      state.gapsOnly = event.target.checked;
+      renderGapsMode();
+    });
+
+    document.getElementById("capacityRange").addEventListener("input", renderCapacity);
+
+    document.getElementById("confirmButton").addEventListener("click", event => {
+      event.currentTarget.classList.toggle("is-confirmed");
+      event.currentTarget.textContent = event.currentTarget.classList.contains("is-confirmed") ? "План старта подтверждён" : "Подтвердить план старта";
+    });
+
+    document.getElementById("downloadButton").addEventListener("click", () => {
+      const rows = filteredProducts();
+      const csv = [
+        ["Продукт", "Пакеты", "Задачи", "Часы", "Создать пакетов", "Обновить пакетов"],
+        ...rows.map(p => [p.name, p.packages, p.tasks, p.hours, p.newPackages, p.updatePackages])
+      ].map(row => row.map(value => `"${String(value).replaceAll('"', '""')}"`).join(";")).join("\n");
+      const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `insurance-docs-${state.filter}-${state.strategy}.csv`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    });
+
+    const accessHash = "69e62ea6ec1e1e35959c97f5631d02c93286c13410c20895fb8b5118cf644ef0";
+
+    async function hashAccessCode(value) {
+      const bytes = new TextEncoder().encode(value);
+      const digest = await crypto.subtle.digest("SHA-256", bytes);
+      return Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, "0")).join("");
+    }
+
+    function unlockDashboard() {
+      document.body.classList.remove("locked");
+      document.getElementById("passwordGate").setAttribute("aria-hidden", "true");
+    }
+
+    if (sessionStorage.getItem("insuranceWikiAccess") === accessHash) unlockDashboard();
+
+    document.getElementById("passwordForm").addEventListener("submit", async event => {
+      event.preventDefault();
+      const input = document.getElementById("passwordInput");
+      const error = document.getElementById("passwordError");
+      const submittedHash = await hashAccessCode(input.value.trim());
+      if (submittedHash === accessHash) {
+        sessionStorage.setItem("insuranceWikiAccess", accessHash);
+        error.textContent = "";
+        unlockDashboard();
+      } else {
+        error.textContent = "Неверный код доступа";
+        input.select();
+      }
+    });
+
+    renderFilter();
+    renderStrategy();
+  </script>
+</body>
+</html>
