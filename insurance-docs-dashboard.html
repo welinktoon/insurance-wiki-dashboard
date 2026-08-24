@@ -116,6 +116,13 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .time-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+      gap: 14px;
+      margin-top: var(--space);
+    }
+
     .notes-grid {
       grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
     }
@@ -271,6 +278,75 @@
       letter-spacing: -0.02em;
     }
 
+    .time-panel,
+    .estimate-panel {
+      padding: 22px;
+    }
+
+    .time-panel p,
+    .estimate-panel p {
+      color: var(--muted);
+    }
+
+    .time-breakdown {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .time-stat {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--surface-soft);
+    }
+
+    .time-stat span,
+    .estimate-line span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .time-stat strong {
+      display: block;
+      margin-top: 5px;
+      font-size: 24px;
+      letter-spacing: -0.04em;
+    }
+
+    .capacity-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 18px 0 8px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--blue);
+    }
+
+    .estimate-result {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+    }
+
+    .estimate-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+    }
+
+    .estimate-line strong { font-size: 16px; }
+
     .note-list,
     .done-list {
       margin: 0;
@@ -396,9 +472,12 @@
     @media (max-width: 1080px) {
       .summary-grid,
       .analytics-grid,
+      .time-grid,
       .notes-grid {
         grid-template-columns: 1fr 1fr;
       }
+
+      .time-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 760px) {
@@ -411,9 +490,12 @@
 
       .summary-grid,
       .analytics-grid,
+      .time-grid,
       .notes-grid {
         grid-template-columns: 1fr;
       }
+
+      .time-breakdown { grid-template-columns: 1fr; }
 
       .donut-layout {
         grid-template-columns: 1fr;
@@ -535,17 +617,31 @@
       </article>
     </section>
 
-    <section class="notes-grid">
-      <article class="panel note-panel">
-        <h2>Что изменилось на странице</h2>
-        <ul class="note-list">
-          <li>Убраны блоки <strong>«Что хотят от меня»</strong>, <strong>«Правильно ли поставлена задача»</strong>, <strong>«План действий»</strong> и <strong>«Рекомендация на старт»</strong> как устаревший управленческий слой.</li>
-          <li>Убран переключатель <strong>«Показать только пробелы»</strong>: текущий дашборд теперь сразу показывает рабочий срез, а не скрывает остальные данные.</li>
-          <li>Продуктовые пакеты и старые оценки по 222 часам заменены на три прикладных разреза из живой таблицы: <strong>трудоёмкость</strong>, <strong>действие по документации</strong> и <strong>компонент</strong>.</li>
-          <li>Отдельно добавлен статусный срез по вкладке <strong>«готово»</strong>, чтобы было видно не только хвост, но и уже закрытые карточки.</li>
-        </ul>
+    <section class="time-grid" aria-label="Оценка времени на документацию">
+      <article class="panel time-panel">
+        <h2 class="section-title">Оценка времени</h2>
+        <p>Базовая оценка на анализ, проверку Wiki, обновление текста, ревью и публикацию. Разработка, тестирование продукта и релиз в неё не входят.</p>
+        <div class="time-breakdown">
+          <div class="time-stat"><span>Общий объём</span><strong>222 ч</strong></div>
+          <div class="time-stat"><span>На карточку Tracker</span><strong>1 ч 21 мин</strong></div>
+          <div class="time-stat"><span>На статью / пакет Wiki</span><strong>3 ч 46 мин</strong></div>
+        </div>
       </article>
 
+      <article class="panel estimate-panel">
+        <h2 class="section-title">Календарная оценка</h2>
+        <p>Укажите фактическую доступность на документацию в неделю.</p>
+        <label class="capacity-label" for="capacityRange"><span>Доступность</span><strong><span id="capacityValue">40</span> ч/нед</strong></label>
+        <input id="capacityRange" type="range" min="10" max="40" step="5" value="40">
+        <div class="estimate-result" aria-live="polite">
+          <div class="estimate-line"><span>Работа с документацией</span><strong id="pureWeeks">5,6 недели</strong></div>
+          <div class="estimate-line"><span>С ревью и публикацией (+15%)</span><strong id="bufferWeeks">6,4 недели</strong></div>
+          <div class="estimate-line"><span>Ориентир в месяцах</span><strong id="calendarMonths">≈ 1,5 месяца</strong></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="notes-grid">
       <article class="panel note-panel">
         <h2>Что уже закрыто</h2>
         <ol class="done-list" id="doneList"></ol>
@@ -659,6 +755,17 @@
       `).join("");
     }
 
+    function renderTimeEstimate() {
+      const capacity = Number(document.getElementById("capacityRange").value);
+      const pureWeeks = 222 / capacity;
+      const bufferedWeeks = pureWeeks * 1.15;
+      const months = bufferedWeeks / 4.345;
+      document.getElementById("capacityValue").textContent = capacity;
+      document.getElementById("pureWeeks").textContent = `${pureWeeks.toFixed(1).replace(".", ",")} недели`;
+      document.getElementById("bufferWeeks").textContent = `${bufferedWeeks.toFixed(1).replace(".", ",")} недели`;
+      document.getElementById("calendarMonths").textContent = `≈ ${months.toFixed(1).replace(".", ",")} месяца`;
+    }
+
     const accessHash = "69e62ea6ec1e1e35959c97f5631d02c93286c13410c20895fb8b5118cf644ef0";
 
     async function hashAccessCode(value) {
@@ -694,6 +801,8 @@
     renderDonut("component", "componentDonut", "componentLegend", "componentTotal");
     renderDonut("status", "statusDonut", "statusLegend", "statusTotal");
     renderDoneList();
+    document.getElementById("capacityRange").addEventListener("input", renderTimeEstimate);
+    renderTimeEstimate();
   </script>
 </body>
 </html>
