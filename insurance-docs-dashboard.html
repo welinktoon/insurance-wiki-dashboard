@@ -325,6 +325,17 @@
       font-weight: 700;
     }
 
+    .strategy-select {
+      width: 100%;
+      min-height: 42px;
+      padding: 0 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      background: white;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
     input[type="range"] {
       width: 100%;
       accent-color: var(--blue);
@@ -620,9 +631,15 @@
     <section class="time-grid" aria-label="Оценка времени на документацию">
       <article class="panel time-panel">
         <h2 class="section-title">Оценка времени</h2>
-        <p>Базовая оценка на анализ, проверку Wiki, обновление текста, ревью и публикацию. Разработка, тестирование продукта и релиз в неё не входят.</p>
+        <p>Оценка на анализ, проверку Wiki, обновление текста, ревью и публикацию. Разработка, тестирование продукта и релиз в неё не входят.</p>
+        <label class="capacity-label" for="timeMode"><span>Тип оценки</span><strong id="timeScope">Все 59 пакетов по волнам</strong></label>
+        <select class="strategy-select" id="timeMode">
+          <option value="fast">Быстро: критичные методы и горячие продукты</option>
+          <option value="balanced" selected>Сбалансированно: весь объём по волнам</option>
+          <option value="thorough">Основательно: полный контроль и расширенное ревью</option>
+        </select>
         <div class="time-breakdown">
-          <div class="time-stat"><span>Общий объём</span><strong>222 ч</strong></div>
+          <div class="time-stat"><span>Общий объём</span><strong id="timeTotal">222 ч</strong></div>
           <div class="time-stat"><span>На карточку Tracker</span><strong>1 ч 21 мин</strong></div>
           <div class="time-stat"><span>На статью / пакет Wiki</span><strong>3 ч 46 мин</strong></div>
         </div>
@@ -757,14 +774,24 @@
 
     function renderTimeEstimate() {
       const capacity = Number(document.getElementById("capacityRange").value);
-      const pureWeeks = 222 / capacity;
+      const mode = timeModes[document.getElementById("timeMode").value];
+      const hours = 222 * mode.multiplier;
+      const pureWeeks = hours / capacity;
       const bufferedWeeks = pureWeeks * 1.15;
       const months = bufferedWeeks / 4.345;
       document.getElementById("capacityValue").textContent = capacity;
+      document.getElementById("timeScope").textContent = mode.scope;
+      document.getElementById("timeTotal").textContent = `${hours.toFixed(1).replace(".", ",")} ч`;
       document.getElementById("pureWeeks").textContent = `${pureWeeks.toFixed(1).replace(".", ",")} недели`;
       document.getElementById("bufferWeeks").textContent = `${bufferedWeeks.toFixed(1).replace(".", ",")} недели`;
       document.getElementById("calendarMonths").textContent = `≈ ${months.toFixed(1).replace(".", ",")} месяца`;
     }
+
+    const timeModes = {
+      fast: { multiplier: 0.65, scope: "Критичные методы и горячие продукты" },
+      balanced: { multiplier: 1, scope: "Все 59 пакетов по волнам" },
+      thorough: { multiplier: 1.35, scope: "59 пакетов + полный контроль и ревью" }
+    };
 
     const accessHash = "69e62ea6ec1e1e35959c97f5631d02c93286c13410c20895fb8b5118cf644ef0";
 
@@ -802,6 +829,7 @@
     renderDonut("status", "statusDonut", "statusLegend", "statusTotal");
     renderDoneList();
     document.getElementById("capacityRange").addEventListener("input", renderTimeEstimate);
+    document.getElementById("timeMode").addEventListener("change", renderTimeEstimate);
     renderTimeEstimate();
   </script>
 </body>
