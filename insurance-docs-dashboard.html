@@ -631,7 +631,7 @@
     <section class="time-grid" aria-label="Оценка времени на документацию">
       <article class="panel time-panel">
         <h2 class="section-title">Оценка времени</h2>
-        <p>Оценка на анализ, проверку Wiki, обновление текста, ревью и публикацию. Разработка, тестирование продукта и релиз в неё не входят.</p>
+        <p>Переоценка по текущему листу: 162 активные карточки, 38 затронутых Wiki-страниц и 49 ФРОНТ/смешанных задач. Разработка, тестирование продукта и релиз в неё не входят.</p>
         <label class="capacity-label" for="timeMode"><span>Тип оценки</span><strong id="timeScope">Все 59 пакетов по волнам</strong></label>
         <select class="strategy-select" id="timeMode">
           <option value="fast">Быстро: критичные методы и горячие продукты</option>
@@ -639,9 +639,9 @@
           <option value="thorough">Основательно: полный контроль и расширенное ревью</option>
         </select>
         <div class="time-breakdown">
-          <div class="time-stat"><span>Общий объём</span><strong id="timeTotal">222 ч</strong></div>
-          <div class="time-stat"><span>На карточку Tracker</span><strong>1 ч 21 мин</strong></div>
-          <div class="time-stat"><span>На статью / пакет Wiki</span><strong>3 ч 46 мин</strong></div>
+          <div class="time-stat"><span>Общий объём</span><strong id="timeTotal">262 ч</strong></div>
+          <div class="time-stat"><span>На карточку Tracker</span><strong>1 ч 37 мин</strong></div>
+          <div class="time-stat"><span>На Wiki-страницу</span><strong>6 ч 54 мин</strong></div>
         </div>
       </article>
 
@@ -651,9 +651,9 @@
         <label class="capacity-label" for="capacityRange"><span>Доступность</span><strong><span id="capacityValue">40</span> ч/нед</strong></label>
         <input id="capacityRange" type="range" min="10" max="40" step="5" value="40">
         <div class="estimate-result" aria-live="polite">
-          <div class="estimate-line"><span>Работа с документацией</span><strong id="pureWeeks">5,6 недели</strong></div>
-          <div class="estimate-line"><span>С ревью и публикацией (+15%)</span><strong id="bufferWeeks">6,4 недели</strong></div>
-          <div class="estimate-line"><span>Ориентир в месяцах</span><strong id="calendarMonths">≈ 1,5 месяца</strong></div>
+          <div class="estimate-line"><span>Работа с документацией</span><strong id="pureWeeks">6,6 недели</strong></div>
+          <div class="estimate-line"><span>С ревью и публикацией (+15%)</span><strong id="bufferWeeks">7,5 недели</strong></div>
+          <div class="estimate-line"><span>Ориентир в месяцах</span><strong id="calendarMonths">≈ 1,7 месяца</strong></div>
         </div>
       </article>
     </section>
@@ -775,7 +775,7 @@
     function renderTimeEstimate() {
       const capacity = Number(document.getElementById("capacityRange").value);
       const mode = timeModes[document.getElementById("timeMode").value];
-      const hours = 222 * mode.multiplier;
+      const hours = 262 * mode.multiplier;
       const pureWeeks = hours / capacity;
       const bufferedWeeks = pureWeeks * 1.15;
       const months = bufferedWeeks / 4.345;
@@ -789,8 +789,8 @@
 
     const timeModes = {
       fast: { multiplier: 0.65, scope: "Критичные методы и горячие продукты" },
-      balanced: { multiplier: 1, scope: "Все 59 пакетов по волнам" },
-      thorough: { multiplier: 1.35, scope: "59 пакетов + полный контроль и ревью" }
+      balanced: { multiplier: 1, scope: "162 задачи и 38 Wiki-страниц" },
+      thorough: { multiplier: 1.35, scope: "Полный охват + расширенное сценарное ревью" }
     };
 
     const accessHash = "69e62ea6ec1e1e35959c97f5631d02c93286c13410c20895fb8b5118cf644ef0";
