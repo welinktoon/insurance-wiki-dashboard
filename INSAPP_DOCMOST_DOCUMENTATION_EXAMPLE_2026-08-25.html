@@ -48,12 +48,16 @@
     .tree-header p { margin: 0; color: #c4d0d4; font-size: 12px; line-height: 1.55; }
     .tree-scroll { flex: 1; min-height: 0; padding: 15px 12px 24px; overflow-y: auto; }
     .tree-group { margin: 0 0 5px; }
-    .tree-group summary { display: flex; align-items: center; min-height: 38px; padding: 10px 11px; border: 1px solid transparent; border-radius: 8px; color: #e0eaed; font-size: 12px; font-weight: 800; list-style: none; cursor: pointer; }
+    .tree-group summary { display: flex; align-items: center; gap: 5px; min-height: 38px; padding: 4px 0; color: #e0eaed; font-size: 12px; font-weight: 800; list-style: none; cursor: pointer; }
     .tree-group summary::-webkit-details-marker { display: none; }
-    .tree-group summary::before { content: "+"; width: 17px; color: #8bd0f7; font-size: 17px; line-height: 1; }
-    .tree-group[open] summary::before { content: "-"; }
-    .tree-group summary:hover { border-color: #617078; background: #41494f; }
-    .tree-group summary:focus-visible, .tree-item:focus-visible, .reader-bar a:focus-visible { outline: 3px solid #8bd0f7; outline-offset: 2px; }
+    .tree-toggle { display: grid; width: 32px; height: 38px; place-items: center; flex: 0 0 auto; border: 1px solid transparent; border-radius: 7px; color: #8bd0f7; font-size: 17px; line-height: 1; }
+    .tree-toggle::before { content: "+"; }
+    .tree-group[open] .tree-toggle::before { content: "-"; }
+    .tree-group summary:hover .tree-toggle { border-color: #617078; background: #41494f; }
+    .tree-section-item { display: block; width: 100%; min-height: 38px; padding: 8px 9px; border: 1px solid transparent; border-radius: 7px; color: #e0eaed; background: transparent; font: inherit; font-size: 12px; font-weight: 800; line-height: 1.35; text-align: left; }
+    .tree-section-item:hover { border-color: #617078; color: #fff; background: #41494f; }
+    .tree-section-item.is-active { border-color: var(--blue); color: #fff; background: #235c80; box-shadow: inset 3px 0 0 #b2e6ff; }
+    .tree-group summary:focus-visible, .tree-section-item:focus-visible, .tree-item:focus-visible, .reader-bar a:focus-visible { outline: 3px solid #8bd0f7; outline-offset: 2px; }
     .tree-list { margin: 0 0 8px 13px; padding: 0 0 0 12px; border-left: 1px solid rgba(255,255,255,.16); list-style: none; }
     .tree-list li { position: relative; margin: 2px 0; }
     .tree-list li::before { content: ""; position: absolute; top: 15px; left: -12px; width: 8px; border-top: 1px solid rgba(255,255,255,.16); }
@@ -143,54 +147,54 @@
       </header>
       <nav class="tree-scroll" aria-label="Разделы Insapp">
         <details class="tree-group" open>
-          <summary>00. Старт и правила</summary>
+          <summary><span class="tree-toggle" aria-hidden="true"></span><button type="button" class="tree-section-item" data-doc="section-start">00. Старт и правила</button></summary>
           <ul class="tree-list">
             <li><button class="tree-item" data-doc="map">00.01. Карта документации</button></li>
             <li><button class="tree-item" data-doc="rules">00.04. Как обновлять документацию</button></li>
           </ul>
         </details>
         <details class="tree-group" open>
-          <summary>10. Платформа и общая часть</summary>
+          <summary><span class="tree-toggle" aria-hidden="true"></span><button type="button" class="tree-section-item" data-doc="section-platform">10. Платформа и общая часть</button></summary>
           <ul class="tree-list">
             <li><button class="tree-item" data-doc="architecture">10.01. Архитектура Insapp</button></li>
             <li><button class="tree-item" data-doc="api-rules">10.03. Общие правила API</button></li>
           </ul>
         </details>
         <details class="tree-group" open>
-          <summary>20. Код и backend</summary>
+          <summary><span class="tree-toggle" aria-hidden="true"></span><button type="button" class="tree-section-item" data-doc="section-code">20. Код и backend</button></summary>
           <ul class="tree-list">
             <li><button class="tree-item" data-doc="backend">20.02. Сервисы и обработка заявки</button></li>
             <li><button class="tree-item" data-doc="jobs">20.07. Фоновые задачи и Quartz</button></li>
           </ul>
         </details>
         <details class="tree-group" open>
-          <summary>30. Продукты</summary>
+          <summary><span class="tree-toggle" aria-hidden="true"></span><button type="button" class="tree-section-item" data-doc="section-products">30. Продукты</button></summary>
           <ul class="tree-list">
             <li><button class="tree-item" data-doc="kasko">30.02. КАСКО</button></li>
             <li><button class="tree-item" data-doc="kasko-fields">30.02.03. Поля и проверки КАСКО</button></li>
           </ul>
         </details>
         <details class="tree-group" open>
-          <summary>40. Партнеры и внешние API</summary>
+          <summary><span class="tree-toggle" aria-hidden="true"></span><button type="button" class="tree-section-item" data-doc="section-partners">40. Партнеры и внешние API</button></summary>
           <ul class="tree-list">
             <li><button class="tree-item" data-doc="partner-api">40.01. Общие методы API</button></li>
             <li><button class="tree-item" data-doc="integration">40.02. Страховые интеграции</button></li>
           </ul>
         </details>
         <details class="tree-group" open>
-          <summary>50. ARM и работа операторов</summary>
+          <summary><span class="tree-toggle" aria-hidden="true"></span><button type="button" class="tree-section-item" data-doc="section-arm">50. ARM и работа операторов</button></summary>
           <ul class="tree-list">
             <li><button class="tree-item" data-doc="arm">50.02. Работа с заявкой</button></li>
           </ul>
         </details>
         <details class="tree-group" open>
-          <summary>60. Эксплуатация и безопасность</summary>
+          <summary><span class="tree-toggle" aria-hidden="true"></span><button type="button" class="tree-section-item" data-doc="section-operations">60. Эксплуатация и безопасность</button></summary>
           <ul class="tree-list">
             <li><button class="tree-item" data-doc="incident">60.05. Инцидент: платежная ссылка</button></li>
           </ul>
         </details>
         <details class="tree-group" open>
-          <summary>70. Как обновляется документация</summary>
+          <summary><span class="tree-toggle" aria-hidden="true"></span><button type="button" class="tree-section-item" data-doc="section-docs">70. Как обновляется документация</button></summary>
           <ul class="tree-list">
             <li><button class="tree-item" data-doc="hermes">70.02. Hermes: сбор данных и черновик</button></li>
           </ul>
@@ -209,6 +213,94 @@
 
   <script>
     const documents = {
+      "section-start": {
+        path: ["Insapp", "00. Старт и правила"],
+        title: "00. Старт и правила",
+        summary: "Шаблон основной статьи раздела. Она дает вход в базу и объясняет, как найти нужную страницу и как поддерживать документацию в порядке.",
+        meta: [["Тип", "Страница раздела"], ["Статус", "План заполнения"], ["Владелец", "Документация Insapp"], ["Триггер", "Изменение структуры или правил"]],
+        sections: [
+          { type: "callout", body: "<strong>Граница раздела.</strong> Здесь только общие правила и навигация. Описание конкретного продукта, API или инцидента остается в своем разделе." },
+          { type: "table", title: "Что заполнить в основной статье", headers: ["Блок", "Что должно быть"], rows: [["Назначение", "Для каких вопросов нужен этот раздел"], ["Карта", "Ссылки на основные страницы и разделы 10-70"], ["Правила", "Как проверять и обновлять страницы"], ["Глоссарий", "Общие термины и сокращения"], ["Источники", "Git, DocMost, Tracker и ответственные"]] },
+          { type: "sources", items: [["Дочерние страницы", "00.01. Карта документации и 00.04. Как обновлять документацию"], ["Код", "Git - источник реального поведения"], ["Процесс", "Git -> Hermes -> человек -> DocMost"], ["Проверка", "Дата, владелец и повод для пересмотра"]] }
+        ]
+      },
+      "section-platform": {
+        path: ["Insapp", "10. Платформа и общая часть"],
+        title: "10. Платформа и общая часть",
+        summary: "Шаблон основной статьи для общей части системы: архитектуры, общих правил API, справочников и настроек, которые используют разные продукты.",
+        meta: [["Тип", "Страница раздела"], ["Статус", "План заполнения"], ["Владелец", "Backend"], ["Триггер", "Новый сервис, общий контракт или настройка"]],
+        sections: [
+          { type: "callout", body: "<strong>Граница раздела.</strong> Здесь общие части Insapp. Детали конкретного продукта остаются в разделе 30, а код конкретного сервиса - в разделе 20." },
+          { type: "table", title: "Что заполнить в основной статье", headers: ["Блок", "Что должно быть"], rows: [["Состав системы", "Какие приложения и сервисы есть, как они связаны"], ["Общие API", "Базовые URL, авторизация, общие поля и ошибки"], ["Настройки", "Справочники, feature flags, конфигурация и контуры"], ["Ссылки", "Переходы к архитектуре, backend, API и эксплуатации"], ["Источники", "Git, контракты API и проверенные страницы"]] },
+          { type: "sources", items: [["Дочерние страницы", "10.01. Архитектура Insapp и 10.03. Общие правила API"], ["Backend", "Insapp.Services, Insapp.DataAccess, Insapp.Models"], ["Frontend", "ОСАГО, КАСКО и ипотека"], ["Проверка", "Изменение общего контракта или состава системы"]] }
+        ]
+      },
+      "section-code": {
+        path: ["Insapp", "20. Код и backend"],
+        title: "20. Код и backend",
+        summary: "Шаблон основной технической статьи раздела. Она показывает карту кода, границу раздела и ссылки на сервисы, данные, API, фоновые задачи и тесты.",
+        meta: [["Тип", "Страница раздела"], ["Статус", "План заполнения"], ["Владелец", "Backend"], ["Триггер", "Изменение кода, данных или контракта"]],
+        sections: [
+          { type: "callout", body: "<strong>Граница раздела.</strong> Здесь описывается реализация и технические контракты. Путь клиента лежит в разделе 30, а общие партнерские API - в разделе 40." },
+          { type: "table", title: "Что заполнить в основной статье", headers: ["Блок", "Что должно быть"], rows: [["Карта кода", "Сервисы, контроллеры, DataAccess, модели и тесты"], ["Вложенные темы", "Сервисы, runtime, API, данные, интеграции, ARM, эксплуатация"], ["Граница", "Что остается в продуктах, партнерах и ARM"], ["Связи", "Какие API, Quartz-задачи, колбэки и таблицы затрагиваются"], ["Источники", "Пути в Git, тесты, миграции и логи"]] },
+          { type: "sources", items: [["Дочерние страницы", "20.02. Сервисы и обработка заявки; 20.07. Фоновые задачи и Quartz"], ["Код", "Insapp.Services, Insapp.DataAccess, Insapp.Models"], ["Контракты", "Public API, колбэки и интеграции"], ["Проверка", "Git и тесты перед обновлением страницы"]] }
+        ]
+      },
+      "section-products": {
+        path: ["Insapp", "30. Продукты"],
+        title: "30. Продукты",
+        summary: "Шаблон основной статьи для продуктовых путей: что делает клиент, какие поля заполняет, какие API вызываются и что происходит при ошибке.",
+        meta: [["Тип", "Страница раздела"], ["Статус", "План заполнения"], ["Владелец", "Продукт + Backend"], ["Триггер", "Изменение пути клиента, поля или API"]],
+        sections: [
+          { type: "callout", body: "<strong>Граница раздела.</strong> Здесь путь клиента и правила продукта. Техническая реализация сервисов остается в разделе 20, а общий контракт партнера - в разделе 40." },
+          { type: "table", title: "Что заполнить в основной статье", headers: ["Блок", "Что должно быть"], rows: [["Список продуктов", "ОСАГО, КАСКО, ипотека и другие направления"], ["Путь клиента", "Экраны, шаги и переходы по каждому продукту"], ["Поля", "Обязательность, проверки и источник значений"], ["API и статусы", "Создание заявки, офферы, документы, оплата и ошибки"], ["Ссылки", "Страница продукта, поля, API, ARM и инструкции"]] },
+          { type: "sources", items: [["Дочерние страницы", "30.02. КАСКО и 30.02.03. Поля и проверки КАСКО"], ["Frontend", "Маршруты, property-controls и сервисы"], ["Backend", "API и модели заявки"], ["Проверка", "Изменение формы, API или пути клиента"]] }
+        ]
+      },
+      "section-partners": {
+        path: ["Insapp", "40. Партнеры и внешние API"],
+        title: "40. Партнеры и внешние API",
+        summary: "Шаблон основной статьи для обмена с партнерами: методы API, страховые интеграции, колбэки, доступы и правила разбора ошибок.",
+        meta: [["Тип", "Страница раздела"], ["Статус", "План заполнения"], ["Владелец", "Партнеры + Backend"], ["Триггер", "Новый партнер, контракт или ошибка обмена"]],
+        sections: [
+          { type: "callout", body: "<strong>Граница раздела.</strong> Здесь внешний обмен и договоренности с партнером. Поведение продукта остается в разделе 30, а внутренняя реализация - в разделе 20." },
+          { type: "table", title: "Что заполнить в основной статье", headers: ["Блок", "Что должно быть"], rows: [["Партнеры", "Список страховых и внешних сервисов"], ["Контракты", "Методы, авторизация, поля, ответы и ошибки"], ["Колбэки", "События, повторная доставка и защита от дублей"], ["Доступы", "Контуры, ключи без раскрытия секретов и ответственные"], ["Проверка", "Тестовый сценарий и логи обмена"]] },
+          { type: "sources", items: [["Дочерние страницы", "40.01. Общие методы API и 40.02. Страховые интеграции"], ["Код", "Интеграционные сервисы и контроллеры"], ["Продукты", "ОСАГО, КАСКО и ипотека"], ["Инциденты", "Ошибки, таймауты и повторные запросы"]] }
+        ]
+      },
+      "section-arm": {
+        path: ["Insapp", "50. ARM и работа операторов"],
+        title: "50. ARM и работа операторов",
+        summary: "Шаблон основной статьи для действий оператора: поиск и изменение заявки, права, доступы, статусы и передача проблемы в работу.",
+        meta: [["Тип", "Страница раздела"], ["Статус", "План заполнения"], ["Владелец", "Операции + Backend"], ["Триггер", "Изменение ARM, ролей или процессов"]],
+        sections: [
+          { type: "callout", body: "<strong>Граница раздела.</strong> Здесь действия оператора и права доступа. Логика продукта и контракт API не дублируются: на них должны быть ссылки." },
+          { type: "table", title: "Что заполнить в основной статье", headers: ["Блок", "Что должно быть"], rows: [["Роли", "Кто видит раздел и что может сделать"], ["Сценарии", "Поиск, просмотр, изменение и передача заявки"], ["Поля и статусы", "Что оператор может менять и что меняется после действия"], ["Ошибки", "Что видит оператор и куда передать проблему"], ["Ссылки", "Продукт, API, логи и инструкция по инциденту"]] },
+          { type: "sources", items: [["Дочерние страницы", "50.02. Работа с заявкой"], ["Доступы", "Роли, права и настройки"], ["Код", "ARM endpoints и сервисы"], ["Проверка", "Изменение интерфейса, роли или действия"]] }
+        ]
+      },
+      "section-operations": {
+        path: ["Insapp", "60. Эксплуатация и безопасность"],
+        title: "60. Эксплуатация и безопасность",
+        summary: "Шаблон основной статьи для работы системы после релиза: deploy, настройки, доступы, логи, PII, проверки и инструкции по инцидентам.",
+        meta: [["Тип", "Страница раздела"], ["Статус", "План заполнения"], ["Владелец", "Backend + Операции"], ["Триггер", "Инцидент, релиз или смена доступа"]],
+        sections: [
+          { type: "callout", body: "<strong>Граница раздела.</strong> Здесь только эксплуатация, безопасность и устранение сбоев. Описание продукта и кода остается на соответствующих страницах." },
+          { type: "table", title: "Что заполнить в основной статье", headers: ["Блок", "Что должно быть"], rows: [["Релиз", "Deploy, миграции, конфигурация и проверка после выкладки"], ["Наблюдение", "Логи, метрики и алерты"], ["Безопасность", "Доступы, PII и что нельзя писать в документации"], ["Инциденты", "Как заметить, что проверить, куда передать и как закрыть"], ["Ссылки", "Сервис, продукт, API и ответственный"]] },
+          { type: "sources", items: [["Дочерние страницы", "60.05. Инцидент: платежная ссылка"], ["Код", "Quartz, обработчики, deploy и конфигурация"], ["Контроль", "Логи, метрики и тесты"], ["Проверка", "Релиз, инцидент или новая точка риска"]] }
+        ]
+      },
+      "section-docs": {
+        path: ["Insapp", "70. Как обновляется документация"],
+        title: "70. Как обновляется документация",
+        summary: "Шаблон основной статьи для процесса обновления: какие источники проверяются, что делает Hermes, что проверяет человек и когда страница становится основной.",
+        meta: [["Тип", "Страница раздела"], ["Статус", "План заполнения"], ["Владелец", "Документация Insapp"], ["Триггер", "Изменение процесса, источника или шаблона"]],
+        sections: [
+          { type: "callout", body: "<strong>Граница раздела.</strong> Здесь правила работы с документацией. Сами технические и продуктовые сведения остаются на своих страницах." },
+          { type: "table", title: "Что заполнить в основной статье", headers: ["Блок", "Что должно быть"], rows: [["Источники", "Git, Tracker, Wiki и DocMost"], ["Черновик", "Что собирает Hermes и что исключает"], ["Проверка", "Поля, API, путь клиента, ошибки и ограничения"], ["Публикация", "Кто подтверждает и публикует страницу"], ["Актуальность", "Дата проверки, владелец и повод для следующего пересмотра"]] },
+          { type: "sources", items: [["Дочерние страницы", "70.02. Hermes: сбор данных и черновик"], ["Реальное поведение", "Git-кодовая база"], ["Канон", "DocMost после проверки человеком"], ["Проверка", "Задача, код, контракт и тесты"]] }
+        ]
+      },
       map: {
         path: ["Insapp", "00. Старт и правила", "00.01. Карта документации"],
         title: "Карта документации Insapp",
@@ -376,18 +468,22 @@
         renderMeta(doc.meta),
         doc.sections.map(renderSection).join("")
       ].join("");
-      document.querySelectorAll(".tree-item").forEach((item) => item.classList.toggle("is-active", item.dataset.doc === key));
+      document.querySelectorAll(".tree-item, .tree-section-item").forEach((item) => item.classList.toggle("is-active", item.dataset.doc === key));
       document.title = `Insapp: ${doc.title}`;
     }
 
-    document.querySelectorAll(".tree-item").forEach((item) => {
-      item.addEventListener("click", () => {
+    document.querySelectorAll(".tree-item, .tree-section-item").forEach((item) => {
+      item.addEventListener("click", (event) => {
+        if (item.classList.contains("tree-section-item")) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
         renderDocument(item.dataset.doc);
         if (window.innerWidth < 681) document.querySelector(".reader").scrollIntoView({ behavior: "smooth" });
       });
     });
 
-    renderDocument("kasko");
+    renderDocument("section-code");
   </script>
 </body>
 </html>
