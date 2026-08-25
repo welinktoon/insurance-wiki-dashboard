@@ -22,6 +22,8 @@
       --paper: #30373c;
       --canvas: #252b30;
       --bar: #363e43;
+      --page-width: 1440px;
+      --header-height: 68px;
       --shadow: 0 18px 60px rgba(0, 0, 0, .25);
       --radius: 16px;
     }
@@ -32,12 +34,17 @@
     button, a { font: inherit; }
     button { cursor: pointer; }
 
-    .app { display: grid; grid-template-columns: 320px minmax(0, 1fr); min-height: 100vh; max-width: 1680px; margin: 0 auto; background: var(--paper); box-shadow: var(--shadow); }
+    .sitebar { min-height: var(--header-height); max-width: var(--page-width); display: flex; align-items: center; justify-content: space-between; gap: 24px; margin: 0 auto; padding: 0 40px; color: #fff; background: var(--bar); }
+    .brand { display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 800; letter-spacing: .04em; }
+    .brand-mark { display: grid; width: 36px; height: 36px; place-items: center; border-radius: 50%; color: #102018; background: var(--green); font-size: 13px; letter-spacing: 0; }
+    .brand-divider { width: 1px; height: 24px; margin: 0 8px; background: rgba(255,255,255,.26); }
+    .brand-context { color: #c1cccf; font-weight: 500; letter-spacing: 0; }
+    .back { display: inline-flex; align-items: center; min-height: 36px; padding: 0 13px; border: 1px solid #617078; border-radius: 8px; color: #e7eef0; background: #41494f; font-size: 13px; font-weight: 700; text-decoration: none; }
+    .back:hover { border-color: var(--blue); color: #fff; background: #235c80; }
+    .app { display: grid; grid-template-columns: 320px minmax(0, 1fr); min-height: calc(100vh - var(--header-height)); max-width: var(--page-width); margin: 0 auto; background: var(--paper); box-shadow: var(--shadow); }
     .tree-panel { display: flex; flex-direction: column; min-height: 0; color: #e9f1f4; background: var(--bar); }
     .tree-header { padding: 26px 24px 20px; border-bottom: 1px solid rgba(255,255,255,.12); }
-    .brand { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 800; letter-spacing: .08em; }
-    .brand-mark { display: grid; width: 31px; height: 31px; place-items: center; border-radius: 50%; color: #102018; background: var(--green); font-size: 11px; letter-spacing: 0; }
-    .tree-header h1 { margin: 24px 0 8px; color: #f7fbfc; font-size: 29px; line-height: 1.1; letter-spacing: -.035em; }
+    .tree-header h1 { margin: 0 0 8px; color: #f7fbfc; font-size: 29px; line-height: 1.1; letter-spacing: -.035em; }
     .tree-header p { margin: 0; color: #c4d0d4; font-size: 12px; line-height: 1.55; }
     .tree-scroll { flex: 1; min-height: 0; padding: 15px 12px 24px; overflow-y: auto; }
     .tree-group { margin: 0 0 5px; }
@@ -94,6 +101,7 @@
     .empty h2 { margin-bottom: 8px; }
 
     @media (max-width: 900px) {
+      .sitebar { padding: 0 22px; }
       .app { grid-template-columns: 270px minmax(0, 1fr); }
       .reader-bar { padding: 0 28px; }
       .reader-content { padding: 42px 34px 64px; }
@@ -101,10 +109,12 @@
     }
     @media (max-width: 680px) {
       body { background: var(--paper); }
+      .sitebar { min-height: 58px; }
+      .brand-divider, .brand-context { display: none; }
       .app { display: block; }
       .tree-panel { min-height: auto; }
       .tree-header { padding: 20px 20px 15px; }
-      .tree-header h1 { margin-top: 16px; font-size: 25px; }
+      .tree-header h1 { font-size: 25px; }
       .tree-scroll { max-height: 280px; padding: 11px 10px 16px; }
       .tree-footer { display: none; }
       .reader-bar { position: static; min-height: 52px; padding: 0 20px; }
@@ -116,10 +126,18 @@
   </style>
 </head>
 <body>
+  <header class="sitebar">
+    <div class="brand">
+      <span class="brand-mark">IN</span>
+      <span>INSAPP</span>
+      <span class="brand-divider"></span>
+      <span class="brand-context">Пример документации</span>
+    </div>
+    <a class="back" href="INSAPP_DOCMOST_AUDIT_2026-08-24.html">Вернуться к отчету</a>
+  </header>
   <div class="app">
     <aside class="tree-panel" aria-label="Дерево документации">
       <header class="tree-header">
-        <div class="brand"><span class="brand-mark">IN</span> INSAPP</div>
         <h1>Пример документации</h1>
         <p>Выберите страницу в дереве. Справа откроется пример того, что в ней должно быть.</p>
       </header>
@@ -184,7 +202,6 @@
     <main class="reader">
       <header class="reader-bar">
         <p id="reader-path">Insapp / пример</p>
-        <a href="INSAPP_DOCMOST_AUDIT_2026-08-24.html">Вернуться к отчету</a>
       </header>
       <article class="reader-content" id="document" aria-live="polite"></article>
     </main>
