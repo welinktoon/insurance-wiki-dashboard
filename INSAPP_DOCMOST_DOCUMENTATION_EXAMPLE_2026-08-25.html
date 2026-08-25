@@ -41,8 +41,8 @@
     .brand-context { color: #c1cccf; font-weight: 500; letter-spacing: 0; }
     .back { display: inline-flex; align-items: center; min-height: 36px; padding: 0 13px; border: 1px solid #617078; border-radius: 8px; color: #e7eef0; background: #41494f; font-size: 13px; font-weight: 700; text-decoration: none; }
     .back:hover { border-color: var(--blue); color: #fff; background: #235c80; }
-    .app { display: grid; grid-template-columns: 320px minmax(0, 1fr); min-height: calc(100vh - var(--header-height)); max-width: var(--page-width); margin: 0 auto; background: var(--paper); box-shadow: var(--shadow); }
-    .tree-panel { display: flex; flex-direction: column; min-height: 0; color: #e9f1f4; background: var(--bar); }
+    .app { display: grid; grid-template-columns: 320px minmax(0, 1fr); height: calc(100vh - var(--header-height)); min-height: 560px; max-width: var(--page-width); margin: 0 auto; background: var(--paper); box-shadow: var(--shadow); }
+    .tree-panel { display: flex; flex-direction: column; min-height: 0; overflow: hidden; color: #e9f1f4; background: var(--bar); }
     .tree-header { padding: 26px 24px 20px; border-bottom: 1px solid rgba(255,255,255,.12); }
     .tree-header h1 { margin: 0 0 8px; color: #f7fbfc; font-size: 29px; line-height: 1.1; letter-spacing: -.035em; }
     .tree-header p { margin: 0; color: #c4d0d4; font-size: 12px; line-height: 1.55; }
@@ -66,12 +66,12 @@
     .tree-item.is-active { border-color: var(--blue); color: #fff; background: #235c80; box-shadow: inset 3px 0 0 #b2e6ff; }
     .tree-footer { padding: 16px 24px; border-top: 1px solid rgba(255,255,255,.12); color: #bdc9cc; font-size: 11px; line-height: 1.5; }
 
-    .reader { min-width: 0; background: var(--paper); }
+    .reader { min-width: 0; min-height: 0; overflow-y: auto; background: var(--paper); }
     .reader-bar { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 64px; padding: 0 44px; border-bottom: 1px solid var(--line); background: rgba(52,60,65,.94); backdrop-filter: blur(12px); }
     .reader-bar p { margin: 0; color: var(--muted); font-size: 12px; font-weight: 700; }
     .reader-bar a { display: inline-flex; align-items: center; min-height: 36px; padding: 0 13px; border: 1px solid #617078; border-radius: 8px; color: #e7eef0; background: #41494f; font-size: 12px; font-weight: 800; text-decoration: none; }
     .reader-bar a:hover { border-color: var(--blue); color: #fff; background: #235c80; }
-    .reader-content { max-width: 1020px; padding: 54px 54px 86px; }
+    .reader-content { max-width: 1160px; padding: 54px 54px 86px; }
     .crumbs { display: flex; flex-wrap: wrap; gap: 7px; margin: 0 0 16px; color: var(--muted); font-size: 12px; }
     .crumbs span:not(:last-child)::after { content: "/"; margin-left: 7px; color: #9caeb5; }
     .document-title { max-width: 840px; margin: 0; color: var(--navy); font-size: clamp(34px, 4.6vw, 56px); line-height: 1.05; letter-spacing: -.05em; }
@@ -80,7 +80,11 @@
     .meta-cell { min-height: 85px; padding: 15px; background: var(--fog); }
     .meta-label { display: block; color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
     .meta-value { display: block; margin-top: 7px; color: var(--ink); font-size: 12px; font-weight: 700; line-height: 1.4; }
-    .section { margin: 0 0 42px; }
+    .article-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: -14px 0 38px; padding: 15px; border: 1px solid var(--line); border-radius: 12px; background: #343c41; }
+    .article-nav strong { width: 100%; color: var(--muted); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+    .article-nav a { display: inline-flex; align-items: center; min-height: 32px; padding: 6px 10px; border: 1px solid #617078; border-radius: 7px; color: #dce8eb; background: #41494f; font-size: 12px; font-weight: 700; line-height: 1.25; text-decoration: none; }
+    .article-nav a:hover { border-color: var(--blue); color: #fff; background: #235c80; }
+    .section { margin: 0 0 42px; scroll-margin-top: 84px; }
     .section h2 { margin: 0 0 14px; color: var(--navy); font-size: 24px; line-height: 1.2; letter-spacing: -.03em; }
     .section h3 { margin: 22px 0 8px; color: var(--ink); font-size: 15px; line-height: 1.35; }
     .section p, .section li { color: #dde5e7; font-size: 14px; line-height: 1.72; }
@@ -94,7 +98,7 @@
     .field-table th { color: var(--muted); background: var(--fog); font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
     .field-table td { color: #dde5e7; line-height: 1.5; }
     .field-table tr:last-child td { border-bottom: 0; }
-    .field-table code { color: var(--navy); font-size: 12px; }
+    .field-table code, .section code { color: var(--navy); font-size: .92em; }
     pre { margin: 14px 0 0; padding: 17px 19px; overflow-x: auto; border-radius: 10px; color: #e4eff3; background: #20282d; font: 12px/1.6 "Cascadia Mono", Consolas, monospace; }
     code { font-family: "Cascadia Mono", Consolas, monospace; }
     .source-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 14px 0 0; }
@@ -115,13 +119,14 @@
       body { background: var(--paper); }
       .sitebar { min-height: 58px; }
       .brand-divider, .brand-context { display: none; }
-      .app { display: block; }
+      .app { display: block; height: auto; min-height: 0; }
       .tree-panel { min-height: auto; }
       .tree-header { padding: 20px 20px 15px; }
       .tree-header h1 { font-size: 25px; }
       .tree-scroll { max-height: 280px; padding: 11px 10px 16px; }
       .tree-footer { display: none; }
       .reader-bar { position: static; min-height: 52px; padding: 0 20px; }
+      .reader { overflow: visible; }
       .reader-content { padding: 34px 20px 52px; }
       .document-summary { font-size: 15px; }
       .meta-grid, .source-list { grid-template-columns: 1fr; }
@@ -170,8 +175,18 @@
         <details class="tree-group" open>
           <summary><span class="tree-toggle" aria-hidden="true"></span><button type="button" class="tree-section-item" data-doc="section-products">30. Продукты</button></summary>
           <ul class="tree-list">
+            <li><button class="tree-item" data-doc="osago">30.01. ОСАГО</button></li>
+            <li><button class="tree-item" data-doc="osago-api">30.01.01. API и статусы ОСАГО</button></li>
+            <li><button class="tree-item" data-doc="osago-fields">30.01.02. Поля ОСАГО</button></li>
+            <li><button class="tree-item" data-doc="osago-prolongation">30.01.03. Продление и оплата ОСАГО</button></li>
             <li><button class="tree-item" data-doc="kasko">30.02. КАСКО</button></li>
+            <li><button class="tree-item" data-doc="kasko-api-offers">30.02.01. API и офферы КАСКО</button></li>
+            <li><button class="tree-item" data-doc="kasko-documents">30.02.02. Документы КАСКО</button></li>
             <li><button class="tree-item" data-doc="kasko-fields">30.02.03. Поля и проверки КАСКО</button></li>
+            <li><button class="tree-item" data-doc="kasko-payment">30.02.04. Оплата КАСКО</button></li>
+            <li><button class="tree-item" data-doc="mortgage">30.03. Ипотека</button></li>
+            <li><button class="tree-item" data-doc="mortgage-api">30.03.01. API и офферы ипотеки</button></li>
+            <li><button class="tree-item" data-doc="mortgage-fields">30.03.02. Поля и офлайн-сценарий</button></li>
           </ul>
         </details>
         <details class="tree-group" open>
@@ -179,6 +194,8 @@
           <ul class="tree-list">
             <li><button class="tree-item" data-doc="partner-api">40.01. Общие методы API</button></li>
             <li><button class="tree-item" data-doc="integration">40.02. Страховые интеграции</button></li>
+            <li><button class="tree-item" data-doc="cache-enrichment">40.03. Кэш и обогащение данных</button></li>
+            <li><button class="tree-item" data-doc="files-documents">40.04. Файлы и документы</button></li>
           </ul>
         </details>
         <details class="tree-group" open>
@@ -191,6 +208,9 @@
           <summary><span class="tree-toggle" aria-hidden="true"></span><button type="button" class="tree-section-item" data-doc="section-operations">60. Эксплуатация и безопасность</button></summary>
           <ul class="tree-list">
             <li><button class="tree-item" data-doc="incident">60.05. Инцидент: платежная ссылка</button></li>
+            <li><button class="tree-item" data-doc="incident-offers">60.06. Инцидент: нет офферов</button></li>
+            <li><button class="tree-item" data-doc="incident-documents">60.07. Инцидент: документы</button></li>
+            <li><button class="tree-item" data-doc="incident-enrichment">60.08. Инцидент: данные автомобиля</button></li>
           </ul>
         </details>
         <details class="tree-group" open>
@@ -364,6 +384,61 @@
           { type: "callout", body: "<strong>Важно.</strong> Для каждой фоновой задачи нужна ссылка на инструкцию: что делать, если она не запустилась, зависла или обработала данные неправильно." }
         ]
       },
+      osago: {
+        path: ["Insapp", "30. Продукты", "30.01. ОСАГО"],
+        title: "ОСАГО: полный путь клиента",
+        summary: "ОСАГО ведет клиента от создания заявки и заполнения автомобиля до офферов, проверки данных, оплаты и выпуска полиса. Отдельно поддерживаются продление действующего полиса и офлайн-сохранение заявки.",
+        meta: [["Статус", "Рабочая страница"], ["Обновлено", "26.08.2026"], ["Основание", "Маршруты и сервисы фронта ОСАГО"], ["Пересмотр", "Маршрут, форма или API"]],
+        sections: [
+          { type: "table", title: "Маршруты и результат", headers: ["Маршрут", "Что делает клиент", "Что должно получиться"], rows: [["`/`", "Открывает виджет или партнерский вход", "Создана или восстановлена заявка"], ["`/form`", "Заполняет автомобиль, водителей, собственника, страхователя и контакты", "Данные готовы к отправке страховым"], ["`/offers`", "Смотрит расчет и выбирает оффер", "Сохранен выбранный `offerId`"], ["`/data-checking`", "Переходит по ссылке проверки данных", "Проверка продолжена во внешнем или отдельном шаге"], ["`/create-policy`", "Ждет готовность оплаты и полиса", "Получена платежная ссылка или понятный итог ожидания"], ["`/success`", "Получает итог оформления", "Показан успешный результат"], ["`/prolongation`", "Продлевает полис по номеру авто или данным старого полиса", "Найдены данные для новой заявки"], ["`/loading` и `/error`", "Ждет фоновую операцию или видит ошибку", "Есть понятный следующий шаг"]] },
+          { type: "table", title: "Основная цепочка", headers: ["Шаг", "Методы", "Что фиксировать"], rows: [["Создание", "`app/new`, `app/GetApplicationInfo`, `client/GetCache`", "`applicationId`, источник входа и состояние кэша"], ["Автомобиль", "Справочники марок, моделей, лет, мощности и стран", "Выбранные идентификаторы справочников"], ["Проверка", "`CreateKbmReport` / `GetKbmReport`, `CreateCarCharacteristicsReport` / `GetCarCharacteristicsReport`", "Идентификатор отчета и итоговый статус"], ["Расчет", "`SendOsagoApplication`, `SendToInsurers`, `GetOffers`", "Время отправки и полученные офферы"], ["Выбор", "`SelectOffer`, `SetStatusBuyButtonPressed`", "Выбранный `offerId`"], ["Оплата", "`GetOsagoPaymentLink`, `SendOsagoPaymentLink`", "Статус ссылки и канал отправки"]] },
+          { type: "text", title: "Варианты входа и возврата", body: "<p>Фронт может открыть заявку по <code>applicationId</code>, партнерскому идентификатору или данным из кэша. Для возврата к партнеру используются <code>GetInfoForRedirect</code>, <code>GetReturnToOfferUrlRequest</code> и настройка канала через <code>SetReturnChannel</code>. На странице партнера нужно отдельно описывать, какой вариант включен и куда пользователь возвращается после оформления.</p>" },
+          { type: "text", title: "Что видит клиент при ошибке", body: "<ul><li>Ошибка формы должна указывать конкретный блок и поле, а не только общий текст.</li><li>Если отчет KBM или данные автомобиля не готовы, показывается ожидание с ограничением по времени.</li><li>Если офферов нет, клиенту нужен следующий шаг: исправить данные, повторить позже или передать заявку в ручную работу.</li><li>Если платежная ссылка не получена, сохраняются <code>applicationId</code>, <code>offerId</code>, время и статус без персональных данных.</li></ul>" },
+          { type: "sources", items: [["Маршруты", "insapp-front-osago-develop/src/app/app.routes.ts"], ["Основной API", "shared/services/app.service.ts и osago.service.ts"], ["Поля", "src/assets/data/property-controls.json"], ["Продление", "Компоненты prolongation и сервисы enrichment"]] }
+        ]
+      },
+      "osago-api": {
+        path: ["Insapp", "30. Продукты", "30.01. ОСАГО", "30.01.01. API и статусы"],
+        title: "ОСАГО: API, статусы и ожидание",
+        summary: "Карта показывает, какой метод вызывается на каждом шаге, какой статус нужен для перехода и какие данные безопасно сохранить для разбора ошибки.",
+        meta: [["Статус", "Рабочая страница"], ["Обновлено", "26.08.2026"], ["Основание", "Сервисы фронта ОСАГО"], ["Пересмотр", "Метод или статус"]],
+        sections: [
+          { type: "table", title: "Методы по назначению", headers: ["Группа", "Методы"], rows: [["Заявка", "`app/new`, `app/GetApplicationInfo`, `app/GetDraft`, `app/SaveOfflineOsagoApplication`"], ["Кэш", "`client/GetCache`, `Client/GetOsagoCacheByApplicationId`, `Client/GetOsagoCacheByPartnerApplicationId`, `client/UpdateCache`"], ["Справочники", "`GetAllBrands`, `GetAllModels`, `GetYears`, `GetPowers`, `GetAllCountries`, `GetOsagoPreliminaryCost`"], ["Расчет", "`app/SendOsagoApplication`, `app/SendToInsurers`, `app/GetOffers`, `app/SelectOffer`"], ["Подтверждение", "`app/SendVerificationCode`, `app/VerifyCode`"], ["Оплата", "`app/GetOsagoPaymentLink`, `app/SendOsagoPaymentLink`"], ["Виджет и возврат", "`SetStatusWidgetDisplayed`, `SetWidgetStatus`, `SetStatusBuyButtonPressed`, `SetReturnChannel`, `GetInfoForRedirect`"], ["Партнер", "`GetApiKeySettings`, `GetReturnToOfferUrlRequest`, `AddTatneftJwt`"]] },
+          { type: "table", title: "Статусы заявки, найденные во фронте", headers: ["Статус", "Смысл для пути"], rows: [["`Filled`", "Анкета заполнена"], ["`SentToInsurers`", "Заявка отправлена страховым"], ["`OfferRecived`", "Офферы получены; написание сохранено как в коде"], ["`OfferChosen`", "Клиент выбрал оффер"], ["`PaymentLinkReceived`", "Ссылка на оплату получена"], ["`BuyButtonPressed`", "Клиент нажал покупку"], ["`PaidFromPartner` и `Paid`", "Оплата подтверждена партнером или системой"], ["`PolicyIsActive`", "Полис активен"], ["`SentToAccountingSystem`", "Данные переданы в учетную систему"]] },
+          { type: "table", title: "Фоновые проверки", headers: ["Операция", "Запуск", "Проверка", "Готово когда"], rows: [["KBM", "`CreateKbmReport`", "`GetKbmReport`", "Статус `Complete`"], ["Автомобиль", "`CreateCarCharacteristicsReport`", "`GetCarCharacteristicsReport`", "Получены характеристики или конечная ошибка"], ["Продление ОСАГО", "`CreateOsagoReport`", "`GetOsagoReport`", "Получены данные старого полиса или конечная ошибка"], ["Платежная ссылка", "Выбор оффера", "`GetOsagoPaymentLink`", "Статус `Received`; отдельно обработать `Timeout`"]] },
+          { type: "text", title: "Правила описания метода", body: "<p>Для каждого вызова нужны: экран, момент запуска, поля запроса, успешный ответ, конечные статусы, повтор запроса, ограничение ожидания и видимая ошибка. Значение <code>apiKey</code>, персональные данные и адреса закрытых окружений в примеры не добавляются.</p>" },
+          { type: "sources", items: [["App API", "src/app/shared/services/app.service.ts"], ["ОСАГО", "src/app/shared/services/osago.service.ts"], ["Кэш", "src/app/shared/services/cache.service.ts"], ["Статусы", "Компоненты offers, create-policy и success"]] }
+        ]
+      },
+      "osago-fields": {
+        path: ["Insapp", "30. Продукты", "30.01. ОСАГО", "30.01.02. Поля"],
+        title: "ОСАГО: поля формы и правила показа",
+        summary: "Базовая форма ОСАГО содержит больше ста настроек полей. Здесь они собраны по смыслу, чтобы при изменении было видно, какой экран, запрос и проверку нужно обновить.",
+        meta: [["Статус", "Рабочая страница"], ["Обновлено", "26.08.2026"], ["Основание", "property-controls.json ОСАГО"], ["Пересмотр", "Поле или проверка"]],
+        sections: [
+          { type: "table", title: "Технические поля", headers: ["Поля", "Назначение"], rows: [["`apiKey`, `applicationId`", "Настройка партнера и идентификатор заявки"], ["`cpaClientUid`", "Связь с партнерской или бонусной программой, если она включена"], ["`email`, `phone`", "Контакт и отправка результата"], ["`policyStartDate`", "Дата начала нового полиса"]] },
+          { type: "table", title: "Автомобиль", headers: ["Группа", "Поля"], rows: [["Основные данные", "`licensePlate`, `brandId`, `modelId`, `productionYear`, `horsePower`, `horsePowerKw`"], ["Идентификаторы", "`vinNumber`, `bodyNumber`, `chassisNumber`"], ["Документ", "`documentType`, поля СТС, ПТС и электронного ПТС"], ["Использование", "`purposeOfUse` и ограничения использования"], ["Справочники", "Марка, модель, год, мощность и страна берутся по идентификаторам API"]] },
+          { type: "table", title: "Водители", headers: ["Группа", "Поля"], rows: [["Личность", "Имя, фамилия, отчество и дата рождения"], ["Стаж", "Дата начала стажа"], ["Удостоверение", "Серия и номер, дата выдачи, данные предыдущего удостоверения"], ["Условия", "Флаги ограниченного списка и связи водителя с собственником или страхователем"]] },
+          { type: "table", title: "Собственник и страхователь", headers: ["Тип", "Что хранится"], rows: [["Физическое лицо", "ФИО, дата рождения, паспорт, город и адрес"], ["Юридическое лицо", "Название, ИНН, ОГРН, КПП, свидетельство, юридический адрес и представитель"], ["Связи", "Флаги совпадения собственника, страхователя и водителя"]] },
+          { type: "table", title: "Продление", headers: ["Поля", "Когда нужны"], rows: [["`previousPolicySeries`, `previousPolicyNumber`", "Поиск предыдущего полиса"], ["`prolongationFormBirthDate`", "Дополнительная проверка клиента"], ["Госномер", "Быстрый поиск данных автомобиля и полиса"]] },
+          { type: "text", title: "Что писать для каждого поля", body: "<ul><li>Экран и блок формы.</li><li>Имя в коде и имя в запросе.</li><li>Тип, обязательность, маска и допустимый диапазон.</li><li>Условие показа и зависимость от других полей.</li><li>Источник значения: ручной ввод, справочник, кэш или отчет обогащения.</li><li>Текст ошибки и действие клиента.</li></ul>" },
+          { type: "callout", body: "<strong>Персональные данные.</strong> В документации показываются имена полей и вымышленные значения формата. Реальные ФИО, телефоны, паспорта, адреса и документы не используются." },
+          { type: "sources", items: [["Базовая схема", "insapp-front-osago-develop/src/assets/data/property-controls.json"], ["Форма", "Компоненты form"], ["Справочники", "Сервис dictionaries"], ["Кэш", "Сервисы Client и client/UpdateCache"]] }
+        ]
+      },
+      "osago-prolongation": {
+        path: ["Insapp", "30. Продукты", "30.01. ОСАГО", "30.01.03. Продление и оплата"],
+        title: "ОСАГО: продление, выбор и оплата",
+        summary: "Страница объединяет путь от поиска старого полиса до новой заявки, выбора оффера и получения платежной ссылки. Это отдельный сценарий, а не сокращенная версия обычной анкеты.",
+        meta: [["Статус", "Рабочая страница"], ["Обновлено", "26.08.2026"], ["Основание", "Компоненты prolongation, offers и create-policy"], ["Пересмотр", "Продление или оплата"]],
+        sections: [
+          { type: "table", title: "Продление по данным автомобиля", headers: ["Шаг", "Действие"], rows: [["1", "Клиент вводит госномер или данные прежнего полиса"], ["2", "Фронт запускает `CreateOsagoReport`"], ["3", "Фронт проверяет результат через `GetOsagoReport`"], ["4", "Найденные данные переносятся в новую заявку и показываются клиенту для проверки"], ["5", "Недостающие или изменившиеся данные клиент исправляет до отправки"]] },
+          { type: "table", title: "Выбор и платеж", headers: ["Шаг", "Метод", "Успех", "Ошибка"], rows: [["Офферы", "`GetOffers`", "Есть доступные предложения", "Показать сценарий без офферов"], ["Выбор", "`SelectOffer`", "Сохранен `offerId`", "Не переходить к оплате без подтвержденного выбора"], ["Кнопка покупки", "`SetStatusBuyButtonPressed`", "Зафиксировано действие клиента", "Не блокировать разбор, если запись статуса не удалась"], ["Ссылка", "`GetOsagoPaymentLink`", "Статус `Received`", "Обработать `Timeout` и конечную ошибку"], ["Отправка ссылки", "`SendOsagoPaymentLink`", "Клиент получил ссылку по выбранному каналу", "Показать безопасный повтор"]] },
+          { type: "text", title: "Проверки перед переходом к оплате", body: "<ul><li>Заявка принадлежит текущему партнерскому входу.</li><li>Выбранный оффер еще доступен.</li><li>Есть <code>applicationId</code> и <code>offerId</code>.</li><li>Статус заявки допускает создание платежной ссылки.</li><li>Пользователю показано, что ожидание может занять время.</li></ul>" },
+          { type: "text", title: "Данные для разбора", body: "<p>Сохраняются идентификатор заявки, идентификатор оффера, маршрут, время, статус заявки, статус платежной ссылки и имя метода. Не сохраняются полный запрос с персональными данными, ключ партнера и содержимое полиса.</p>" },
+          { type: "sources", items: [["Продление", "Компоненты маршрута /prolongation"], ["Отчет", "CreateOsagoReport и GetOsagoReport"], ["Офферы", "Компоненты /offers"], ["Оплата", "GetOsagoPaymentLink и SendOsagoPaymentLink"]] }
+        ]
+      },
       kasko: {
         path: ["Insapp", "30. Продукты", "30.02. КАСКО"],
         title: "КАСКО: путь клиента и работа заявки",
@@ -373,6 +448,87 @@
           { type: "text", title: "Путь клиента", body: "<ol><li>`/kasko` - номер автомобиля и создание заявки.</li><li>`/kasko/auto-info` - данные автомобиля.</li><li>`/kasko/drivers` и `/kasko/owner` - водители, собственник и контакты.</li><li>`/kasko/offers` - отправка заявки и получение офферов.</li><li>`/kasko/create-policy`, `/kasko/documents`, `/kasko/payment-processing` - выпуск, документы и ожидание оплаты.</li></ol>" },
           { type: "table", title: "Что должно быть связано на странице продукта", headers: ["Часть", "Что описать"], rows: [["Поля", "Марка, модель, пробег, год, документы, контакты и проверки"], ["API", "Создание заявки, отправка, офферы, документы, оплата"], ["Статусы", "Переходы при создании, ожидании офферов и оплате"], ["Ошибки", "Нет марки, нет ссылки на оплату, ошибка документа"], ["Код", "Компоненты, сервисы и backend-методы"]] },
           { type: "sources", items: [["Маршруты и API", "PAGES_AND_API_ENDPOINTS.md"], ["Поля", "kaskoV2 property-controls.json"], ["Frontend", "kasko.service.ts и компоненты"], ["Backend", "Public API, сервисы, модели"]] }
+        ]
+      },
+      "kasko-api-offers": {
+        path: ["Insapp", "30. Продукты", "30.02. КАСКО", "30.02.01. API и офферы"],
+        title: "КАСКО: API заявки и получение офферов",
+        summary: "Полная цепочка от входа в форму до выбора предложения. Страница показывает порядок вызовов, обязательные идентификаторы и места, где путь может остановиться.",
+        meta: [["Статус", "Рабочая страница"], ["Обновлено", "26.08.2026"], ["Основание", "PAGES_AND_API_ENDPOINTS.md и kasko.service.ts"], ["Пересмотр", "Контракт или офферы"]],
+        sections: [
+          { type: "table", title: "Инициализация", headers: ["Действие", "Метод", "Результат"], rows: [["Загрузить марки", "`dictionaries/GetAllBrands`", "Справочник марок"], ["Загрузить модели", "`dictionaries/GetAllModels`", "Модели выбранной марки"], ["Создать заявку", "`app/new`", "Новый `applicationId`"], ["Записать показ виджета", "`app/SetStatusWidgetDisplayed`", "Событие входа в форму"], ["Открыть существующую заявку", "`app/GetApplicationInfo`", "Данные и текущее состояние заявки"]] },
+          { type: "table", title: "Анкета и подтверждение", headers: ["Шаг", "Методы", "Что проверить"], rows: [["Автомобиль", "`app/SaveClientCarData`", "Идентификаторы авто, документ и стоимость"], ["Контакт", "`app/SendVerificationCode`", "Телефон принят для отправки кода"], ["Авторизация", "`app/Authorize`", "Запущен разрешенный партнером сценарий"], ["Код", "`app/VerifyCode`", "Код подтвержден до отправки заявки"], ["Сохранение", "`client/UpdateCache`", "Изменения формы можно восстановить"]] },
+          { type: "table", title: "Расчет и выбор", headers: ["Порядок", "Метод", "Ожидаемый итог"], rows: [["1", "`app/SendKaskoApplication`", "Данные заявки приняты API"], ["2", "`app/SendToInsurers`", "Запущен расчет у доступных страховых"], ["3", "`app/GetKaskoOffers`", "Фронт получает список или состояние расчета"], ["4", "`app/SelectOffer`", "Выбран конкретный `offerId`"], ["5", "`app/CopyApplicationDocuments`", "Документы копируются, если сценарий это требует"]] },
+          { type: "table", title: "Особые предложения", headers: ["Метод", "Когда нужен", "Как описывать"], rows: [["`app/GetSpecialOffers`", "Партнерская настройка включает отдельные предложения", "Указать условие показа, источник и отличие от обычного оффера"], ["`GetApiKeySettings`", "Нужно определить возможности партнерского ключа", "Показывать только доступные функции, не значение ключа"]] },
+          { type: "text", title: "Пустой или долгий расчет", body: "<p>Страница должна различать три состояния: расчет еще идет, расчет завершен без подходящих предложений, запрос завершился ошибкой. Для разбора нужны <code>applicationId</code>, время <code>SendToInsurers</code>, последний ответ <code>GetKaskoOffers</code> и партнерский сценарий без значения ключа.</p>" },
+          { type: "sources", items: [["Карта экранов", "insapp-front-kasko-develop/docs/PAGES_AND_API_ENDPOINTS.md"], ["Основной сервис", "projects/kaskoV2/src/app/shared/services/kasko.service.ts"], ["Настройки", "GetApiKeySettings и партнерские сборки"], ["Технический слой", "DocMost: интеграции КАСКО и матрица настроек"]] }
+        ]
+      },
+      "kasko-documents": {
+        path: ["Insapp", "30. Продукты", "30.02. КАСКО", "30.02.02. Документы"],
+        title: "КАСКО: загрузка и отправка документов",
+        summary: "После выбора оффера часть заявок требует документы. Клиент должен видеть список, требования к файлу, состояние загрузки, возможность удалить ошибочный файл и понятный итог отправки.",
+        meta: [["Статус", "Рабочая страница"], ["Обновлено", "26.08.2026"], ["Основание", "documents.service.ts и API-карта"], ["Пересмотр", "Файловый метод"]],
+        sections: [
+          { type: "table", title: "Методы работы с документами", headers: ["Метод", "Назначение", "Ключевые данные"], rows: [["`file/DocumentList`", "Получить список нужных и загруженных документов", "`applicationId`, при необходимости `offerId`"], ["`file/UploadDocument`", "Загрузить один файл", "`ApplicationId`, `DocumentType`, файл; по сценарию `PersonType` или `OfferId`"], ["`file/DeleteDocument`", "Удалить неверный файл", "Идентификатор заявки и документа"], ["`file/SendDocuments`", "Передать готовый комплект дальше", "`applicationId`, выбранный оффер и готовность списка"]] },
+          { type: "table", title: "Путь клиента", headers: ["Шаг", "Что показывает интерфейс", "Что запрещает переход"], rows: [["Список", "Обязательные типы и уже загруженные файлы", "Не получен список документов"], ["Выбор файла", "Допустимый формат и размер", "Формат, размер или пустой файл не подходят"], ["Загрузка", "Прогресс и итог каждого файла", "Есть незавершенная или ошибочная загрузка"], ["Проверка", "Файл привязан к правильному типу и человеку", "Не заполнен обязательный тип"], ["Отправка", "Общий итог комплекта", "Не все обязательные документы готовы"], ["Финал", "Маршрут `/kasko/success-upload-documents`", "API вернул конечную ошибку"]] },
+          { type: "text", title: "Ошибки, которые нужно различать", body: "<ul><li>Файл не выбран или пустой.</li><li>Формат или размер не поддерживается.</li><li>Загрузка оборвалась до получения ответа.</li><li>Файл загружен, но не связан с нужным типом документа.</li><li>Удаление не подтвердилось, поэтому старый файл остается в списке.</li><li>Комплект не принят методом <code>SendDocuments</code>.</li></ul>" },
+          { type: "callout", body: "<strong>Безопасность.</strong> В лог и обращение не добавляется содержимое файла. Для разбора используются <code>applicationId</code>, <code>offerId</code>, тип документа, безопасное имя файла, размер, время и ответ метода." },
+          { type: "sources", items: [["API", "projects/kaskoV2/src/app/shared/services/documents.service.ts"], ["Карта", "docs/PAGES_AND_API_ENDPOINTS.md"], ["Маршруты", "/kasko/documents и /kasko/success-upload-documents"], ["Безопасность", "DocMost: классификация данных и PII"]] }
+        ]
+      },
+      "kasko-payment": {
+        path: ["Insapp", "30. Продукты", "30.02. КАСКО", "30.02.04. Оплата"],
+        title: "КАСКО: черновик полиса и платежная ссылка",
+        summary: "После выбора оффера фронт ждет готовность черновика и платежной ссылки. Оба результата проверяются повторно, поэтому документация должна явно показывать интервалы, конечные состояния и выход из ожидания.",
+        meta: [["Статус", "Рабочая страница"], ["Обновлено", "26.08.2026"], ["Основание", "CreatePolicyComponent и PaymentProcessingComponent"], ["Пересмотр", "Платежный путь"]],
+        sections: [
+          { type: "table", title: "Ожидание результата", headers: ["Экран", "Метод", "Интервал", "Готово когда"], rows: [["`/kasko/create-policy`", "`app/GetDraft`", "2 секунды", "Статус черновика 2 или 3"], ["`/kasko/create-policy`", "`app/GetKaskoPaymentLink`", "2 секунды", "Статус `Received`"], ["`/kasko/payment-processing`", "`app/GetDraft`", "2 секунды", "Черновик перешел в конечное состояние"], ["`/kasko/payment-processing`", "`app/GetKaskoPaymentLink`", "2 секунды", "Получена ссылка"]] },
+          { type: "table", title: "Развилки после выбора", headers: ["Условие", "Куда идет клиент", "Что должно быть описано"], rows: [["Документы не нужны", "`/kasko/create-policy`", "Ожидание черновика и ссылки"], ["Документы нужны", "`/kasko/documents`", "Список, загрузка, отправка и затем ожидание оплаты"], ["Документы отправлены", "`/kasko/payment-processing`", "Повторная проверка черновика и ссылки"], ["Ссылка не получена", "`/kasko/payment-link-failed`", "Причина, безопасный повтор и передача в поддержку"], ["Ссылка получена", "Переход по платежному URL", "Проверка допустимого адреса и понятный переход"]] },
+          { type: "text", title: "Защита от бесконечного ожидания", body: "<p>В текущих исходниках подтвержден повтор раз в две секунды. На рабочей странице дополнительно нужно указать общий срок ожидания, число повторов, текст для клиента и действие после превышения срока. Эти четыре значения нельзя придумывать: их нужно подтвердить владельцем процесса или backend-контрактом.</p>" },
+          { type: "text", title: "Данные для разбора", body: "<p>Нужны <code>applicationId</code>, <code>offerId</code>, маршрут, время начала ожидания, последний статус <code>GetDraft</code> и <code>GetKaskoPaymentLink</code>. Платежный URL, ключ и персональные данные в обращение не копируются.</p>" },
+          { type: "sources", items: [["Экран", "CreatePolicyComponent"], ["После документов", "PaymentProcessingComponent"], ["Методы", "app/GetDraft и app/GetKaskoPaymentLink"], ["Технический разбор", "DocMost: оплата и платежные ссылки"]] }
+        ]
+      },
+      mortgage: {
+        path: ["Insapp", "30. Продукты", "30.03. Ипотека"],
+        title: "Ипотека: путь клиента и состав заявки",
+        summary: "Ипотечный фронт короче ОСАГО и КАСКО, но анкета содержит данные заемщика, кредита, объекта, здоровья и выбранного продукта. Путь включает предварительный расчет, офферы, сохранение и оплату.",
+        meta: [["Статус", "Рабочая страница"], ["Обновлено", "26.08.2026"], ["Основание", "Маршруты, mortgage.service.ts и property-controls.json"], ["Пересмотр", "Форма или API"]],
+        sections: [
+          { type: "table", title: "Маршруты", headers: ["Маршрут", "Назначение", "Итог"], rows: [["`/`", "Вход в продукт и создание заявки", "Есть `applicationId` и настройки партнера"], ["`/form`", "Анкета заемщика, кредита, объекта и страховых условий", "Данные готовы к предварительному расчету или сохранению"], ["`/success`", "Итог онлайн- или офлайн-сценария", "Показан результат; поддерживается `status=offline`"]] },
+          { type: "table", title: "Состав процесса", headers: ["Этап", "Методы"], rows: [["Справочники", "`GetBanks`, `GetMortgageProducts`, `GetProductDetails`, `GetProfessions`"], ["Заявка", "`app/new`, `GetApplicationInfo`, `GetMortgageCacheByApplicationId`"], ["Предварительный расчет", "`PreapproveMortgageApplication`, `GetOffers`"], ["Выбор", "`SelectOffer`, `ApproveMortgageOffer`"], ["Сохранение", "`SaveContacts`, `SaveMortgageApplication`, `SaveOfflineMortgageApplication`"], ["Оплата", "`GetMortgagePaymentLink`, `SendMortgagePaymentLink`, `SetStatusBuyButtonPressed`"]] },
+          { type: "text", title: "Онлайн и офлайн", body: "<p>Онлайн-путь ведет от предварительного расчета к выбору оффера и оплате. Офлайн-путь сохраняет заявку через <code>SaveOfflineMortgageApplication</code> и завершает ее отдельным результатом. На странице партнера нужно указать, когда выбирается каждый путь и кто продолжает заявку после офлайн-сохранения.</p>" },
+          { type: "text", title: "Что нельзя смешивать", body: "<p>Данные заемщика, сведения о кредите, параметры объекта и медицинские ответы относятся к разным блокам и имеют разные правила доступа. В логах и примерах используются только названия полей и вымышленные безопасные значения.</p>" },
+          { type: "sources", items: [["Маршруты", "insapp-front-mortgage-develop/src/app/app.routes.ts"], ["API", "shared/services/mortgage.service.ts"], ["Поля", "src/assets/data/property-controls.json"], ["Контракты", "mortgage-application.interface.ts"]] }
+        ]
+      },
+      "mortgage-api": {
+        path: ["Insapp", "30. Продукты", "30.03. Ипотека", "30.03.01. API и офферы"],
+        title: "Ипотека: API предварительного расчета и офферов",
+        summary: "Методы собраны по порядку вызова: загрузка справочников, создание заявки, предварительный расчет, получение и подтверждение оффера, сохранение и платеж.",
+        meta: [["Статус", "Рабочая страница"], ["Обновлено", "26.08.2026"], ["Основание", "mortgage.service.ts и интерфейсы"], ["Пересмотр", "Контракт API"]],
+        sections: [
+          { type: "table", title: "Справочники", headers: ["Метод", "Для чего"], rows: [["`dictionaries/GetBanks`", "Выбор банка"], ["`dictionaries/GetMortgageProducts`", "Доступные страховые продукты"], ["`dictionaries/GetProductDetails`", "Параметры выбранного продукта"], ["`dictionaries/GetProfessions`", "Профессия и занятость заемщика"]] },
+          { type: "table", title: "Цепочка заявки", headers: ["Порядок", "Метод", "Ключевые данные", "Результат"], rows: [["1", "`app/new`", "`apiKey` и данные входа", "`applicationId`"], ["2", "`PreapproveMortgageApplication`", "Продукт, остаток кредита, возраст, пол, тип объекта, флаги условий и согласия", "Предварительный расчет"], ["3", "`GetOffers`", "`applicationId`", "Офферы и их состояние"], ["4", "`SelectOffer`", "`applicationId`, `offerId`", "Выбранный оффер"], ["5", "`ApproveMortgageOffer`", "Выбранное предложение", "Подтвержденный оффер"], ["6", "`SaveContacts` и `SaveMortgageApplication`", "Контакт и полная анкета", "Заявка сохранена"], ["7", "`GetMortgagePaymentLink`", "Заявка и выбранный оффер", "Ссылка на оплату"]] },
+          { type: "table", title: "Статусы оффера во фронте", headers: ["Статус", "Действие"], rows: [["`PreApproved`", "Показать предварительно доступное предложение и нужные следующие шаги"], ["`Approved`", "Разрешить подтверждение и дальнейшее оформление"]] },
+          { type: "text", title: "Флаги предварительного расчета", body: "<p>В запросе есть условия <code>WithoutCreditNumber</code>, <code>WithoutOwnership</code>, <code>WithWood</code>, <code>WithGas</code> и <code>WithIllegalRedevelopment</code>. Для каждого флага на рабочей странице нужно указать понятный смысл, экран, значение по умолчанию и влияние на доступные продукты.</p>" },
+          { type: "sources", items: [["Сервис", "shared/services/mortgage.service.ts"], ["Запрос", "mortgage-application.interface.ts"], ["Офферы", "Компоненты формы и success"], ["Кэш", "Client/GetMortgageCacheByApplicationId"]] }
+        ]
+      },
+      "mortgage-fields": {
+        path: ["Insapp", "30. Продукты", "30.03. Ипотека", "30.03.02. Поля и офлайн-сценарий"],
+        title: "Ипотека: поля формы и офлайн-сохранение",
+        summary: "В базовой настройке формы найдено 47 полей. Они разделены на продукт, заемщика, кредит, объект, здоровье и служебные данные офлайн-сценария.",
+        meta: [["Статус", "Рабочая страница"], ["Обновлено", "26.08.2026"], ["Основание", "property-controls.json ипотеки"], ["Пересмотр", "Поле или офлайн-путь"]],
+        sections: [
+          { type: "table", title: "Продукт и расчет", headers: ["Поля", "Назначение"], rows: [["`mortgagePropertyType`, `bankId`", "Тип объекта и банк"], ["`creditRemain`, `baseAmount`", "Остаток кредита и страховая сумма"], ["`mortgageProductId`", "Выбранный продукт"], ["`policyStartDate`, `policyEndDate`", "Срок страхования"], ["`withRefusalRate`", "Условие расчета, которое должно быть объяснено пользователю"]] },
+          { type: "table", title: "Заемщик", headers: ["Группа", "Поля"], rows: [["Личность", "ФИО, дата рождения, пол и место рождения"], ["Паспорт", "Серия, номер, дата выдачи, код подразделения и кем выдан"], ["Адрес", "Город, адрес и дом"], ["Работа", "Профессия и сведения о занятости"], ["Контакт", "`email`, `phone`"]] },
+          { type: "table", title: "Кредит и объект", headers: ["Группа", "Поля"], rows: [["Кредит", "Сумма, номер, даты, ставка и ежемесячный платеж"], ["Адрес объекта", "Адрес, дом и кадастровый номер"], ["Характеристики", "Год постройки, площадь, этажность, комнаты и этаж"], ["Условия", "Флаги собственности, дерева, газа и перепланировки"]] },
+          { type: "table", title: "Здоровье", headers: ["Поля", "Правило"], rows: [["`weight`, `height`", "Числовые значения с диапазонами и единицами"], ["`lowPressure`, `highPressure`", "Нижнее и верхнее давление; не менять местами"], ["Медицинские ответы", "Относить к чувствительным данным и не выводить в обычные логи"]] },
+          { type: "table", title: "Офлайн-сценарий", headers: ["Данные", "Зачем"], rows: [["Офлайн-ФИО и город", "Передача заявки для дальнейшей ручной работы"], ["`loanIssueAddress`", "Адрес выдачи кредита"], ["`SaveOfflineMortgageApplication`", "Сохранение без продолжения онлайн-оплаты"], ["`status=offline`", "Отдельный итог на странице success"]] },
+          { type: "text", title: "Правила проверки", body: "<p>Для каждого поля нужны обязательность, тип, единица измерения, допустимый диапазон, условие показа, источник значения, поле запроса и текст ошибки. Для паспортов, адресов и медицинских данных отдельно указывается, кто имеет доступ и что можно писать в лог.</p>" },
+          { type: "sources", items: [["Поля", "insapp-front-mortgage-develop/src/assets/data/property-controls.json"], ["Контракты", "mortgage-application.interface.ts"], ["Сохранение", "SaveMortgageApplication и SaveOfflineMortgageApplication"], ["Маршруты", "/form и /success"]] }
         ]
       },
       "kasko-fields": {
@@ -406,6 +562,33 @@
           { type: "sources", items: [["Код", "Интеграционные сервисы Insapp"], ["Колбэки", "Матрица колбэков и постбэков"], ["Продукт", "ОСАГО, КАСКО или ипотека"], ["Инциденты", "60.05. Инструкции по инцидентам"]] }
         ]
       },
+      "cache-enrichment": {
+        path: ["Insapp", "40. Партнеры и внешние API", "40.03. Кэш и обогащение данных"],
+        title: "Кэш и обогащение данных заявки",
+        summary: "Кэш возвращает клиента к заполненной форме, а сервисы обогащения получают сведения об автомобиле, KBM или старом полисе. Эти процессы идут отдельно от основного сохранения заявки и требуют понятного ожидания.",
+        meta: [["Статус", "Рабочая страница"], ["Обновлено", "26.08.2026"], ["Основание", "Сервисы кэша и enrichment трех фронтов"], ["Пересмотр", "Кэш или отчет"]],
+        sections: [
+          { type: "table", title: "Кэш по продуктам", headers: ["Продукт", "Чтение", "Запись", "Назначение"], rows: [["ОСАГО", "`client/GetCache`, `GetOsagoCacheByApplicationId`, `GetOsagoCacheByPartnerApplicationId`", "`client/UpdateCache`", "Восстановить форму по заявке или партнерскому идентификатору"], ["КАСКО", "`client/GetCache`, `GetKaskoCacheByApplicationId`", "`client/UpdateCache`", "Вернуть данные анкеты после повторного входа"], ["Ипотека", "`Client/GetMortgageCacheByApplicationId`", "Сохранение идет через методы заявки", "Открыть ранее созданную ипотечную заявку"]] },
+          { type: "table", title: "Отчеты обогащения", headers: ["Продукт", "Создание", "Проверка", "Готовый результат"], rows: [["ОСАГО: KBM", "`CreateKbmReport`", "`GetKbmReport`", "Статус `Complete` и данные расчета"], ["ОСАГО: автомобиль", "`CreateCarCharacteristicsReport`", "`GetCarCharacteristicsReport`", "Характеристики автомобиля"], ["ОСАГО: старый полис", "`CreateOsagoReport`", "`GetOsagoReport`", "Данные для продления"], ["КАСКО: автомобиль", "`CreateTechDataReport`", "`GetTechDataReport`", "Марка, модель и технические данные"]] },
+          { type: "table", title: "Внешние подсказки КАСКО", headers: ["Сервис", "Методы", "Назначение"], rows: [["DaData", "`suggest/address`, `suggest/fio`", "Подсказки адреса и ФИО"], ["Alfa ID", "`Enrichment/GetAlfaIdUrl`, `Enrichment/AlfaId`", "Отдельный сценарий идентификации, если включен партнером"]] },
+          { type: "text", title: "Правила ожидания", body: "<ul><li>После создания отчета хранится его идентификатор.</li><li>Повторная проверка останавливается при готовом результате, конечной ошибке или превышении срока.</li><li>Клиент видит, что идет проверка, и может понять следующий шаг.</li><li>Повторный запуск не должен создавать несколько независимых отчетов без причины.</li><li>В лог не попадает полный ответ с персональными данными.</li></ul>" },
+          { type: "text", title: "Расхождение кэша и заявки", body: "<p>Если кэш содержит старое значение, а API заявки уже вернул новое, рабочая документация должна определить главный источник для каждого шага. Пока это правило не подтверждено, расхождение передается на технический разбор с <code>applicationId</code>, временем чтения и именами методов.</p>" },
+          { type: "sources", items: [["ОСАГО", "Сервисы cache, KBM и osago-report"], ["КАСКО", "cache.service.ts, dadata.service.ts и tech-data report"], ["Ипотека", "GetMortgageCacheByApplicationId"], ["Backend", "DocMost: интеграции, кэш и фоновые операции"]] }
+        ]
+      },
+      "files-documents": {
+        path: ["Insapp", "40. Партнеры и внешние API", "40.04. Файлы и документы"],
+        title: "Файлы и документы в продуктовых сценариях",
+        summary: "Документы описываются как отдельный процесс: получить список, проверить требования, загрузить, удалить ошибочный файл, отправить комплект и показать итог. Содержимое документов не становится частью технического лога.",
+        meta: [["Статус", "Рабочая страница"], ["Обновлено", "26.08.2026"], ["Основание", "Файловые сервисы КАСКО и ипотеки"], ["Пересмотр", "Файловый контракт"]],
+        sections: [
+          { type: "table", title: "Подтвержденные точки", headers: ["Продукт", "Методы или путь", "Использование"], rows: [["КАСКО", "`DocumentList`, `UploadDocument`, `DeleteDocument`, `SendDocuments`", "Полный путь документов после выбора оффера"], ["КАСКО", "`CopyApplicationDocuments`", "Перенос документов между связанными заявками, когда это допускает сценарий"], ["Ипотека", "`File/draft/`", "Работа с черновиком файла; точный контракт нужно описывать по методу и месту вызова"], ["ОСАГО", "В доступном списке фронтовых методов отдельный полный файловый путь не подтвержден", "Не копировать правила КАСКО без проверки"]] },
+          { type: "table", title: "Что обязательно есть в описании загрузки", headers: ["Блок", "Содержание"], rows: [["Вход", "Тип документа, связь с заявкой, оффером или человеком"], ["Ограничения", "Разрешенные форматы, размер, число файлов и безопасное имя"], ["Проверка", "Пустой файл, повтор, неверный тип, поврежденный файл"], ["Ответ", "Идентификатор документа и состояние загрузки"], ["Удаление", "Что происходит с уже отправленным или связанным файлом"], ["Отправка", "Когда комплект считается полным"], ["Безопасность", "Кто имеет доступ, срок хранения и запрет содержимого в логах"]] },
+          { type: "text", title: "Пример безопасного лога", body: "<pre>applicationId: &lt;идентификатор&gt;\nofferId: &lt;идентификатор&gt;\nmethod: file/UploadDocument\ndocumentType: &lt;тип&gt;\nsize: &lt;байты&gt;\nstartedAt: &lt;время&gt;\nresult: &lt;статус или код ошибки&gt;</pre>" },
+          { type: "callout", body: "<strong>Не писать в лог.</strong> Содержимое файла, паспортные данные, медицинские сведения, полный URL файла, ключи доступа и токены." },
+          { type: "sources", items: [["КАСКО", "documents.service.ts и PAGES_AND_API_ENDPOINTS.md"], ["Ипотека", "Вызовы File/draft/ во фронте"], ["PII", "DocMost: классификация данных и PII"], ["Операции", "DocMost: загрузка документов и инциденты"]] }
+        ]
+      },
       arm: {
         path: ["Insapp", "50. ARM и работа операторов", "50.02. Работа с заявкой"],
         title: "ARM: работа оператора с заявкой",
@@ -425,6 +608,42 @@
           { type: "text", title: "Как заметить проблему", body: "<ul><li>Клиент остается на `/kasko/create-policy` или `/kasko/payment-processing`.</li><li>Метод `app/GetKaskoPaymentLink` не возвращает статус `Received`.</li><li>В заявке нет ссылки на оплату.</li></ul>" },
           { type: "text", title: "Что проверить", body: "<ol><li>Проверить `applicationId` и `offerId`.</li><li>Проверить ответ `app/GetDraft` и `app/GetKaskoPaymentLink`.</li><li>Посмотреть логи запроса и ответ партнера.</li><li>Проверить, не зависла ли фоновая обработка или колбэк.</li><li>Передать в backend данные заявки и время ошибки, если причина не найдена.</li></ol>" },
           { type: "callout", body: "<strong>Результат разбора.</strong> После исправления записать причину, затронутые заявки и ссылку на изменение в Git. Если изменился путь клиента или API - обновить страницы продукта и API." }
+        ]
+      },
+      "incident-offers": {
+        path: ["Insapp", "60. Эксплуатация и безопасность", "60.06. Инцидент: нет офферов"],
+        title: "Инцидент: офферы не появились",
+        summary: "Инструкция отделяет долгий расчет от завершенного расчета без предложений и от ошибки запроса. Она подходит для ОСАГО, КАСКО и ипотеки с учетом названия продуктового метода.",
+        meta: [["Статус", "Рабочая инструкция"], ["Обновлено", "26.08.2026"], ["Основание", "Продуктовые методы офферов"], ["Пересмотр", "Расчет или статус"]],
+        sections: [
+          { type: "table", title: "Проверка по шагам", headers: ["Шаг", "Что проверить", "Что записать"], rows: [["1. Заявка", "Есть `applicationId`, анкета прошла клиентские проверки", "Продукт, маршрут и время"], ["2. Отправка", "Успешны `SendOsagoApplication` или `SendKaskoApplication`, затем `SendToInsurers`; для ипотеки - `PreapproveMortgageApplication`", "Имя метода и безопасный итог"], ["3. Чтение", "Вызывается `GetOffers` или `GetKaskoOffers`", "Последний статус и число предложений"], ["4. Состояние", "Расчет идет, завершен пустым списком или упал", "Не смешивать эти три результата"], ["5. Передача", "Есть данные для backend-разбора", "`applicationId`, время, методы и партнерский сценарий"]] },
+          { type: "table", title: "Что показать клиенту", headers: ["Состояние", "Сообщение и действие"], rows: [["Расчет идет", "Показать ожидание и не запускать повторную отправку без причины"], ["Нет подходящих офферов", "Пояснить результат и дать исправить данные или перейти в доступный ручной путь"], ["Ошибка", "Показать безопасный повтор или канал поддержки"], ["Заявка устарела", "Создать или восстановить актуальную заявку по правилам продукта"]] },
+          { type: "callout", body: "<strong>Минимум для разбора.</strong> Продукт, <code>applicationId</code>, время отправки, последний вызов получения офферов, итоговый статус и число офферов. Форма клиента и ключ партнера не прикладываются." },
+          { type: "sources", items: [["ОСАГО", "SendOsagoApplication, SendToInsurers, GetOffers"], ["КАСКО", "SendKaskoApplication, SendToInsurers, GetKaskoOffers"], ["Ипотека", "PreapproveMortgageApplication и GetOffers"], ["Backend", "DocMost: интеграции и плейбук отладки"]] }
+        ]
+      },
+      "incident-documents": {
+        path: ["Insapp", "60. Эксплуатация и безопасность", "60.07. Инцидент: документы"],
+        title: "Инцидент КАСКО: документ не загрузился или не отправился",
+        summary: "Проверка идет по одному файлу и по комплекту отдельно. Успешная загрузка файла еще не означает, что весь набор отправлен и принят.",
+        meta: [["Статус", "Рабочая инструкция"], ["Обновлено", "26.08.2026"], ["Основание", "Файловые методы КАСКО"], ["Пересмотр", "Документный путь"]],
+        sections: [
+          { type: "table", title: "Проверка", headers: ["Шаг", "Метод или данные", "Успешный признак"], rows: [["Список", "`file/DocumentList`", "Получены обязательные типы и текущие файлы"], ["Файл", "Формат, размер, непустое содержимое", "Клиентская проверка пройдена"], ["Загрузка", "`file/UploadDocument`", "Получен ответ и документ появился в списке"], ["Связь", "`DocumentType`, `PersonType`, `OfferId` по сценарию", "Файл относится к нужному объекту"], ["Удаление", "`file/DeleteDocument`", "Файл исчез из нового списка"], ["Комплект", "`file/SendDocuments`", "API подтвердил отправку"]] },
+          { type: "table", title: "Что передать", headers: ["Можно", "Нельзя"], rows: [["`applicationId`, `offerId`, тип документа", "Файл и его содержимое"], ["Безопасное имя и размер", "Паспорт, ФИО и другие данные из документа"], ["Время, метод, код или статус ошибки", "Токен, ключ и закрытый URL"], ["Браузерный маршрут", "Полный сетевой дамп без очистки"]] },
+          { type: "text", title: "После исправления", body: "<p>Повторить только упавший шаг, снова получить <code>DocumentList</code> и убедиться, что список соответствует интерфейсу. Если комплект уже был отправлен, повторная отправка допускается только по подтвержденному правилу backend.</p>" },
+          { type: "sources", items: [["Методы", "documents.service.ts"], ["Экраны", "/kasko/documents и /kasko/success-upload-documents"], ["Контракт", "PAGES_AND_API_ENDPOINTS.md"], ["PII", "DocMost: классификация данных"]] }
+        ]
+      },
+      "incident-enrichment": {
+        path: ["Insapp", "60. Эксплуатация и безопасность", "60.08. Инцидент: данные автомобиля"],
+        title: "Инцидент: не получены данные автомобиля или старого полиса",
+        summary: "ОСАГО и КАСКО создают отдельный отчет и затем проверяют его готовность. Ошибка может возникнуть до создания отчета, во время ожидания или в готовом ответе с неполными данными.",
+        meta: [["Статус", "Рабочая инструкция"], ["Обновлено", "26.08.2026"], ["Основание", "Методы enrichment ОСАГО и КАСКО"], ["Пересмотр", "Отчет обогащения"]],
+        sections: [
+          { type: "table", title: "Виды отчета", headers: ["Сценарий", "Создание", "Проверка"], rows: [["Характеристики ОСАГО", "`CreateCarCharacteristicsReport`", "`GetCarCharacteristicsReport`"], ["KBM ОСАГО", "`CreateKbmReport`", "`GetKbmReport`"], ["Продление ОСАГО", "`CreateOsagoReport`", "`GetOsagoReport`"], ["Технические данные КАСКО", "`CreateTechDataReport`", "`GetTechDataReport`"]] },
+          { type: "table", title: "Где искать сбой", headers: ["Стадия", "Признак", "Действие"], rows: [["Создание", "Нет идентификатора отчета", "Проверить запрос создания и не запускать polling без идентификатора"], ["Ожидание", "Статус долго не меняется", "Зафиксировать интервал, число повторов и общий срок"], ["Конечная ошибка", "Сервис вернул отказ", "Показать ручной ввод или другой разрешенный путь"], ["Неполный ответ", "Нет марки, модели или данных полиса", "Не подставлять догадку; попросить клиента проверить поле"], ["Несовпадение", "Ответ расходится с введенными данными", "Показать найденные значения и дать подтвердить выбор"]] },
+          { type: "text", title: "Данные для разбора", body: "<p>Нужны продукт, <code>applicationId</code>, вид отчета, идентификатор отчета, время запуска, последний статус и список отсутствующих полей. Госномер, VIN и данные полиса передаются только в разрешенном защищенном канале и не копируются в общую страницу.</p>" },
+          { type: "sources", items: [["ОСАГО", "Сервисы KBM, car characteristics и osago report"], ["КАСКО", "CreateTechDataReport и GetTechDataReport"], ["Фронт", "Компоненты старта и продления"], ["Backend", "DocMost: интеграции и плейбук отладки"]] }
         ]
       },
       hermes: {
@@ -676,22 +895,38 @@
       }
     });
 
-    function renderMeta(items) {
-      return `<div class="meta-grid">${items.map(([label, value]) => `<div class="meta-cell"><span class="meta-label">${label}</span><span class="meta-value">${value}</span></div>`).join("")}</div>`;
+    function formatInline(value) {
+      return String(value).replace(/`([^`]+)`/g, "<code>$1</code>");
     }
 
-    function renderSection(section) {
-      if (section.type === "callout") return `<section class="section"><div class="callout">${section.body}</div></section>`;
-      if (section.type === "code") return `<section class="section"><h2>${section.title}</h2><pre>${section.body.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</pre></section>`;
+    function renderMeta(items) {
+      return `<div class="meta-grid">${items.map(([label, value]) => `<div class="meta-cell"><span class="meta-label">${label}</span><span class="meta-value">${formatInline(value)}</span></div>`).join("")}</div>`;
+    }
+
+    function sectionTitle(section) {
+      if (section.type === "sources") return "Связанные источники";
+      return section.title || "";
+    }
+
+    function renderSection(section, index) {
+      const id = `section-${index}`;
+      if (section.type === "callout") return `<section class="section" id="${id}"><div class="callout">${section.body}</div></section>`;
+      if (section.type === "code") return `<section class="section" id="${id}"><h2>${section.title}</h2><pre>${section.body.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</pre></section>`;
       if (section.type === "table") {
-        const head = section.headers.map((header) => `<th>${header}</th>`).join("");
-        const rows = section.rows.map((row) => `<tr>${row.map((cell) => `<td>${cell}</td>`).join("")}</tr>`).join("");
-        return `<section class="section"><h2>${section.title}</h2><table class="field-table"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table></section>`;
+        const head = section.headers.map((header) => `<th>${formatInline(header)}</th>`).join("");
+        const rows = section.rows.map((row) => `<tr>${row.map((cell) => `<td>${formatInline(cell)}</td>`).join("")}</tr>`).join("");
+        return `<section class="section" id="${id}"><h2>${section.title}</h2><table class="field-table"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table></section>`;
       }
       if (section.type === "sources") {
-        return `<section class="section"><h2>Связанные источники</h2><div class="source-list">${section.items.map(([label, value]) => `<div class="source"><span>${label}</span><strong>${value}</strong></div>`).join("")}</div></section>`;
+        return `<section class="section" id="${id}"><h2>Связанные источники</h2><div class="source-list">${section.items.map(([label, value]) => `<div class="source"><span>${label}</span><strong>${formatInline(value)}</strong></div>`).join("")}</div></section>`;
       }
-      return `<section class="section"><h2>${section.title}</h2>${section.body}</section>`;
+      return `<section class="section" id="${id}"><h2>${section.title}</h2>${section.body}</section>`;
+    }
+
+    function renderArticleNav(sections) {
+      const links = sections.map((section, index) => [sectionTitle(section), index]).filter(([title]) => title);
+      if (links.length < 2) return "";
+      return `<nav class="article-nav" aria-label="Содержание страницы"><strong>На этой странице</strong>${links.map(([title, index]) => `<a href="#section-${index}">${title}</a>`).join("")}</nav>`;
     }
 
     function renderDocument(key) {
@@ -702,6 +937,7 @@
         `<h1 class="document-title">${doc.title}</h1>`,
         `<p class="document-summary">${doc.summary}</p>`,
         renderMeta(doc.meta),
+        renderArticleNav(doc.sections),
         doc.sections.map(renderSection).join("")
       ].join("");
       document.querySelectorAll(".tree-item, .tree-section-item").forEach((item) => item.classList.toggle("is-active", item.dataset.doc === key));
@@ -715,7 +951,9 @@
           event.stopPropagation();
         }
         renderDocument(item.dataset.doc);
-        if (window.innerWidth < 681) document.querySelector(".reader").scrollIntoView({ behavior: "smooth" });
+        const reader = document.querySelector(".reader");
+        if (window.innerWidth < 681) reader.scrollIntoView({ behavior: "smooth" });
+        else reader.scrollTop = 0;
       });
     });
 
