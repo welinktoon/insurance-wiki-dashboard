@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Интерактивный пример структуры и шаблонов документации Insapp.">
+  <title>Insapp: пример документации</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      --ink: #eef3f4;
+      --navy: #bce7ef;
+      --blue: #5aadeb;
+      --blue-pale: #274552;
+      --green: #5bd58c;
+      --green-pale: #1d3c2a;
+      --amber: #efb35e;
+      --fog: #3a4247;
+      --line: #59656c;
+      --muted: #c0cbce;
+      --paper: #30373c;
+      --canvas: #252b30;
+      --bar: #363e43;
+      --shadow: 0 18px 60px rgba(0, 0, 0, .25);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { min-height: 100vh; margin: 0; color: var(--ink); background: var(--canvas); font-family: Roboto, "Segoe UI", sans-serif; }
+    button, a { font: inherit; }
+    button { cursor: pointer; }
+
+    .app { display: grid; grid-template-columns: 320px minmax(0, 1fr); min-height: 100vh; max-width: 1680px; margin: 0 auto; background: var(--paper); box-shadow: var(--shadow); }
+    .tree-panel { display: flex; flex-direction: column; min-height: 0; color: #e9f1f4; background: var(--bar); }
+    .tree-header { padding: 26px 24px 20px; border-bottom: 1px solid rgba(255,255,255,.12); }
+    .brand { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 800; letter-spacing: .08em; }
+    .brand-mark { display: grid; width: 31px; height: 31px; place-items: center; border-radius: 50%; color: #102018; background: var(--green); font-size: 11px; letter-spacing: 0; }
+    .tree-header h1 { margin: 24px 0 8px; color: #f7fbfc; font-size: 29px; line-height: 1.1; letter-spacing: -.035em; }
+    .tree-header p { margin: 0; color: #c4d0d4; font-size: 12px; line-height: 1.55; }
+    .tree-scroll { flex: 1; min-height: 0; padding: 15px 12px 24px; overflow-y: auto; }
+    .tree-group { margin: 0 0 5px; }
+    .tree-group summary { display: flex; align-items: center; min-height: 38px; padding: 10px 11px; border: 1px solid transparent; border-radius: 8px; color: #e0eaed; font-size: 12px; font-weight: 800; list-style: none; cursor: pointer; }
+    .tree-group summary::-webkit-details-marker { display: none; }
+    .tree-group summary::before { content: "+"; width: 17px; color: #8bd0f7; font-size: 17px; line-height: 1; }
+    .tree-group[open] summary::before { content: "-"; }
+    .tree-group summary:hover { border-color: #617078; background: #41494f; }
+    .tree-group summary:focus-visible, .tree-item:focus-visible, .reader-bar a:focus-visible { outline: 3px solid #8bd0f7; outline-offset: 2px; }
+    .tree-list { margin: 0 0 8px 13px; padding: 0 0 0 12px; border-left: 1px solid rgba(255,255,255,.16); list-style: none; }
+    .tree-list li { position: relative; margin: 2px 0; }
+    .tree-list li::before { content: ""; position: absolute; top: 15px; left: -12px; width: 8px; border-top: 1px solid rgba(255,255,255,.16); }
+    .tree-item { display: block; width: 100%; min-height: 38px; padding: 8px 9px; border: 1px solid transparent; border-radius: 7px; color: #cfdbdf; background: transparent; font-size: 12px; line-height: 1.35; text-align: left; }
+    .tree-item:hover { border-color: #617078; color: #fff; background: #41494f; }
+    .tree-item.is-active { border-color: var(--blue); color: #fff; background: #235c80; box-shadow: inset 3px 0 0 #b2e6ff; }
+    .tree-footer { padding: 16px 24px; border-top: 1px solid rgba(255,255,255,.12); color: #bdc9cc; font-size: 11px; line-height: 1.5; }
+
+    .reader { min-width: 0; background: var(--paper); }
+    .reader-bar { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 64px; padding: 0 44px; border-bottom: 1px solid var(--line); background: rgba(52,60,65,.94); backdrop-filter: blur(12px); }
+    .reader-bar p { margin: 0; color: var(--muted); font-size: 12px; font-weight: 700; }
+    .reader-bar a { display: inline-flex; align-items: center; min-height: 36px; padding: 0 13px; border: 1px solid #617078; border-radius: 8px; color: #e7eef0; background: #41494f; font-size: 12px; font-weight: 800; text-decoration: none; }
+    .reader-bar a:hover { border-color: var(--blue); color: #fff; background: #235c80; }
+    .reader-content { max-width: 1020px; padding: 54px 54px 86px; }
+    .crumbs { display: flex; flex-wrap: wrap; gap: 7px; margin: 0 0 16px; color: var(--muted); font-size: 12px; }
+    .crumbs span:not(:last-child)::after { content: "/"; margin-left: 7px; color: #9caeb5; }
+    .document-title { max-width: 840px; margin: 0; color: var(--navy); font-size: clamp(34px, 4.6vw, 56px); line-height: 1.05; letter-spacing: -.05em; }
+    .document-summary { max-width: 780px; margin: 18px 0 0; color: var(--muted); font-size: 16px; line-height: 1.65; }
+    .meta-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; margin: 30px 0 38px; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--line); }
+    .meta-cell { min-height: 85px; padding: 15px; background: var(--fog); }
+    .meta-label { display: block; color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .meta-value { display: block; margin-top: 7px; color: var(--ink); font-size: 12px; font-weight: 700; line-height: 1.4; }
+    .section { margin: 0 0 42px; }
+    .section h2 { margin: 0 0 14px; color: var(--navy); font-size: 24px; line-height: 1.2; letter-spacing: -.03em; }
+    .section h3 { margin: 22px 0 8px; color: var(--ink); font-size: 15px; line-height: 1.35; }
+    .section p, .section li { color: #dde5e7; font-size: 14px; line-height: 1.72; }
+    .section p { margin: 0; }
+    .section ul, .section ol { margin: 12px 0 0; padding-left: 21px; }
+    .section li + li { margin-top: 5px; }
+    .callout { padding: 17px 20px; border-left: 3px solid var(--green); border-radius: 0 10px 10px 0; background: var(--green-pale); color: #d0ead8; font-size: 13px; line-height: 1.6; }
+    .callout strong { color: #7ee5a6; }
+    .field-table { width: 100%; margin-top: 14px; overflow: hidden; border: 1px solid var(--line); border-radius: 10px; border-collapse: separate; border-spacing: 0; font-size: 13px; }
+    .field-table th, .field-table td { padding: 11px 13px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    .field-table th { color: var(--muted); background: var(--fog); font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .field-table td { color: #dde5e7; line-height: 1.5; }
+    .field-table tr:last-child td { border-bottom: 0; }
+    .field-table code { color: var(--navy); font-size: 12px; }
+    pre { margin: 14px 0 0; padding: 17px 19px; overflow-x: auto; border-radius: 10px; color: #e4eff3; background: #20282d; font: 12px/1.6 "Cascadia Mono", Consolas, monospace; }
+    code { font-family: "Cascadia Mono", Consolas, monospace; }
+    .source-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 14px 0 0; }
+    .source { padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: #394147; }
+    .source span { display: block; color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .source strong { display: block; margin-top: 6px; color: var(--navy); font-size: 12px; line-height: 1.4; }
+    .empty { padding: 26px; border: 1px dashed #82939a; border-radius: 12px; color: var(--muted); background: var(--fog); }
+    .empty h2 { margin-bottom: 8px; }
+
+    @media (max-width: 900px) {
+      .app { grid-template-columns: 270px minmax(0, 1fr); }
+      .reader-bar { padding: 0 28px; }
+      .reader-content { padding: 42px 34px 64px; }
+      .meta-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 680px) {
+      body { background: var(--paper); }
+      .app { display: block; }
+      .tree-panel { min-height: auto; }
+      .tree-header { padding: 20px 20px 15px; }
+      .tree-header h1 { margin-top: 16px; font-size: 25px; }
+      .tree-scroll { max-height: 280px; padding: 11px 10px 16px; }
+      .tree-footer { display: none; }
+      .reader-bar { position: static; min-height: 52px; padding: 0 20px; }
+      .reader-content { padding: 34px 20px 52px; }
+      .document-summary { font-size: 15px; }
+      .meta-grid, .source-list { grid-template-columns: 1fr; }
+      .field-table { display: block; overflow-x: auto; white-space: nowrap; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="tree-panel" aria-label="Дерево документации">
+      <header class="tree-header">
+        <div class="brand"><span class="brand-mark">IN</span> INSAPP</div>
+        <h1>Пример документации</h1>
+        <p>Выберите страницу в дереве. Справа откроется пример того, что в ней должно быть.</p>
+      </header>
+      <nav class="tree-scroll" aria-label="Разделы Insapp">
+        <details class="tree-group" open>
+          <summary>00. Старт и правила</summary>
+          <ul class="tree-list">
+            <li><button class="tree-item" data-doc="map">00.01. Карта документации</button></li>
+            <li><button class="tree-item" data-doc="rules">00.04. Как обновлять документацию</button></li>
+          </ul>
+        </details>
+        <details class="tree-group" open>
+          <summary>10. Платформа и общая часть</summary>
+          <ul class="tree-list">
+            <li><button class="tree-item" data-doc="architecture">10.01. Архитектура Insapp</button></li>
+            <li><button class="tree-item" data-doc="api-rules">10.03. Общие правила API</button></li>
+          </ul>
+        </details>
+        <details class="tree-group" open>
+          <summary>20. Код и backend</summary>
+          <ul class="tree-list">
+            <li><button class="tree-item" data-doc="backend">20.02. Сервисы и обработка заявки</button></li>
+            <li><button class="tree-item" data-doc="jobs">20.07. Фоновые задачи и Quartz</button></li>
+          </ul>
+        </details>
+        <details class="tree-group" open>
+          <summary>30. Продукты</summary>
+          <ul class="tree-list">
+            <li><button class="tree-item" data-doc="kasko">30.02. КАСКО</button></li>
+            <li><button class="tree-item" data-doc="kasko-fields">30.02.03. Поля и проверки КАСКО</button></li>
+          </ul>
+        </details>
+        <details class="tree-group" open>
+          <summary>40. Партнеры и внешние API</summary>
+          <ul class="tree-list">
+            <li><button class="tree-item" data-doc="partner-api">40.01. Общие методы API</button></li>
+            <li><button class="tree-item" data-doc="integration">40.02. Страховые интеграции</button></li>
+          </ul>
+        </details>
+        <details class="tree-group" open>
+          <summary>50. ARM и работа операторов</summary>
+          <ul class="tree-list">
+            <li><button class="tree-item" data-doc="arm">50.02. Работа с заявкой</button></li>
+          </ul>
+        </details>
+        <details class="tree-group" open>
+          <summary>60. Эксплуатация и безопасность</summary>
+          <ul class="tree-list">
+            <li><button class="tree-item" data-doc="incident">60.05. Инцидент: платежная ссылка</button></li>
+          </ul>
+        </details>
+        <details class="tree-group" open>
+          <summary>70. Как обновляется документация</summary>
+          <ul class="tree-list">
+            <li><button class="tree-item" data-doc="hermes">70.02. Hermes: сбор данных и черновик</button></li>
+          </ul>
+        </details>
+      </nav>
+      <footer class="tree-footer">Пример построен по текущим материалам DocMost, Git и фронтовым API-файлам Insapp.</footer>
+    </aside>
+
+    <main class="reader">
+      <header class="reader-bar">
+        <p id="reader-path">Insapp / пример</p>
+        <a href="INSAPP_DOCMOST_AUDIT_2026-08-24.html">Вернуться к отчету</a>
+      </header>
+      <article class="reader-content" id="document" aria-live="polite"></article>
+    </main>
+  </div>
+
+  <script>
+    const documents = {
+      map: {
+        path: ["Insapp", "00. Старт и правила", "00.01. Карта документации"],
+        title: "Карта документации Insapp",
+        summary: "Стартовая страница. Она помогает быстро понять, где лежит информация о продукте, коде, API, партнере или инциденте.",
+        meta: [["Тип", "Основная страница"], ["Проверка", "25.08.2026"], ["Владелец", "Назначить"], ["Следующий пересмотр", "При изменении структуры"]],
+        sections: [
+          { type: "callout", body: "<strong>Как пользоваться.</strong> Если вопрос о поведении продукта - открыть раздел 30. Если вопрос о коде или данных - раздел 20. Если об API партнера - раздел 40. Если проблема в работе системы - раздел 60." },
+          { type: "text", title: "Что должно быть на этой странице", body: "<ul><li>Короткая карта всех разделов.</li><li>Ссылка на страницу каждого продукта.</li><li>Ссылка на API, партнеров, ARM и инструкции по инцидентам.</li><li>Правило: Git - источник для проверки реального поведения системы.</li></ul>" },
+          { type: "sources", items: [["Структура", "Целевое дерево 00-99"], ["Код", "Git: Insapp backend и фронты"], ["Документация", "DocMost: пространство Insapp"], ["Процесс", "Git -> Hermes -> человек -> DocMost"]] }
+        ]
+      },
+      rules: {
+        path: ["Insapp", "00. Старт и правила", "00.04. Как обновлять документацию"],
+        title: "Как обновлять документацию",
+        summary: "Страница фиксирует простой порядок: из каких источников взять изменение, кто проверяет черновик и что считается готовой страницей.",
+        meta: [["Тип", "Правило работы"], ["Проверка", "25.08.2026"], ["Владелец", "Документация Insapp"], ["Триггер", "Изменение в Git, Tracker или Wiki"]],
+        sections: [
+          { type: "text", title: "Порядок", body: "<ol><li>Найти изменение в Git, Tracker и Wiki.</li><li>Hermes собирает нужные данные и делает черновик.</li><li>Человек сверяет API, поля, путь клиента и ошибки.</li><li>Человек публикует страницу через Hermes.</li><li>На странице обновляются дата проверки и ссылка на источник.</li></ol>" },
+          { type: "text", title: "Что нельзя пропускать", body: "<ul><li>Не считать страницу готовой только по названию задачи.</li><li>Не копировать секреты, ключи и PII в документацию.</li><li>Не писать поведение, которого нет в коде или контракте.</li></ul>" }
+        ]
+      },
+      architecture: {
+        path: ["Insapp", "10. Платформа и общая часть", "10.01. Архитектура Insapp"],
+        title: "Архитектура Insapp",
+        summary: "Пример страницы, которая объясняет состав системы и дает ссылки на подробности, а не пытается вместить весь код в один текст.",
+        meta: [["Тип", "Архитектура"], ["Проверка", "25.08.2026"], ["Владелец", "Backend"], ["Триггер", "Новый сервис или связь"]],
+        sections: [
+          { type: "text", title: "Состав системы", body: "<ul><li>Клиентские приложения: ОСАГО, КАСКО и ипотека.</li><li>Backend: Public API, сервисы, DataAccess и модели.</li><li>Операционный слой: ARM, настройки партнера, комиссии и доступы.</li><li>Фоновые процессы: Quartz, импорт, экспорт, колбэки и уведомления.</li></ul>" },
+          { type: "text", title: "Что связывать с этой страницей", body: "<p>Ссылки на структуру solution, DI, общие правила API, базы данных, интеграции, deploy и логи. Подробные методы и поля не дублируются здесь: они живут на страницах API и продукта.</p>" },
+          { type: "sources", items: [["Backend", "Insapp.Services, Insapp.DataAccess, Insapp.Models"], ["Frontend", "ОСАГО, КАСКО, ипотека"], ["Операции", "ARM и Quartz"], ["Документация", "10, 20, 40, 50 и 60 разделы"]] }
+        ]
+      },
+      "api-rules": {
+        path: ["Insapp", "10. Платформа и общая часть", "10.03. Общие правила API"],
+        title: "Общие правила API",
+        summary: "Шаблон общей страницы API. Конкретные методы и поля остаются на своих страницах, а здесь - одинаковые правила для всех методов.",
+        meta: [["Тип", "Правила API"], ["Проверка", "25.08.2026"], ["Владелец", "Backend"], ["Триггер", "Изменение общего контракта"]],
+        sections: [
+          { type: "text", title: "Что обязательно описать", body: "<ul><li>Базовый URL и контуры.</li><li>Как передается `apiKey` и какие права нужны.</li><li>Общие поля `applicationId`, `offerId`, `partnerId` и правила их передачи.</li><li>Единый вид ошибок, логирование и ограничения по запросам.</li><li>Как повторять запрос и что делать с колбэками.</li></ul>" },
+          { type: "code", title: "Форма страницы конкретного метода", body: "POST /app/MethodName\n\nЗачем нужен метод\nАвторизация\nПоля запроса\nПоля ответа\nОшибки\nПример запроса и ответа\nСсылки на код и тесты" }
+        ]
+      },
+      backend: {
+        path: ["Insapp", "20. Код и backend", "20.02. Сервисы и обработка заявки"],
+        title: "Сервисы и обработка заявки",
+        summary: "Пример backend-страницы: она отвечает на вопрос, где лежит логика, какие данные меняются и какие страницы нужно обновить после правки.",
+        meta: [["Тип", "Код и backend"], ["Проверка", "25.08.2026"], ["Владелец", "Backend"], ["Триггер", "Изменение сервиса или модели"]],
+        sections: [
+          { type: "text", title: "Что должно быть в описании", body: "<ul><li>Путь к проекту и сервису в Git.</li><li>Входные данные и результат работы.</li><li>Какие модели, таблицы и файлы затрагиваются.</li><li>Какие статусы меняются.</li><li>Какие API-методы, колбэки или Quartz-задачи вызываются дальше.</li></ul>" },
+          { type: "text", title: "Проверка после изменения", body: "<p>Указать тесты, логи и метрики, по которым видно, что изменение работает. Если поменялся контракт или путь клиента, поставить ссылку на страницу продукта и API.</p>" },
+          { type: "sources", items: [["Сервисы", "Insapp.Services"], ["Данные", "Insapp.DataAccess и Insapp.Models"], ["API", "Public API и контроллеры"], ["Фон", "Quartz и обработчики"]] }
+        ]
+      },
+      jobs: {
+        path: ["Insapp", "20. Код и backend", "20.07. Фоновые задачи и Quartz"],
+        title: "Фоновые задачи и Quartz",
+        summary: "Шаблон страницы для задачи, которая выполняется без действия пользователя: когда запускается, что делает, как заметить ошибку и как повторить работу.",
+        meta: [["Тип", "Фоновая задача"], ["Проверка", "25.08.2026"], ["Владелец", "Backend"], ["Триггер", "Новая задача или смена расписания"]],
+        sections: [
+          { type: "table", title: "Что фиксировать для каждой задачи", headers: ["Поле", "Что написать"], rows: [["Имя", "Имя Quartz-задачи и путь к коду"], ["Когда запускается", "Расписание, событие или ручной запуск"], ["Что делает", "Какие данные читает и меняет"], ["Повтор", "Можно ли запустить снова и что будет при повторе"], ["Контроль", "Логи, метрики и кто разбирает ошибку"]] },
+          { type: "callout", body: "<strong>Важно.</strong> Для каждой фоновой задачи нужна ссылка на инструкцию: что делать, если она не запустилась, зависла или обработала данные неправильно." }
+        ]
+      },
+      kasko: {
+        path: ["Insapp", "30. Продукты", "30.02. КАСКО"],
+        title: "КАСКО: путь клиента и работа заявки",
+        summary: "Пример продуктовой страницы на основе фронта КАСКО. Она соединяет экраны, поля, API и шаги после отправки заявки.",
+        meta: [["Тип", "Продукт"], ["Проверка", "25.08.2026"], ["Владелец", "Продукт + Backend"], ["Триггер", "Изменение пути клиента или API"]],
+        sections: [
+          { type: "text", title: "Путь клиента", body: "<ol><li>`/kasko` - номер автомобиля и создание заявки.</li><li>`/kasko/auto-info` - данные автомобиля.</li><li>`/kasko/drivers` и `/kasko/owner` - водители, собственник и контакты.</li><li>`/kasko/offers` - отправка заявки и получение офферов.</li><li>`/kasko/create-policy`, `/kasko/documents`, `/kasko/payment-processing` - выпуск, документы и ожидание оплаты.</li></ol>" },
+          { type: "table", title: "Что должно быть связано на странице продукта", headers: ["Часть", "Что описать"], rows: [["Поля", "Марка, модель, пробег, год, документы, контакты и проверки"], ["API", "Создание заявки, отправка, офферы, документы, оплата"], ["Статусы", "Переходы при создании, ожидании офферов и оплате"], ["Ошибки", "Нет марки, нет ссылки на оплату, ошибка документа"], ["Код", "Компоненты, сервисы и backend-методы"]] },
+          { type: "sources", items: [["Маршруты и API", "PAGES_AND_API_ENDPOINTS.md"], ["Поля", "kaskoV2 property-controls.json"], ["Frontend", "kasko.service.ts и компоненты"], ["Backend", "Public API, сервисы, модели"]] }
+        ]
+      },
+      "kasko-fields": {
+        path: ["Insapp", "30. Продукты", "30.02. КАСКО", "30.02.03. Поля и проверки"],
+        title: "КАСКО: поля и проверки формы",
+        summary: "Пример страницы полей на основе `property-controls.json`. Для каждого поля важно показать не только подпись, но и откуда оно берется, когда проверяется и куда уходит.",
+        meta: [["Тип", "Поля продукта"], ["Проверка", "25.08.2026"], ["Владелец", "Frontend + Backend"], ["Триггер", "Изменение формы или API"]],
+        sections: [
+          { type: "table", title: "Пример описания полей", headers: ["Поле", "Где используется", "Проверка", "Куда передается"], rows: [["`license`", "Стартовая форма", "Формат номера автомобиля", "Создание заявки и обогащение"], ["`brandId`, `modelId`", "Данные автомобиля", "Выбор из справочника", "Заявка и расчет"], ["`mileage`, `horsePower`, `price`", "Данные автомобиля", "Тип и допустимое значение", "Расчет офферов"], ["`documentType`, `stsNumber`", "Документы", "Обязательность по сценарию", "Заявка и загрузка файлов"], ["`ownedSince`", "Собственник", "Дата и список значений", "Отправка заявки"]] },
+          { type: "text", title: "Что добавить для каждого поля", body: "<ul><li>Тип, маска, обязательность и текст ошибки.</li><li>Когда поле показывается или скрывается.</li><li>Источник значения: пользователь, справочник, кэш или ответ API.</li><li>В какой запрос поле попадает и как называется в backend.</li></ul>" }
+        ]
+      },
+      "partner-api": {
+        path: ["Insapp", "40. Партнеры и внешние API", "40.01. Общие методы API"],
+        title: "Общие методы API партнера",
+        summary: "Страница для партнера должна дать работающий контракт без поиска по разным продуктовым страницам.",
+        meta: [["Тип", "API"], ["Проверка", "25.08.2026"], ["Владелец", "Backend + Партнеры"], ["Триггер", "Изменение API или доступа"]],
+        sections: [
+          { type: "table", title: "Шаблон описания метода", headers: ["Раздел", "Что написать"], rows: [["Назначение", "Какой сценарий решает метод"], ["Доступ", "Как передается `apiKey`, какие права нужны"], ["Запрос", "URL, метод, обязательные и необязательные поля"], ["Ответ", "Поля, статусы и примеры"], ["Ошибки", "Код, причина и действие партнера"], ["Проверка", "Тестовый контур и пример запроса"]] },
+          { type: "code", title: "Минимальный пример", body: "POST /app/GetApplicationInfo\n{\n  \"apiKey\": \"<API_KEY>\",\n  \"applicationId\": \"<APPLICATION_ID>\"\n}\n\nВ документации рядом: полный ответ, ошибки, ссылка на код и тест." }
+        ]
+      },
+      integration: {
+        path: ["Insapp", "40. Партнеры и внешние API", "40.02. Страховые интеграции"],
+        title: "Страховая интеграция: шаблон страницы",
+        summary: "Одна страница на страховую или внешний сервис. Она должна показывать весь обмен: запрос, ответ, колбэк, ошибки и проверку.",
+        meta: [["Тип", "Интеграция"], ["Проверка", "25.08.2026"], ["Владелец", "Партнеры + Backend"], ["Триггер", "Новый контракт или ошибка обмена"]],
+        sections: [
+          { type: "text", title: "Порядок обмена", body: "<ol><li>Insapp готовит данные заявки.</li><li>Сервис отправляет запрос страховой.</li><li>Страховая возвращает ответ или присылает колбэк.</li><li>Insapp сохраняет результат, обновляет статус и показывает его клиенту или оператору.</li></ol>" },
+          { type: "text", title: "Что обязательно добавить", body: "<ul><li>Контакт и тестовый контур партнера.</li><li>Сопоставление полей Insapp и полей партнера.</li><li>Правила повторной отправки и защиты от дублей.</li><li>Ошибки, таймауты и что делать с заявкой.</li><li>Логи и метрики, по которым видно проблему.</li></ul>" },
+          { type: "sources", items: [["Код", "Интеграционные сервисы Insapp"], ["Колбэки", "Матрица колбэков и постбэков"], ["Продукт", "ОСАГО, КАСКО или ипотека"], ["Инциденты", "60.05. Инструкции по инцидентам"]] }
+        ]
+      },
+      arm: {
+        path: ["Insapp", "50. ARM и работа операторов", "50.02. Работа с заявкой"],
+        title: "ARM: работа оператора с заявкой",
+        summary: "Страница объясняет, что может сделать оператор, какие данные он видит, какие права нужны и где искать причину ошибки.",
+        meta: [["Тип", "Инструкция ARM"], ["Проверка", "25.08.2026"], ["Владелец", "Операции + Backend"], ["Триггер", "Изменение ARM или ролей"]],
+        sections: [
+          { type: "text", title: "Сценарий", body: "<ol><li>Найти заявку по доступному идентификатору.</li><li>Проверить статус, офферы, документы и оплату.</li><li>Внести разрешенное изменение или передать заявку дальше.</li><li>Проверить результат в истории, логах или у партнера.</li></ol>" },
+          { type: "text", title: "Что должно быть на странице", body: "<ul><li>Какие роли видят страницу и действия.</li><li>Какие поля можно менять.</li><li>Что происходит после каждого действия.</li><li>Какие ошибки может увидеть оператор.</li><li>Куда обращаться и какие данные приложить к обращению.</li></ul>" }
+        ]
+      },
+      incident: {
+        path: ["Insapp", "60. Эксплуатация и безопасность", "60.05. Инцидент: платежная ссылка"],
+        title: "Инцидент: не пришла платежная ссылка",
+        summary: "Пример короткой инструкции по реальной точке риска из пути КАСКО: создание полиса и ожидание платежной ссылки.",
+        meta: [["Тип", "Инструкция по инциденту"], ["Проверка", "25.08.2026"], ["Владелец", "Операции + Backend"], ["Триггер", "Ошибка оплаты или жалоба клиента"]],
+        sections: [
+          { type: "text", title: "Как заметить проблему", body: "<ul><li>Клиент остается на `/kasko/create-policy` или `/kasko/payment-processing`.</li><li>Метод `app/GetKaskoPaymentLink` не возвращает статус `Received`.</li><li>В заявке нет ссылки на оплату.</li></ul>" },
+          { type: "text", title: "Что проверить", body: "<ol><li>Проверить `applicationId` и `offerId`.</li><li>Проверить ответ `app/GetDraft` и `app/GetKaskoPaymentLink`.</li><li>Посмотреть логи запроса и ответ партнера.</li><li>Проверить, не зависла ли фоновая обработка или колбэк.</li><li>Передать в backend данные заявки и время ошибки, если причина не найдена.</li></ol>" },
+          { type: "callout", body: "<strong>Результат разбора.</strong> После исправления записать причину, затронутые заявки и ссылку на изменение в Git. Если изменился путь клиента или API - обновить страницы продукта и API." }
+        ]
+      },
+      hermes: {
+        path: ["Insapp", "70. Как обновляется документация", "70.02. Hermes: сбор данных и черновик"],
+        title: "Hermes: сбор данных и черновик",
+        summary: "Страница показывает, что именно делает Hermes и где остается решение человека.",
+        meta: [["Тип", "Процесс"], ["Проверка", "25.08.2026"], ["Владелец", "Документация Insapp"], ["Триггер", "Изменение процесса или источников"]],
+        sections: [
+          { type: "text", title: "Что делает Hermes", body: "<ul><li>Берет изменение из Git, Tracker и Wiki.</li><li>Находит связанные страницы и контракты.</li><li>Не переносит секреты и PII.</li><li>Готовит черновик и список того, что нужно проверить.</li></ul>" },
+          { type: "text", title: "Что делает человек", body: "<ul><li>Проверяет, что поля, API, путь клиента и ошибки совпадают с кодом.</li><li>Возвращает замечания в правила Hermes, если черновик ошибся.</li><li>Публикует готовую страницу через Hermes.</li></ul>" },
+          { type: "callout", body: "<strong>Главное правило.</strong> Git показывает реальное поведение системы. DocMost хранит понятную версию для команды после проверки человеком." }
+        ]
+      }
+    };
+
+    function renderMeta(items) {
+      return `<div class="meta-grid">${items.map(([label, value]) => `<div class="meta-cell"><span class="meta-label">${label}</span><span class="meta-value">${value}</span></div>`).join("")}</div>`;
+    }
+
+    function renderSection(section) {
+      if (section.type === "callout") return `<section class="section"><div class="callout">${section.body}</div></section>`;
+      if (section.type === "code") return `<section class="section"><h2>${section.title}</h2><pre>${section.body.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</pre></section>`;
+      if (section.type === "table") {
+        const head = section.headers.map((header) => `<th>${header}</th>`).join("");
+        const rows = section.rows.map((row) => `<tr>${row.map((cell) => `<td>${cell}</td>`).join("")}</tr>`).join("");
+        return `<section class="section"><h2>${section.title}</h2><table class="field-table"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table></section>`;
+      }
+      if (section.type === "sources") {
+        return `<section class="section"><h2>Связанные источники</h2><div class="source-list">${section.items.map(([label, value]) => `<div class="source"><span>${label}</span><strong>${value}</strong></div>`).join("")}</div></section>`;
+      }
+      return `<section class="section"><h2>${section.title}</h2>${section.body}</section>`;
+    }
+
+    function renderDocument(key) {
+      const doc = documents[key] || documents.map;
+      document.getElementById("reader-path").textContent = doc.path.join(" / ");
+      document.getElementById("document").innerHTML = [
+        `<div class="crumbs">${doc.path.map((item) => `<span>${item}</span>`).join("")}</div>`,
+        `<h1 class="document-title">${doc.title}</h1>`,
+        `<p class="document-summary">${doc.summary}</p>`,
+        renderMeta(doc.meta),
+        doc.sections.map(renderSection).join("")
+      ].join("");
+      document.querySelectorAll(".tree-item").forEach((item) => item.classList.toggle("is-active", item.dataset.doc === key));
+      document.title = `Insapp: ${doc.title}`;
+    }
+
+    document.querySelectorAll(".tree-item").forEach((item) => {
+      item.addEventListener("click", () => {
+        renderDocument(item.dataset.doc);
+        if (window.innerWidth < 681) document.querySelector(".reader").scrollIntoView({ behavior: "smooth" });
+      });
+    });
+
+    renderDocument("kasko");
+  </script>
+</body>
+</html>

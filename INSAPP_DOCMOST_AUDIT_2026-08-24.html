@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Проверенный отчет по DocMost Insapp: структура, кодовая база, API-файлы, результаты и понятное дерево страниц.">
+  <title>Insapp: DocMost - отчет и полная структура</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      --ink: #eef3f4;
+      --navy: #bce7ef;
+      --blue: #5aadeb;
+      --green: #5bd58c;
+      --green-pale: #1d3c2a;
+      --amber: #efb35e;
+      --amber-pale: #4a391c;
+      --fog: #3a4247;
+      --line: #59656c;
+      --muted: #c0cbce;
+      --white: #30373c;
+      --canvas: #252b30;
+      --bar: #363e43;
+      --shadow: 0 18px 60px rgba(0, 0, 0, .25);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--canvas);
+      font-family: Roboto, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    a { color: inherit; }
+    .sitebar {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 0 40px;
+      color: #fff;
+      background: var(--bar);
+    }
+    .brand { display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 800; letter-spacing: .04em; }
+    .brand-mark { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; background: var(--green); font-size: 13px; letter-spacing: 0; }
+    .brand-divider { width: 1px; height: 24px; margin: 0 8px; background: rgba(255,255,255,.26); }
+    .brand-context { color: #c1cccf; font-weight: 500; letter-spacing: 0; }
+    .back { display: inline-flex; align-items: center; min-height: 36px; padding: 0 13px; border: 1px solid #617078; border-radius: 8px; color: #e7eef0; background: #41494f; font-size: 13px; font-weight: 700; text-decoration: none; }
+    .back:hover { border-color: var(--blue); color: #fff; background: #235c80; }
+
+    .page { max-width: 1440px; margin: 0 auto; background: var(--white); box-shadow: var(--shadow); }
+    .hero { padding: 60px 72px 42px; border-bottom: 1px solid var(--line); }
+    .eyebrow { margin: 0 0 12px; color: var(--green); font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { max-width: 950px; margin: 0; color: #f6fbfc; font-size: clamp(36px, 5vw, 63px); line-height: 1.06; letter-spacing: -.055em; }
+    .hero-copy { max-width: 850px; margin-top: 20px; color: var(--muted); font-size: 18px; }
+    .source-note { max-width: 960px; margin-top: 28px; padding: 17px 20px; border-left: 3px solid var(--amber); background: var(--amber-pale); color: #ffe0a8; font-size: 13px; }
+
+    .contents { display: flex; gap: 22px; overflow-x: auto; padding: 14px 72px; border-bottom: 1px solid var(--line); font-size: 13px; font-weight: 700; white-space: nowrap; }
+    .contents a { padding: 7px 10px; border: 1px solid transparent; border-radius: 7px; color: var(--muted); text-decoration: none; }
+    .contents a:hover { border-color: #5f737c; color: #fff; background: #414a50; }
+    section { padding: 52px 72px; }
+    section + section { border-top: 1px solid var(--line); }
+    .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 26px; }
+    h2 { margin: 0; color: var(--navy); font-size: clamp(24px, 3vw, 34px); line-height: 1.15; letter-spacing: -.035em; }
+    .section-kicker { color: var(--muted); font-size: 13px; font-weight: 700; text-align: right; }
+    h3 { margin: 0; color: var(--navy); font-size: 18px; line-height: 1.28; }
+    p { margin: 0; }
+
+    .model-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+    .model-card { position: relative; min-height: 190px; padding: 22px; border: 1px solid var(--line); border-radius: 12px; background: var(--white); }
+    .model-card:not(:last-child)::after { content: ""; position: absolute; top: 50%; left: calc(100% + 1px); width: 16px; height: 1px; background: var(--navy); }
+    .role-no { display: block; margin-bottom: 11px; color: var(--green); font-size: 28px; font-weight: 700; }
+    .model-card p { margin-top: 9px; color: var(--muted); font-size: 13px; }
+    .model-card strong { color: var(--ink); }
+
+    .scope-grid { max-width: 920px; }
+    .panel { padding: 24px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); }
+    .panel p { margin-top: 9px; color: var(--muted); font-size: 13px; }
+    .analysis-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 22px; }
+    .analysis-card { padding: 22px; border: 1px solid var(--line); border-radius: 12px; background: var(--white); }
+    .analysis-card p { margin-top: 9px; color: var(--muted); font-size: 13px; }
+    .findings { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 22px; }
+    .finding { display: flex; gap: 12px; padding: 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--fog); }
+    .severity { display: grid; place-items: center; width: 34px; height: 25px; flex: 0 0 auto; border-radius: 4px; color: #081116; background: var(--amber); font-size: 10px; font-weight: 800; }
+    .severity.p2 { background: var(--blue); }
+    .finding h3 { font-size: 14px; }
+    .finding p { margin-top: 5px; color: var(--muted); font-size: 12px; }
+    .process-diagram { max-width: 1080px; margin: 26px auto 0; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: #444c51; }
+    .process-diagram img { display: block; width: 100%; height: auto; border-radius: 7px; filter: invert(.78) hue-rotate(180deg) brightness(1.15) contrast(1.05); }
+
+    .root-tree { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .root-item { padding: 14px 15px; border: 1px solid var(--line); border-radius: 9px; background: var(--fog); }
+    .root-item strong { display: block; color: var(--navy); font-size: 13px; line-height: 1.35; }
+    .root-item span { display: block; margin-top: 5px; color: var(--muted); font-size: 11px; line-height: 1.4; }
+    .tag { display: inline-block; margin-left: 6px; padding: 1px 6px; border-radius: 4px; background: #173747; color: #8fd7fb; font-size: 10px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+    .tag.draft { background: #3a2c14; color: #f6c872; }
+    .tag.archive { background: #26373d; color: #b1c1c7; }
+
+    .tree-intro { max-width: 900px; margin-bottom: 24px; color: var(--muted); font-size: 14px; }
+    .tree-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; }
+    details { overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--white); }
+    summary { display: flex; align-items: center; min-height: 70px; padding: 18px 20px; color: var(--navy); font-size: 16px; font-weight: 800; cursor: pointer; list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+    summary::before { content: "+"; width: 25px; height: 25px; display: grid; place-items: center; flex: 0 0 auto; margin-right: 11px; border: 1px solid #52717b; border-radius: 50%; color: var(--green); font-size: 18px; line-height: 1; }
+    details[open] summary { border-bottom: 1px solid var(--line); background: #40484d; }
+    details[open] summary::before { content: "-"; }
+    .tree-body { padding: 18px 20px 21px; }
+    .tree-parent { margin: 0 0 12px; color: var(--ink); font-size: 12px; font-weight: 800; }
+    .tree-list { margin: 0; padding: 0; list-style: none; }
+    .tree-list li { position: relative; margin: 0; padding: 7px 0 7px 19px; border-left: 1px solid #46606a; color: #c2d2d7; font-size: 12px; line-height: 1.4; }
+    .tree-list li::before { content: ""; position: absolute; top: 16px; left: 0; width: 12px; border-top: 1px solid #46606a; }
+    .tree-list li:last-child { border-left-color: transparent; }
+    .tree-list ul { margin: 8px 0 1px; padding: 0; list-style: none; }
+    .tree-list ul li { color: var(--muted); font-size: 11px; }
+    .tree-list strong { color: var(--ink); }
+
+    .target { background: linear-gradient(90deg, #2b3337 0%, var(--white) 62%, #2b3337 100%); }
+    .target-tree { max-width: 920px; padding: 25px; border: 1px solid #397553; border-radius: var(--radius); background: var(--green-pale); }
+    .target-tree ul { margin: 12px 0 0; padding-left: 21px; }
+    .target-tree li { margin: 7px 0; color: #a9d9ba; font-size: 13px; }
+    .target-tree strong { color: #63e49a; }
+    .rules { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .rule { padding: 21px; border-top: 3px solid var(--blue); background: var(--fog); }
+    .rule:nth-child(2) { border-top-color: var(--green); }
+    .rule:nth-child(3) { border-top-color: var(--amber); }
+    .rule p { margin-top: 9px; color: var(--muted); font-size: 13px; }
+    .page-types { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .page-type { padding: 22px; border: 1px solid var(--line); border-radius: 12px; background: var(--white); }
+    .page-type ul { margin: 10px 0 0; padding-left: 19px; color: var(--muted); font-size: 13px; }
+    .page-type li { margin: 5px 0; }
+    .example-link { display: inline-flex; margin-top: 22px; padding: 12px 16px; border: 1px solid #77c6ef; border-radius: 8px; color: #fff; background: #256888; font-size: 13px; font-weight: 800; text-decoration: none; }
+    .example-link:hover { border-color: #a9e1ff; background: #2d7398; }
+    footer { padding: 26px 72px; color: var(--muted); background: var(--fog); font-size: 12px; }
+
+    @media (max-width: 900px) {
+      .hero, section { padding-right: 28px; padding-left: 28px; }
+      .contents { padding-right: 28px; padding-left: 28px; }
+      .sitebar { padding: 0 22px; }
+      .model-grid, .tree-groups, .rules, .analysis-grid, .findings, .page-types { grid-template-columns: 1fr 1fr; }
+      .model-card:not(:last-child)::after { display: none; }
+      footer { padding-right: 28px; padding-left: 28px; }
+    }
+    @media (max-width: 620px) {
+      .sitebar { min-height: 58px; }
+      .brand-divider, .brand-context { display: none; }
+      .hero { padding-top: 42px; }
+      .hero-copy { font-size: 16px; }
+      .model-grid, .scope-grid, .root-tree, .tree-groups, .rules, .analysis-grid, .findings, .page-types { grid-template-columns: 1fr; }
+      .section-head { display: block; }
+      .section-kicker { margin-top: 8px; text-align: left; }
+      h1 { font-size: 39px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="sitebar">
+    <div class="brand">
+      <span class="brand-mark">IN</span>
+      <span>INSAPP</span>
+      <span class="brand-divider"></span>
+      <span class="brand-context">Отчет DocMost</span>
+    </div>
+    <a class="back" href="INSAPP_DOCMOST_DOCUMENTATION_EXAMPLE_2026-08-25.html">Пример документации</a>
+  </header>
+
+  <main class="page">
+    <header class="hero">
+      <p class="eyebrow">Insapp / DocMost / Git-кодовая база / 24-25.08.2026</p>
+      <h1>DocMost: отчет и полная структура Insapp</h1>
+      <p class="hero-copy">Материал сформирован: техническая ветка содержит 77 записей экспорта, 76 детальных документов и 806 тематических разделов. Нужно не писать все с нуля, а навести порядок в переходах к уже собранным основным страницам.</p>
+    </header>
+
+    <nav class="contents" aria-label="Содержание">
+      <a href="#result">Результат</a>
+      <a href="#model">Модель работы</a>
+      <a href="#snapshot">Структура Insapp</a>
+      <a href="#target">Целевое дерево</a>
+      <a href="INSAPP_DOCMOST_DOCUMENTATION_EXAMPLE_2026-08-25.html">Пример документации</a>
+      <a href="#page-content">Что писать в страницах</a>
+      <a href="#rules">Следующие шаги</a>
+    </nav>
+
+    <section id="result">
+      <div class="section-head">
+        <h2>Результат анализа</h2>
+        <span class="section-kicker">Выгрузка DocMost и API-файлы проверены повторно</span>
+      </div>
+      <div class="analysis-grid">
+        <article class="analysis-card"><h3>Что действительно покрыто DocMost</h3><p>Сервисы и state machines, рантайм и DI, Public API, DataAccess, модели и БД, Quartz, интеграции и колбэки, ARM, безопасность, deploy, тесты, PII, наблюдаемость и инциденты. Это рабочий технический слой, а не пустая заготовка.</p></article>
+        <article class="analysis-card"><h3>Что подтверждено кодом и API</h3><p>Срез Git от 21.08.2026: `Insapp.Services` - 2 428 C#-файлов, `Insapp.DataAccess` - 986, `Insapp.Models` - 882. Исходники ОСАГО, КАСКО и ипотеки добавляют реальные поля, проверки ввода и API-вызовы.</p></article>
+        <article class="analysis-card"><h3>Проверка фронтовых контрактов</h3><p>ОСАГО содержит 102 конфигурации полей, КАСКО - 51, ипотека - 47. В КАСКО отдельно подтверждена цепочка `app`, `dictionaries`, `file`, кэш, enrichment, DaData и AlfaId: заявка, офферы, документы и платежная ссылка.</p></article>
+        <article class="analysis-card"><h3>Актуальность материалов</h3><p>В метаданных экспорта: 15 страниц обновлены в мае, 23 - в июне, 18 - в июле и 21 - в августе. Последние изменения 24.08.2026 затронули каталог сервисов, модель данных, ARM-endpoints и deploy/миграции.</p></article>
+      </div>
+      <div class="findings">
+        <article class="finding"><span class="severity">P1</span><div><h3>Две разные карты</h3><p>У технической ветки нет одной понятной точки входа.</p></div></article>
+        <article class="finding"><span class="severity">P1</span><div><h3>Номер не является адресом</h3><p>Внутри `20. Монолит и разработка` используются дочерние номера `10-80`.</p></div></article>
+        <article class="finding"><span class="severity">P1</span><div><h3>Канон смешан с управлением документацией</h3><p>`80.*` содержит аудит, backlog и freshness рядом с техническими runbook.</p></div></article>
+        <article class="finding"><span class="severity p2">P2</span><div><h3>Повторяются смыслы `40` и `50`</h3><p>Одни номера используются внутри монолита, другие - на уровне Insapp.</p></div></article>
+        <article class="finding"><span class="severity p2">P2</span><div><h3>Нет паспорта актуальности</h3><p>На странице должны быть тип, дата проверки, owner, Git evidence и trigger обновления.</p></div></article>
+        <article class="finding"><span class="severity p2">P2</span><div><h3>Дублируются title и H1</h3><p>Это ухудшает оглавление, поиск и чтение длинных веток.</p></div></article>
+      </div>
+    </section>
+
+    <section id="model">
+      <div class="section-head">
+        <h2>Модель работы</h2>
+        <span class="section-kicker">DocMost - канон; Git - обязательный источник первого этапа</span>
+      </div>
+      <div class="model-grid">
+        <article class="model-card"><span class="role-no">01</span><h3>Git, Tracker, Wiki</h3><p>Подтвержденные источники изменения. <strong>Git-кодовая база</strong> обязательна в первой волне проверки.</p></article>
+        <article class="model-card"><span class="role-no">02</span><h3>Hermes</h3><p>Собирает нужные источники, исключает секреты и PII, находит страницы для обновления и <strong>создает черновик</strong>.</p></article>
+        <article class="model-card"><span class="role-no">03</span><h3>Человек: review</h3><p>Сверяет API, порядок действий, ограничения и смысл изменения. При ошибке уточняет правила Hermes.</p></article>
+        <article class="model-card"><span class="role-no">04</span><h3>Человек: publish</h3><p>После согласования <strong>публикует через Hermes</strong>. Обновленная страница в DocMost становится каноном.</p></article>
+      </div>
+      <figure class="process-diagram"><img src="INSAPP_HERMES_DOCMOST_PROCESS_SOURCE.png" alt="Git, Tracker и Wiki передают изменение Hermes; человек проверяет и публикует актуальную версию в DocMost"></figure>
+    </section>
+
+    <section id="snapshot">
+      <div class="section-head">
+        <h2>Разделы Insapp</h2>
+        <span class="section-kicker">Названия приведены к понятной рабочей структуре</span>
+      </div>
+      <div class="scope-grid">
+        <article class="panel">
+          <h3>Логика разделов</h3>
+          <p>Основная база собрана в <strong>Insapp</strong>. Продукты, разработка, партнеры, ARM и инструкции по эксплуатации лежат в отдельных понятных разделах. Входящие материалы остаются отдельно от основной базы.</p>
+          <p>Типы страниц: <strong>основная</strong> - проверенная страница; <strong>черновик</strong> - до проверки; <strong>срез кода</strong> - данные из Git; <strong>ссылка</strong> - переход к основной странице; <strong>архив</strong> - старый или сырой материал.</p>
+        </article>
+      </div>
+      <div class="root-tree" style="margin-top:24px">
+        <article class="root-item"><strong>00. Старт и правила</strong><span>Карта базы, глоссарий и правила обновления.</span></article>
+        <article class="root-item"><strong>10. Платформа и общая часть</strong><span>Архитектура, общие API, настройки и справочники.</span></article>
+        <article class="root-item"><strong>20. Код и backend</strong><span>Сервисы, данные, API, задачи Quartz и тесты.</span></article>
+        <article class="root-item"><strong>30. Продукты</strong><span>ОСАГО, КАСКО, ипотека и другие продуктовые пути.</span></article>
+        <article class="root-item"><strong>40. Партнеры и внешние API</strong><span>Страховые, интеграции, виджеты и методы API.</span></article>
+        <article class="root-item"><strong>50. ARM и работа операторов</strong><span>Работа с заявками, настройками и комиссиями.</span></article>
+        <article class="root-item"><strong>60. Эксплуатация и безопасность</strong><span>Deploy, доступы, логи, PII и инструкции по инцидентам.</span></article>
+        <article class="root-item"><strong>70. Как обновляется документация</strong><span>Git, Hermes, проверка человеком и публикация.</span></article>
+        <article class="root-item"><strong>90. Архив и исходные материалы <span class="tag archive">не основное</span></strong><span>Старые страницы, выгрузки и материалы для разбора.</span></article>
+        <article class="root-item"><strong>99. Срезы из кода <span class="tag">Git</span></strong><span>Автоматические данные для сверки документации.</span></article>
+      </div>
+    </section>
+
+
+    <section class="target" id="target">
+      <div class="section-head">
+        <h2>Как должна выглядеть структура</h2>
+        <span class="section-kicker">Десятки - крупные разделы; страницы внутри них: 20.01, 20.02</span>
+      </div>
+      <p class="tree-intro">Так обычно нумеруют большую техническую базу: `00` для старта, `10` для общей части, затем блоки по десяткам. Номер дочерней страницы всегда начинается с номера ее раздела: внутри `20` могут быть только `20.01`, `20.02` и дальше.</p>
+      <div class="target-tree">
+        <strong>Insapp</strong>
+        <ul>
+          <li><strong>00. Старт и правила</strong><ul><li>00.01. Карта документации</li><li>00.02. Глоссарий</li><li>00.03. Как найти нужную страницу</li><li>00.04. Как обновлять документацию</li><li>00.05. Гайд для разработчика, аналитика и агента</li></ul></li>
+          <li><strong>10. Платформа и общая часть</strong><ul><li>10.01. Архитектура Insapp</li><li>10.02. Состав приложений и связи между ними</li><li>10.03. Общие правила API</li><li>10.04. Справочники, базовые URL и настройки</li><li>10.05. Feature flags и GrowthBook</li></ul></li>
+          <li><strong>20. Код и backend</strong><ul><li>20.01. Структура solution, DI и middleware</li><li>20.02. Сервисы и порядок обработки заявки</li><li>20.03. Машины состояний</li><li>20.04. Public API и контроллеры</li><li>20.05. DataAccess, модели, миграции и базы данных</li><li>20.06. Файлы, кэш, настройки и жизненный цикл данных</li><li>20.07. Фоновые задачи и Quartz</li></ul></li>
+          <li><strong>30. Продукты</strong><ul><li>30.01. ОСАГО</li><li>30.02. КАСКО</li><li>30.03. Ипотека</li><li>30.04. FinProduct</li><li>30.05. MFO</li><li>30.06. Страховая вертикаль</li><li>Для каждого продукта: `30.01.01` обзор и границы; `30.01.02` путь клиента и статусы; `30.01.03` поля и проверки; `30.01.04` API и данные; `30.01.05` офферы, комиссии и страховые; `30.01.06` документы и оплата; `30.01.07` ошибки и ссылки на код.</li></ul></li>
+          <li><strong>40. Партнеры и внешние API</strong><ul><li>40.01. Общие методы API</li><li>40.02. Страховые интеграции</li><li>40.03. Колбэки, постбэки и повторная обработка запросов</li><li>40.04. Виджеты ОСАГО, КАСКО и ипотеки</li><li>40.05. Partner, API key, доступ и настройки</li><li>40.06. Онбординг партнера и тестовый контур</li><li>40.07. Комиссии, КВ и отчеты</li></ul></li>
+          <li><strong>50. ARM и работа операторов</strong><ul><li>50.01. Роли и доступы</li><li>50.02. Работа с заявкой</li><li>50.03. Работа с офферами, документами и оплатой</li><li>50.04. Комиссии и настройки партнера</li><li>50.05. Инструкции для оператора</li></ul></li>
+          <li><strong>60. Эксплуатация и безопасность</strong><ul><li>60.01. Deploy, конфигурация и миграции</li><li>60.02. Тесты и проверка перед выпуском</li><li>60.03. Логи, метрики и алерты</li><li>60.04. Работа с PII и правами доступа</li><li>60.05. Инструкции по инцидентам: продажи, оплата, колбэки, Quartz</li></ul></li>
+          <li><strong>70. Как обновляется документация</strong><ul><li>70.01. Источники: Git, Tracker и Wiki</li><li>70.02. Hermes: сбор данных и черновик</li><li>70.03. Проверка и публикация человеком</li><li>70.04. Список страниц на обновление</li><li>70.05. Дата следующей проверки страницы</li></ul></li>
+          <li><strong>90. Архив и сырые материалы</strong><ul><li>90.01. Старые страницы</li><li>90.02. Черновики review</li><li>90.03. Сырые выгрузки и исследования</li></ul></li>
+          <li><strong>99. Generated from code</strong><ul><li>99.01. Карта кода</li><li>99.02. Выгрузки API и моделей</li><li>99.03. Отчеты о проверке документации</li></ul></li>
+        </ul>
+      </div>
+      <a class="example-link" href="INSAPP_DOCMOST_DOCUMENTATION_EXAMPLE_2026-08-25.html">Открыть пример документации Insapp</a>
+    </section>
+
+    <section id="page-content">
+      <div class="section-head">
+        <h2>Что писать в страницах</h2>
+        <span class="section-kicker">Обычный состав технической документации</span>
+      </div>
+      <div class="page-types">
+        <article class="page-type"><h3>На любой основной странице</h3><ul><li>Что описывает страница и для кого она нужна.</li><li>Кто отвечает за страницу.</li><li>Дата последней проверки.</li><li>Ссылки на Git, задачу, API и связанные страницы.</li><li>Когда страницу нужно пересмотреть.</li></ul></article>
+        <article class="page-type"><h3>Страница продукта</h3><ul><li>Что продаем и кому.</li><li>Путь клиента и статусы заявки.</li><li>Поля формы, обязательность и проверки.</li><li>Офферы, комиссии, документы и оплата.</li><li>Ошибки, ограничения и что видит клиент.</li></ul></article>
+        <article class="page-type"><h3>Страница API</h3><ul><li>Зачем нужен метод, URL и HTTP-метод.</li><li>Авторизация и права доступа.</li><li>Поля запроса и ответа с примерами.</li><li>Ошибки, повторный вызов и ограничения.</li><li>Версия API, тестовый контур и пример запроса.</li></ul></article>
+        <article class="page-type"><h3>Страница интеграции</h3><ul><li>Кто с кем обменивается данными.</li><li>Порядок вызовов и колбэки.</li><li>Какие данные передаем и как их сопоставляем.</li><li>Ключи доступа, тестовый контур и контакт.</li><li>Повторная отправка, ошибки и проверка работы.</li></ul></article>
+        <article class="page-type"><h3>Страница кода и backend</h3><ul><li>Где находится код и за что он отвечает.</li><li>Сервисы, модели, таблицы и миграции.</li><li>Правила обработки данных и фоновые задачи.</li><li>Настройки, логи, метрики и тесты.</li><li>Что изменится при правке и какие страницы обновить.</li></ul></article>
+        <article class="page-type"><h3>Инструкция по инциденту</h3><ul><li>Как понять, что случилась проблема.</li><li>На кого влияет проблема.</li><li>Где посмотреть логи и метрики.</li><li>Пошаговые действия для исправления.</li><li>Кому передать проблему и что записать после исправления.</li></ul></article>
+      </div>
+    </section>
+
+    <section id="rules">
+      <div class="section-head">
+        <h2>Следующие шаги</h2>
+        <span class="section-kicker">Очередность внедрения</span>
+      </div>
+      <div class="rules">
+        <article class="rule"><h3>1. Утвердить одну карту</h3><p>`00.01. Карта документации` становится единственной точкой входа. На старых страницах поставить ссылку на новый путь.</p></article>
+        <article class="rule"><h3>2. Разложить текущие страницы</h3><p>Технические материалы из старой ветки `20` разнести по разделам `20`, `40`, `50` и `60`: код, партнеры, ARM и эксплуатация.</p></article>
+        <article class="rule"><h3>3. Добавить сведения о странице</h3><p>На основной странице указать тип, дату проверки, owner, ссылку на Git и когда ее нужно обновить; затем проверить ссылки и убрать дубли в архив.</p></article>
+      </div>
+    </section>
+  </main>
+  <footer>Источники: экспорт DocMost 24.08.2026, навигация Insapp, Git-срез 21.08.2026, API и конфиги фронтов ОСАГО, КАСКО и ипотеки.</footer>
+</body>
+</html>
