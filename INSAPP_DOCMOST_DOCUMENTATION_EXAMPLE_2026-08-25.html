@@ -22,26 +22,26 @@
       --paper: #30373c;
       --canvas: #252b30;
       --bar: #363e43;
-      --page-width: 1520px;
       --header-height: 68px;
       --shadow: 0 18px 60px rgba(0, 0, 0, .25);
       --radius: 16px;
     }
 
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; scrollbar-width: none; }
+    *::-webkit-scrollbar { width: 0; height: 0; display: none; }
     html { scroll-behavior: smooth; }
     body { min-height: 100vh; margin: 0; color: var(--ink); background: var(--canvas); font-family: Roboto, "Segoe UI", sans-serif; }
     button, a { font: inherit; }
     button { cursor: pointer; }
 
-    .sitebar { min-height: var(--header-height); max-width: var(--page-width); display: flex; align-items: center; justify-content: space-between; gap: 24px; margin: 0 auto; padding: 0 40px; color: #fff; background: var(--bar); }
+    .sitebar { width: 100%; min-height: var(--header-height); display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 0 40px; color: #fff; background: var(--bar); }
     .brand { display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 800; letter-spacing: .04em; }
     .brand-mark { display: grid; width: 36px; height: 36px; place-items: center; border-radius: 50%; color: #102018; background: var(--green); font-size: 13px; letter-spacing: 0; }
     .brand-divider { width: 1px; height: 24px; margin: 0 8px; background: rgba(255,255,255,.26); }
     .brand-context { color: #c1cccf; font-weight: 500; letter-spacing: 0; }
     .back { display: inline-flex; align-items: center; min-height: 36px; padding: 0 13px; border: 1px solid #617078; border-radius: 8px; color: #e7eef0; background: #41494f; font-size: 13px; font-weight: 700; text-decoration: none; }
     .back:hover { border-color: var(--blue); color: #fff; background: #235c80; }
-    .app { display: grid; grid-template-columns: 320px minmax(0, 1fr); height: calc(100vh - var(--header-height)); min-height: 560px; max-width: var(--page-width); margin: 0 auto; background: var(--paper); box-shadow: var(--shadow); }
+    .app { width: 100%; display: grid; grid-template-columns: 320px minmax(0, 1fr); height: calc(100vh - var(--header-height)); min-height: 560px; background: var(--paper); box-shadow: var(--shadow); }
     .tree-panel { display: flex; flex-direction: column; min-height: 0; overflow: hidden; color: #e9f1f4; background: var(--bar); }
     .tree-header { padding: 26px 24px 20px; border-bottom: 1px solid rgba(255,255,255,.12); }
     .tree-header h1 { margin: 0 0 8px; color: #f7fbfc; font-size: 29px; line-height: 1.1; letter-spacing: -.035em; }
@@ -57,7 +57,7 @@
     .tree-section-item { display: block; width: 100%; min-height: 38px; padding: 8px 9px; border: 1px solid transparent; border-radius: 7px; color: #e0eaed; background: transparent; font: inherit; font-size: 12px; font-weight: 800; line-height: 1.35; text-align: left; }
     .tree-section-item:hover { border-color: #617078; color: #fff; background: #41494f; }
     .tree-section-item.is-active { border-color: var(--blue); color: #fff; background: #235c80; box-shadow: inset 3px 0 0 #b2e6ff; }
-    .tree-group summary:focus-visible, .tree-section-item:focus-visible, .tree-item:focus-visible, .reader-bar a:focus-visible { outline: 3px solid #8bd0f7; outline-offset: 2px; }
+    .tree-group summary:focus-visible, .tree-section-item:focus-visible, .tree-item:focus-visible, .reader-bar a:focus-visible, .reader-action:focus-visible { outline: 3px solid #8bd0f7; outline-offset: 2px; }
     .tree-list { margin: 0 0 8px 13px; padding: 0 0 0 12px; border-left: 1px solid rgba(255,255,255,.16); list-style: none; }
     .tree-list li { position: relative; margin: 2px 0; }
     .tree-list li::before { content: ""; position: absolute; top: 15px; left: -12px; width: 8px; border-top: 1px solid rgba(255,255,255,.16); }
@@ -70,13 +70,16 @@
     .reader { min-width: 0; min-height: 0; overflow-y: auto; background: var(--paper); }
     .reader-bar { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 64px; padding: 0 44px; border-bottom: 1px solid var(--line); background: rgba(52,60,65,.94); backdrop-filter: blur(12px); }
     .reader-bar p { margin: 0; color: var(--muted); font-size: 12px; font-weight: 700; }
+    .reader-actions { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
+    .reader-action { display: inline-flex; align-items: center; justify-content: center; min-height: 36px; padding: 0 13px; border: 1px solid #617078; border-radius: 8px; color: #e7eef0; background: #41494f; font-size: 12px; font-weight: 800; }
+    .reader-action:hover { border-color: var(--blue); color: #fff; background: #235c80; }
     .reader-bar a { display: inline-flex; align-items: center; min-height: 36px; padding: 0 13px; border: 1px solid #617078; border-radius: 8px; color: #e7eef0; background: #41494f; font-size: 12px; font-weight: 800; text-decoration: none; }
     .reader-bar a:hover { border-color: var(--blue); color: #fff; background: #235c80; }
-    .reader-content { max-width: 1160px; padding: 54px 54px 86px; }
+    .reader-content { width: 100%; max-width: none; padding: 54px 54px 86px; }
     .crumbs { display: flex; flex-wrap: wrap; gap: 7px; margin: 0 0 16px; color: var(--muted); font-size: 12px; }
     .crumbs span:not(:last-child)::after { content: "/"; margin-left: 7px; color: #9caeb5; }
-    .document-title { max-width: 840px; margin: 0; color: var(--navy); font-size: clamp(34px, 4.6vw, 56px); line-height: 1.05; letter-spacing: -.05em; }
-    .document-summary { max-width: 780px; margin: 18px 0 0; color: var(--muted); font-size: 16px; line-height: 1.65; }
+    .document-title { max-width: none; margin: 0; color: var(--navy); font-size: clamp(34px, 4.6vw, 56px); line-height: 1.05; letter-spacing: -.05em; }
+    .document-summary { max-width: none; margin: 18px 0 0; color: var(--muted); font-size: 16px; line-height: 1.65; }
     .meta-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; margin: 30px 0 38px; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--line); }
     .meta-cell { min-height: 85px; padding: 15px; background: var(--fog); }
     .meta-label { display: block; color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
@@ -127,6 +130,8 @@
       .tree-scroll { max-height: 280px; padding: 11px 10px 16px; }
       .tree-footer { display: none; }
       .reader-bar { position: static; min-height: 52px; padding: 0 20px; }
+      .reader-bar p { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .reader-action { min-height: 34px; padding: 0 10px; white-space: nowrap; }
       .reader { overflow: visible; }
       .reader-content { padding: 34px 20px 52px; }
       .document-summary { font-size: 15px; }
@@ -176,22 +181,26 @@
           </ul>
         </details>
         <details class="tree-group" open>
-          <summary><span class="tree-toggle" aria-hidden="true"></span><button type="button" class="tree-section-item" data-doc="section-products">20. Продукты и сценарии</button></summary>
+          <summary><span class="tree-toggle" aria-hidden="true"></span><button type="button" class="tree-section-item" data-doc="section-products">20. Продукты и бизнес-правила</button></summary>
           <ul class="tree-list">
             <li><button class="tree-item" data-doc="osago">20.01. ОСАГО</button></li>
             <li><button class="tree-item tree-subitem" data-doc="osago-api">20.01.01. Путь клиента и статусы</button></li>
             <li><button class="tree-item tree-subitem" data-doc="osago-fields">20.01.02. Поля и проверки</button></li>
             <li><button class="tree-item tree-subitem" data-doc="osago-prolongation">20.01.03. Продление полиса</button></li>
             <li><button class="tree-item tree-subitem" data-doc="osago-offers-payment">20.01.04. Офферы и оплата</button></li>
+            <li><button class="tree-item tree-subitem" data-doc="osago-business">20.01.05. Бизнес-правила ОСАГО</button></li>
             <li><button class="tree-item" data-doc="kasko">20.02. КАСКО</button></li>
             <li><button class="tree-item tree-subitem" data-doc="kasko-api-offers">20.02.01. Путь клиента и офферы</button></li>
             <li><button class="tree-item tree-subitem" data-doc="kasko-fields">20.02.02. Поля и проверки</button></li>
             <li><button class="tree-item tree-subitem" data-doc="kasko-documents">20.02.03. Документы</button></li>
             <li><button class="tree-item tree-subitem" data-doc="kasko-payment">20.02.04. Оплата</button></li>
+            <li><button class="tree-item tree-subitem" data-doc="kasko-business">20.02.05. Бизнес-правила КАСКО</button></li>
             <li><button class="tree-item" data-doc="mortgage">20.03. Ипотека</button></li>
             <li><button class="tree-item tree-subitem" data-doc="mortgage-api">20.03.01. Путь клиента и офферы</button></li>
             <li><button class="tree-item tree-subitem" data-doc="mortgage-fields">20.03.02. Поля и офлайн-сценарий</button></li>
             <li><button class="tree-item tree-subitem" data-doc="mortgage-payment">20.03.03. Одобрение и оплата</button></li>
+            <li><button class="tree-item tree-subitem" data-doc="mortgage-business">20.03.04. Бизнес-правила ипотеки</button></li>
+            <li><button class="tree-item" data-doc="common-business">20.10. Общие бизнес-правила</button></li>
           </ul>
         </details>
         <details class="tree-group" open>
@@ -252,6 +261,9 @@
     <main class="reader">
       <header class="reader-bar">
         <p id="reader-path">Insapp / документация</p>
+        <div class="reader-actions">
+          <button class="reader-action" id="save-document" type="button">Сохранить страницу</button>
+        </div>
       </header>
       <article class="reader-content" id="document" aria-live="polite"></article>
     </main>
@@ -1276,18 +1288,18 @@
         ]
       },
       "section-products": {
-        path: ["Insapp", "20. Продукты и сценарии"],
-        title: "20. Продукты и сценарии",
-        summary: "Здесь описано только поведение продукта: шаги клиента, статусы, поля, проверки, офферы, документы и оплата. Техническая реализация и HTTP-контракты вынесены в другие разделы.",
-        meta: [["Тип", "Продуктовая документация"], ["Проверено", "26.08.2026"], ["Источник", "Frontend + DocMost"], ["Пересмотр", "Изменение клиентского сценария"]],
+        path: ["Insapp", "20. Продукты и бизнес-правила"],
+        title: "20. Продукты и бизнес-правила",
+        summary: "Здесь описаны путь клиента и правила, по которым система принимает продуктовые решения. Техническая реализация и точные HTTP-контракты вынесены в другие разделы.",
+        meta: [["Тип", "Продуктовая документация"], ["Проверено", "26.08.2026"], ["Источник", "Frontend + DocMost"], ["Пересмотр", "Изменение сценария или бизнес-правила"]],
         sections: [
-          { type: "table", title: "Продукты", headers: ["Продукт", "Страницы"], rows: [["ОСАГО", "Путь и статусы; поля; продление; офферы и оплата"], ["КАСКО", "Путь и офферы; поля; документы; оплата"], ["Ипотека", "Путь и офферы; поля и offline; одобрение и оплата"]] },
+          { type: "table", title: "Продукты", headers: ["Продукт", "Страницы"], rows: [["ОСАГО", "Путь и статусы; поля; продление; офферы и оплата; бизнес-правила"], ["КАСКО", "Путь и офферы; поля; документы; оплата; бизнес-правила"], ["Ипотека", "Путь и офферы; поля и offline; одобрение, оплата и бизнес-правила"], ["Общая часть", "Правила заявки, оффера, выбора, документов и оплаты для нескольких продуктов"]] },
           { type: "callout", body: "<strong>Не повторять.</strong> В продуктовой статье нет JSON body, контроллеров и путей к исходникам. Вместо этого стоят ссылки на 10.03, 10.04 и 30." },
           { type: "sources", items: [["Frontend", "Маршруты и компоненты трех приложений"], ["API", "30. Справочник HTTP API"], ["Архитектура", "10. Архитектура и платформа"], ["Инциденты", "60. Эксплуатация и безопасность"]] }
         ]
       },
       osago: {
-        path: ["Insapp", "20. Продукты и сценарии", "20.01. ОСАГО"],
+        path: ["Insapp", "20. Продукты и бизнес-правила", "20.01. ОСАГО"],
         title: "ОСАГО",
         summary: "ОСАГО включает обычное оформление и продление: клиент заполняет данные, получает предложения, выбирает вариант и переходит к оплате и выпуску полиса.",
         meta: [["Тип", "Продукт"], ["Проверено", "26.08.2026"], ["Источник", "Frontend ОСАГО"], ["Пересмотр", "Изменение сценария"]],
@@ -1298,7 +1310,7 @@
         ]
       },
       "osago-prolongation": {
-        path: ["Insapp", "20. Продукты и сценарии", "20.01. ОСАГО", "20.01.03. Продление полиса"],
+        path: ["Insapp", "20. Продукты и бизнес-правила", "20.01. ОСАГО", "20.01.03. Продление полиса"],
         title: "ОСАГО: продление полиса",
         summary: "Продление начинается с поиска прежнего полиса по данным автомобиля или полиса. Найденные данные переносятся в новую заявку и обязательно показываются клиенту для проверки.",
         meta: [["Тип", "Продуктовый сценарий"], ["Проверено", "26.08.2026"], ["Источник", "Компоненты fast-prolongation"], ["Пересмотр", "Изменение продления"]],
@@ -1309,7 +1321,7 @@
         ]
       },
       "osago-offers-payment": {
-        path: ["Insapp", "20. Продукты и сценарии", "20.01. ОСАГО", "20.01.04. Офферы и оплата"],
+        path: ["Insapp", "20. Продукты и бизнес-правила", "20.01. ОСАГО", "20.01.04. Офферы и оплата"],
         title: "ОСАГО: офферы и оплата",
         summary: "После отправки анкеты предложения приходят постепенно. Клиент выбирает оффер, дополнительные продукты и способ оплаты, после чего ждет готовую платежную ссылку.",
         meta: [["Тип", "Продуктовый сценарий"], ["Проверено", "26.08.2026"], ["Источник", "Offers и CreatePolicy"], ["Пересмотр", "Оффер, доппродукт или оплата"]],
@@ -1320,7 +1332,7 @@
         ]
       },
       kasko: {
-        path: ["Insapp", "20. Продукты и сценарии", "20.02. КАСКО"],
+        path: ["Insapp", "20. Продукты и бизнес-правила", "20.02. КАСКО"],
         title: "КАСКО",
         summary: "КАСКО собирает данные автомобиля, водителей и собственника, показывает онлайн, mini и offline-предложения и ведет клиента к документам или оплате.",
         meta: [["Тип", "Продукт"], ["Проверено", "26.08.2026"], ["Источник", "kaskoV2"], ["Пересмотр", "Изменение сценария"]],
@@ -1331,7 +1343,7 @@
         ]
       },
       "kasko-documents": {
-        path: ["Insapp", "20. Продукты и сценарии", "20.02. КАСКО", "20.02.03. Документы"],
+        path: ["Insapp", "20. Продукты и бизнес-правила", "20.02. КАСКО", "20.02.03. Документы"],
         title: "КАСКО: документы",
         summary: "После выбора оффера система определяет нужный комплект. Клиент видит документы по ролям, загружает недостающие файлы и отправляет полный набор.",
         meta: [["Тип", "Продуктовый сценарий"], ["Проверено", "26.08.2026"], ["Источник", "DocumentsComponent"], ["Пересмотр", "Тип документа или порядок загрузки"]],
@@ -1342,7 +1354,7 @@
         ]
       },
       "kasko-payment": {
-        path: ["Insapp", "20. Продукты и сценарии", "20.02. КАСКО", "20.02.04. Оплата"],
+        path: ["Insapp", "20. Продукты и бизнес-правила", "20.02. КАСКО", "20.02.04. Оплата"],
         title: "КАСКО: оплата",
         summary: "После выбора оффера система готовит черновик полиса и платежную ссылку. В зависимости от условий оффера перед оплатой могут потребоваться документы.",
         meta: [["Тип", "Продуктовый сценарий"], ["Проверено", "26.08.2026"], ["Источник", "CreatePolicy и PaymentProcessing"], ["Пересмотр", "Изменение выпуска или оплаты"]],
@@ -1352,7 +1364,7 @@
         ]
       },
       mortgage: {
-        path: ["Insapp", "20. Продукты и сценарии", "20.03. Ипотека"],
+        path: ["Insapp", "20. Продукты и бизнес-правила", "20.03. Ипотека"],
         title: "Ипотека",
         summary: "Ипотечный продукт выполняет предварительный расчет, собирает полную анкету, получает окончательное решение и готовит оплату. При невозможности онлайн-оформления используется offline-заявка.",
         meta: [["Тип", "Продукт"], ["Проверено", "26.08.2026"], ["Источник", "Frontend ипотеки"], ["Пересмотр", "Изменение сценария"]],
@@ -1363,7 +1375,7 @@
         ]
       },
       "mortgage-payment": {
-        path: ["Insapp", "20. Продукты и сценарии", "20.03. Ипотека", "20.03.03. Одобрение и оплата"],
+        path: ["Insapp", "20. Продукты и бизнес-правила", "20.03. Ипотека", "20.03.03. Одобрение и оплата"],
         title: "Ипотека: одобрение и оплата",
         summary: "После выбора предварительного предложения полная анкета сохраняется, выбранное предложение проходит окончательное одобрение, затем клиент получает платежную ссылку.",
         meta: [["Тип", "Продуктовый сценарий"], ["Проверено", "26.08.2026"], ["Источник", "MortgageService"], ["Пересмотр", "Одобрение или оплата"]],
@@ -1380,7 +1392,7 @@
         sections: [
           { type: "table", title: "Разделы API", headers: ["Страница", "Контракты"], rows: [["30.01", "Обертка ответа, доступ, ошибки и повтор"], ["30.02", "Заявки, SMS, офферы, выбор и оплата"], ["30.03", "Справочники автомобилей, банков и продуктов"], ["30.04", "Клиентский кэш"], ["30.05", "Файлы и документы"], ["30.06", "Асинхронное обогащение данных"]] },
           { type: "callout", body: "<strong>Не смешивать с кодом.</strong> Angular-метод и C# action указываются как ссылки на реализацию. Описание контракта живет только здесь." },
-          { type: "sources", items: [["Backend", "30.08. Контрактная матрица Public API"], ["Frontend", "Сервисы трех приложений"], ["Архитектура", "10. Архитектура и платформа"], ["Продукты", "20. Продукты и сценарии"]] }
+          { type: "sources", items: [["Backend", "30.08. Контрактная матрица Public API"], ["Frontend", "Сервисы трех приложений"], ["Архитектура", "10. Архитектура и платформа"], ["Продукты", "20. Продукты и бизнес-правила"]] }
         ]
       },
       "api-application": {
@@ -1485,6 +1497,51 @@
           { type: "sources", items: [["Матрица", "40.04. Контрактная матрица колбэков и постбэков.md"], ["Идемпотентность", "40.04.01. Матрица колбэков и идемпотентности.md"], ["Backend", "InsurerController и FinOrgController matrix"], ["Инциденты", "60. Эксплуатация"]] }
         ]
       },
+      "osago-business": {
+        path: ["Insapp", "20. Продукты и бизнес-правила", "20.01. ОСАГО", "20.01.05. Бизнес-правила ОСАГО"],
+        title: "Бизнес-правила ОСАГО",
+        summary: "Правила определяют допустимый путь заявки ОСАГО: новый полис или продление, состав участников, запуск расчета, выбор предложения и переход к оплате.",
+        meta: [["Тип", "Бизнес-правила продукта"], ["Проверено", "26.08.2026"], ["Источник", "Frontend ОСАГО + DocMost"], ["Пересмотр", "Изменение анкеты, расчета или оплаты"]],
+        sections: [
+          { type: "table", title: "Решения в сценарии", headers: ["Точка решения", "Правило", "Результат"], rows: [["Начало", "Новый расчет и продление идут разными путями", "Для продления используются данные старого полиса и отдельная проверка"], ["Участники", "Собственник, страхователь и водители задаются связями анкеты", "Состав обязательных блоков зависит от выбранных отношений и ограничения водителей"], ["Автомобиль", "Для идентификации нужен разрешенный набор данных автомобиля", "При недостатке данных расчет не запускается"], ["Расчет", "Анкета должна пройти проверки до отправки", "После отправки клиент ожидает предложения, а не отправляет анкету повторно"], ["Выбор", "К продолжению допускается одно выбранное предложение", "Выбранный offerId используется для оформления и оплаты"], ["Оплата", "Способ оплаты зависит от предложения и доступной настройки", "Клиент переходит к разрешенному сценарию оплаты или получает понятный отказ"]] },
+          { type: "text", title: "Границы страницы", body: "<p>Здесь хранится смысл решения. Состав полей находится в 20.01.02, точные HTTP-запросы - в 30.02.02, техническая обработка - в 10.04.02.</p>" },
+          { type: "sources", items: [["Путь клиента", "20.01.01"], ["Поля", "20.01.02"], ["API", "30.02.02"], ["Backend", "10.04.02"]] }
+        ]
+      },
+      "kasko-business": {
+        path: ["Insapp", "20. Продукты и бизнес-правила", "20.02. КАСКО", "20.02.05. Бизнес-правила КАСКО"],
+        title: "Бизнес-правила КАСКО",
+        summary: "Правила КАСКО связывают данные автомобиля и участников с расчетом, группами предложений, документами и доступным способом оформления.",
+        meta: [["Тип", "Бизнес-правила продукта"], ["Проверено", "26.08.2026"], ["Источник", "Frontend КАСКО + DocMost"], ["Пересмотр", "Изменение расчета, документов или оплаты"]],
+        sections: [
+          { type: "table", title: "Решения в сценарии", headers: ["Точка решения", "Правило", "Результат"], rows: [["Конфигурация", "Доступные шаги и продукты зависят от настроек входа", "Форма показывает только разрешенные варианты"], ["Анкета", "Расчет начинается после проверки автомобиля, участников и обязательных согласий", "Неполная анкета остается на текущем шаге"], ["Предложения", "Предложения могут приходить постепенно и группироваться по варианту покрытия", "Клиент выбирает один доступный вариант"], ["Оформление", "Дальнейший путь определяется возможностями выбранного предложения", "Используется загрузка документов, подготовка черновика или переход к оплате"], ["Документы", "Состав и обязательность зависят от предложения и страховой", "Отправляется только полный разрешенный комплект"], ["Оплата", "Платежная ссылка считается готовой только после конечного состояния", "До этого клиент остается в ожидании или получает безопасную ошибку"]] },
+          { type: "text", title: "Границы страницы", body: "<p>Здесь не повторяются поля файловых методов и статусы ожидания. Поля описаны в 20.02.02, документы - в 20.02.03, оплата - в 20.02.04, HTTP-контракты - в 30.02.03 и 30.05.</p>" },
+          { type: "sources", items: [["Путь клиента", "20.02.01"], ["Документы", "20.02.03"], ["Оплата", "20.02.04"], ["API", "30.02.03 и 30.05"]] }
+        ]
+      },
+      "mortgage-business": {
+        path: ["Insapp", "20. Продукты и бизнес-правила", "20.03. Ипотека", "20.03.04. Бизнес-правила ипотеки"],
+        title: "Бизнес-правила ипотеки",
+        summary: "Правила ипотечного страхования определяют переход от предварительной проверки к анкете, предложениям, одобрению выбранного варианта и оплате.",
+        meta: [["Тип", "Бизнес-правила продукта"], ["Проверено", "26.08.2026"], ["Источник", "Frontend ипотеки + DocMost"], ["Пересмотр", "Изменение одобрения, предложения или оплаты"]],
+        sections: [
+          { type: "table", title: "Решения в сценарии", headers: ["Точка решения", "Правило", "Результат"], rows: [["Предварительная проверка", "До полного оформления выполняется доступная проверка входных данных", "При отказе клиент не переходит к выбору предложения"], ["Анкета", "Состав данных зависит от продукта, банка и доступного сценария", "Заявка сохраняется только после обязательных проверок"], ["Предложения", "Клиент выбирает одно предложение из полученных", "Выбор связывается с applicationId и offerId"], ["Одобрение", "Для продолжения требуется конечный разрешающий результат", "Отказ и отсутствие результата не считаются готовностью к оплате"], ["Офлайн-путь", "Если онлайн-продолжение недоступно, используется отдельный результат", "Клиент получает понятный следующий шаг без ложного статуса успеха"], ["Оплата", "Оплата запускается только для сохраненного и выбранного предложения", "Повтор не должен создавать второй выбор или платеж"]] },
+          { type: "text", title: "Границы страницы", body: "<p>Здесь находится смысл переходов. Поля и офлайн-сценарий описаны в 20.03.02, методы preapprove, offers, approve, save и payment - в 30.02.04.</p>" },
+          { type: "sources", items: [["Путь клиента", "20.03.01"], ["Поля", "20.03.02"], ["Одобрение и оплата", "20.03.03"], ["API", "30.02.04"]] }
+        ]
+      },
+      "common-business": {
+        path: ["Insapp", "20. Продукты и бизнес-правила", "20.10. Общие бизнес-правила"],
+        title: "Общие бизнес-правила",
+        summary: "Общие правила используются несколькими продуктами. Здесь хранится только общий смысл заявки, предложения, выбора, документов и оплаты; особенности продукта остаются в 20.01-20.03.",
+        meta: [["Тип", "Общие бизнес-правила"], ["Проверено", "26.08.2026"], ["Источник", "Модели Application и Offer"], ["Пересмотр", "Изменение общего жизненного цикла"]],
+        sections: [
+          { type: "table", title: "Общие понятия", headers: ["Понятие", "Правило", "Где особенности"], rows: [["Заявка", "Application хранит продукт, партнера, клиента и текущее состояние процесса", "Страницы конкретного продукта"], ["Предложение", "Offer относится к заявке и проходит собственные состояния расчета, оформления, документов и оплаты", "Продукт и интеграция"], ["Выбор", "У заявки может быть один текущий выбранный offerId", "Правила продукта"], ["Настройки", "Partner и API key определяют доступные функции и варианты входа", "40.02. Виджеты и настройки"], ["Документы", "Комплект связан с заявкой и предложением; состав зависит от продукта и страховой", "20.02.03 и 30.05"], ["Оплата", "Платеж запускается после выбора разрешенного предложения; повтор требует защиты от дубля", "Продукт, API и интеграция"]] },
+          { type: "table", title: "Куда записывать новое правило", headers: ["Если правило...", "Страница"], rows: [["Действует только в ОСАГО", "20.01.05"], ["Действует только в КАСКО", "20.02.05"], ["Действует только в ипотеке", "20.03.04"], ["Одинаково для нескольких продуктов", "20.10"], ["Описывает точный HTTP-запрос", "30"], ["Описывает обмен с внешней системой", "40"], ["Описывает техническую реализацию", "10.04"]] },
+          { type: "callout", body: "<strong>Правило без дублей.</strong> Общее правило записывается один раз в 20.10. В продуктовой статье остается только отличие и ссылка на общую часть." },
+          { type: "sources", items: [["Application", "30.03.01. Словарь агрегата Application"], ["Offer", "30.03.02. Словарь Offer/FinOffer"], ["Настройки", "30.03.03. Partner/API key"], ["Продукты", "20.01-20.03"]] }
+        ]
+      },
       "external-services": {
         path: ["Insapp", "40. Интеграции и партнеры", "40.04. Внешние сервисы данных"],
         title: "Внешние сервисы данных",
@@ -1513,14 +1570,16 @@
     documents["api-mortgage"].title = "API ипотеки";
     documents["api-documents"].path = ["Insapp", "30. Справочник HTTP API", "30.05. API файлов и документов"];
     documents["api-documents"].title = "API файлов и документов";
-    documents["osago-api"].path = ["Insapp", "20. Продукты и сценарии", "20.01. ОСАГО", "20.01.01. Путь клиента и статусы"];
-    documents["osago-fields"].path = ["Insapp", "20. Продукты и сценарии", "20.01. ОСАГО", "20.01.02. Поля и проверки"];
-    documents["kasko-api-offers"].path = ["Insapp", "20. Продукты и сценарии", "20.02. КАСКО", "20.02.01. Путь клиента и офферы"];
-    documents["kasko-fields"].path = ["Insapp", "20. Продукты и сценарии", "20.02. КАСКО", "20.02.02. Поля и проверки"];
-    documents["mortgage-api"].path = ["Insapp", "20. Продукты и сценарии", "20.03. Ипотека", "20.03.01. Путь клиента и офферы"];
-    documents["mortgage-fields"].path = ["Insapp", "20. Продукты и сценарии", "20.03. Ипотека", "20.03.02. Поля и офлайн-сценарий"];
-    documents["section-start"].sections[0].body = "<ul><li><strong>10. Архитектура и платформа</strong> - устройство системы, отдельно frontend и backend.</li><li><strong>20. Продукты и сценарии</strong> - путь клиента, поля и результаты.</li><li><strong>30. Справочник HTTP API</strong> - request, response, доступ и ошибки.</li><li><strong>40. Интеграции и партнеры</strong> - внешние участники и обмен данными.</li><li><strong>50 и 60</strong> - ARM, эксплуатация и инциденты.</li></ul>";
-    documents.map.sections[0].rows = [["Как устроена система", "10. Архитектура и платформа"], ["Что делает клиент", "20. Продукты и сценарии"], ["Как вызвать HTTP-метод", "30. Справочник HTTP API"], ["Как идет обмен с внешней системой", "40. Интеграции и партнеры"], ["Что делает оператор", "50. ARM и работа операторов"], ["Как разбирать сбой", "60. Эксплуатация и безопасность"]];
+    documents["osago-api"].path = ["Insapp", "20. Продукты и бизнес-правила", "20.01. ОСАГО", "20.01.01. Путь клиента и статусы"];
+    documents["osago-fields"].path = ["Insapp", "20. Продукты и бизнес-правила", "20.01. ОСАГО", "20.01.02. Поля и проверки"];
+    documents["kasko-api-offers"].path = ["Insapp", "20. Продукты и бизнес-правила", "20.02. КАСКО", "20.02.01. Путь клиента и офферы"];
+    documents["kasko-fields"].path = ["Insapp", "20. Продукты и бизнес-правила", "20.02. КАСКО", "20.02.02. Поля и проверки"];
+    documents["mortgage-api"].path = ["Insapp", "20. Продукты и бизнес-правила", "20.03. Ипотека", "20.03.01. Путь клиента и офферы"];
+    documents["mortgage-fields"].path = ["Insapp", "20. Продукты и бизнес-правила", "20.03. Ипотека", "20.03.02. Поля и офлайн-сценарий"];
+    documents["section-start"].sections[0].body = "<ul><li><strong>10. Архитектура и платформа</strong> - устройство системы, отдельно frontend и backend.</li><li><strong>20. Продукты и бизнес-правила</strong> - путь клиента, решения, ограничения и результаты.</li><li><strong>30. Справочник HTTP API</strong> - request, response, доступ и ошибки.</li><li><strong>40. Интеграции и партнеры</strong> - внешние участники и обмен данными.</li><li><strong>50 и 60</strong> - ARM, эксплуатация и инциденты.</li></ul>";
+    documents.map.sections[0].rows = [["Как устроена система", "10. Архитектура и платформа"], ["Что делает клиент и какие правила действуют", "20. Продукты и бизнес-правила"], ["Как вызвать HTTP-метод", "30. Справочник HTTP API"], ["Как идет обмен с внешней системой", "40. Интеграции и партнеры"], ["Что делает оператор", "50. ARM и работа операторов"], ["Как разбирать сбой", "60. Эксплуатация и безопасность"]];
+
+    let currentDocumentKey = "section-start";
 
     function formatInline(value) {
       return String(value).replace(/`([^`]+)`/g, "<code>$1</code>");
@@ -1558,6 +1617,7 @@
 
     function renderDocument(key) {
       const doc = documents[key] || documents.map;
+      currentDocumentKey = documents[key] ? key : "map";
       document.getElementById("reader-path").textContent = doc.path.join(" / ");
       document.getElementById("document").innerHTML = [
         `<div class="crumbs">${doc.path.map((item) => `<span>${item}</span>`).join("")}</div>`,
@@ -1569,6 +1629,32 @@
       ].join("");
       document.querySelectorAll(".tree-item, .tree-section-item").forEach((item) => item.classList.toggle("is-active", item.dataset.doc === key));
       document.title = `Insapp: ${doc.title}`;
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, (symbol) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[symbol]);
+    }
+
+    function saveCurrentDocument() {
+      const doc = documents[currentDocumentKey] || documents.map;
+      const article = document.getElementById("document").cloneNode(true);
+      const styles = document.querySelector("style").textContent;
+      const exported = `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${escapeHtml(doc.title)}</title><style>${styles}\nbody{min-height:100vh}.reader-content{width:100%;max-width:none;margin:0 auto}.reader-content::before{content:"INSAPP";display:block;margin-bottom:26px;color:var(--green);font-size:12px;font-weight:800;letter-spacing:.12em}</style></head><body><main class="reader-content">${article.innerHTML}</main></body></html>`;
+      const blob = new Blob([exported], { type: "text/html;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      const fileName = doc.path[doc.path.length - 1].replace(/[<>:"/\\|?*]+/g, "-").replace(/\s+/g, " ").trim();
+      link.href = url;
+      link.download = `${fileName}.html`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+      const button = document.getElementById("save-document");
+      const label = button.textContent;
+      button.textContent = "Сохранено";
+      setTimeout(() => { button.textContent = label; }, 1400);
     }
 
     document.querySelectorAll(".tree-item, .tree-section-item").forEach((item) => {
@@ -1583,6 +1669,8 @@
         else reader.scrollTop = 0;
       });
     });
+
+    document.getElementById("save-document").addEventListener("click", saveCurrentDocument);
 
     renderDocument("section-start");
   </script>
