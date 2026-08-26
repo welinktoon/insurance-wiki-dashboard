@@ -35,6 +35,7 @@
     button { cursor: pointer; }
 
     .sitebar { width: 100%; min-height: var(--header-height); display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 0 40px; color: #fff; background: var(--bar); }
+    .site-actions { display: flex; align-items: center; gap: 8px; }
     .brand { display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 800; letter-spacing: .04em; }
     .brand-mark { display: grid; width: 36px; height: 36px; place-items: center; border-radius: 50%; color: #102018; background: var(--green); font-size: 13px; letter-spacing: 0; }
     .brand-divider { width: 1px; height: 24px; margin: 0 8px; background: rgba(255,255,255,.26); }
@@ -56,7 +57,7 @@
     .tree-section-item { display: block; width: 100%; min-height: 38px; padding: 8px 9px; border: 1px solid transparent; border-radius: 7px; color: #e0eaed; background: transparent; font: inherit; font-size: 12px; font-weight: 800; line-height: 1.35; text-align: left; }
     .tree-section-item:hover { border-color: #617078; color: #fff; background: #41494f; }
     .tree-section-item.is-active { border-color: var(--blue); color: #fff; background: #235c80; box-shadow: inset 3px 0 0 #b2e6ff; }
-    .tree-group summary:focus-visible, .tree-section-item:focus-visible, .tree-item:focus-visible, .reader-bar a:focus-visible, .reader-action:focus-visible { outline: 3px solid #8bd0f7; outline-offset: 2px; }
+    .tree-group summary:focus-visible, .tree-section-item:focus-visible, .tree-item:focus-visible, .back:focus-visible, .reader-action:focus-visible { outline: 3px solid #8bd0f7; outline-offset: 2px; }
     .tree-list { margin: 0 0 8px 13px; padding: 0 0 0 12px; border-left: 1px solid rgba(255,255,255,.16); list-style: none; }
     .tree-list li { position: relative; margin: 2px 0; }
     .tree-list li::before { content: ""; position: absolute; top: 15px; left: -12px; width: 8px; border-top: 1px solid rgba(255,255,255,.16); }
@@ -66,12 +67,8 @@
     .tree-item.is-active { border-color: var(--blue); color: #fff; background: #235c80; box-shadow: inset 3px 0 0 #b2e6ff; }
 
     .reader { min-width: 0; min-height: 0; overflow-y: auto; background: var(--paper); }
-    .reader-bar { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; justify-content: flex-end; gap: 20px; min-height: 64px; padding: 0 44px; border-bottom: 1px solid var(--line); background: rgba(52,60,65,.94); backdrop-filter: blur(12px); }
-    .reader-actions { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
     .reader-action { display: inline-flex; align-items: center; justify-content: center; min-height: 36px; padding: 0 13px; border: 1px solid #617078; border-radius: 8px; color: #e7eef0; background: #41494f; font-size: 12px; font-weight: 800; }
     .reader-action:hover { border-color: var(--blue); color: #fff; background: #235c80; }
-    .reader-bar a { display: inline-flex; align-items: center; min-height: 36px; padding: 0 13px; border: 1px solid #617078; border-radius: 8px; color: #e7eef0; background: #41494f; font-size: 12px; font-weight: 800; text-decoration: none; }
-    .reader-bar a:hover { border-color: var(--blue); color: #fff; background: #235c80; }
     .reader-content { width: 100%; max-width: none; padding: 54px 54px 86px; }
     .crumbs { display: flex; flex-wrap: wrap; gap: 7px; margin: 0 0 16px; color: var(--muted); font-size: 12px; }
     .crumbs span:not(:last-child)::after { content: "/"; margin-left: 7px; color: #9caeb5; }
@@ -112,21 +109,20 @@
     @media (max-width: 900px) {
       .sitebar { padding: 0 22px; }
       .app { grid-template-columns: 270px minmax(0, 1fr); }
-      .reader-bar { padding: 0 28px; }
       .reader-content { padding: 42px 34px 64px; }
       .meta-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 680px) {
       body { background: var(--paper); }
-      .sitebar { min-height: 58px; }
-      .brand-divider, .brand-context { display: none; }
+      .sitebar { min-height: 58px; gap: 6px; padding: 10px 16px; }
+      .brand-context, .brand-divider { display: none; }
+      .site-actions { gap: 6px; }
+      .back, .reader-action { min-height: 34px; padding: 0 6px; font-size: 10.5px; white-space: nowrap; }
       .app { display: block; height: auto; min-height: 0; }
       .tree-panel { min-height: auto; }
       .tree-header { padding: 20px 20px 15px; }
       .tree-header h1 { font-size: 25px; }
       .tree-scroll { max-height: 280px; padding: 11px 10px 16px; }
-      .reader-bar { position: static; min-height: 52px; padding: 0 20px; }
-      .reader-action { min-height: 34px; padding: 0 10px; white-space: nowrap; }
       .reader { overflow: visible; }
       .reader-content { padding: 34px 20px 52px; }
       .document-summary { font-size: 15px; }
@@ -143,7 +139,10 @@
       <span class="brand-divider"></span>
       <span class="brand-context">План документации</span>
     </div>
-    <a class="back" href="INSAPP_DOCMOST_AUDIT_2026-08-24.html">Вернуться к отчету</a>
+    <div class="site-actions">
+      <a class="back" href="INSAPP_DOCMOST_AUDIT_2026-08-24.html">Вернуться к отчету</a>
+      <button class="reader-action" id="save-document" type="button">Сохранить страницу</button>
+    </div>
   </header>
   <div class="app">
     <aside class="tree-panel" aria-label="Дерево документации">
@@ -198,18 +197,11 @@
           </ul>
         </details>
         <details class="tree-group" open>
-          <summary><span class="tree-toggle" aria-hidden="true"></span><button type="button" class="tree-section-item" data-doc="section-api">30. Справочник HTTP API</button></summary>
+          <summary><span class="tree-toggle" aria-hidden="true"></span><button type="button" class="tree-section-item" data-doc="section-api">30. API для подключения</button></summary>
           <ul class="tree-list">
-            <li><button class="tree-item" data-doc="api-rules">30.01. Общие правила API</button></li>
-            <li><button class="tree-item" data-doc="api-application">30.02. API заявок и офферов</button></li>
-            <li><button class="tree-item tree-subitem" data-doc="api-common">30.02.01. Общие методы заявки</button></li>
-            <li><button class="tree-item tree-subitem" data-doc="api-osago">30.02.02. API ОСАГО</button></li>
-            <li><button class="tree-item tree-subitem" data-doc="api-kasko">30.02.03. API КАСКО</button></li>
-            <li><button class="tree-item tree-subitem" data-doc="api-mortgage">30.02.04. API ипотеки</button></li>
-            <li><button class="tree-item" data-doc="api-dictionaries">30.03. API справочников</button></li>
-            <li><button class="tree-item" data-doc="api-client-cache">30.04. API клиентского кэша</button></li>
-            <li><button class="tree-item" data-doc="api-documents">30.05. API файлов и документов</button></li>
-            <li><button class="tree-item" data-doc="api-enrichment">30.06. API обогащения данных</button></li>
+            <li><button class="tree-item" data-doc="api-osago">30.01. API ОСАГО</button></li>
+            <li><button class="tree-item" data-doc="api-kasko">30.02. API КАСКО</button></li>
+            <li><button class="tree-item" data-doc="api-mortgage">30.03. API ипотеки</button></li>
           </ul>
         </details>
         <details class="tree-group" open>
@@ -252,11 +244,6 @@
     </aside>
 
     <main class="reader">
-      <header class="reader-bar">
-        <div class="reader-actions">
-          <button class="reader-action" id="save-document" type="button">Сохранить страницу</button>
-        </div>
-      </header>
       <article class="reader-content" id="document" aria-live="polite"></article>
     </main>
   </div>
@@ -1547,29 +1534,103 @@
       }
     });
 
+    const productApiBasics = [
+      { type: "table", title: "Как отправлять запросы", headers: ["Правило", "Что делать"], rows: [["Формат", "Передавать JSON и заголовок <code>Content-Type: application/json</code>; исключение - загрузка файла через <code>multipart/form-data</code>"], ["Ключ партнера", "Для большинства методов передавать <code>apiKey</code> в теле запроса, а не в заголовке"], ["Успех", "Проверять одновременно HTTP-ответ и <code>result=true</code>; полезные данные находятся в <code>value</code>"], ["Ошибка", "При <code>result=false</code> читать <code>error</code>; многие ошибки проверки возвращаются с HTTP 200"], ["Повтор", "Повторять только методы чтения и только с ограничением по времени; создание заявки, отправка SMS, расчет и платеж могут дать повторное действие"], ["Безопасность", "Не писать в логи <code>apiKey</code>, Authorization, паспорт, телефон, адрес, документы и полное тело анкеты"]] },
+      { type: "code", title: "Обертка ответа", body: "{\n  \"result\": true,\n  \"value\": {},\n  \"error\": null\n}" },
+      { type: "table", title: "Ошибки и повторы", headers: ["Ситуация", "Действие клиента"], rows: [["HTTP 200, result=false", "Не считать запрос успешным; показать безопасное сообщение и сохранить технический код ошибки"], ["HTTP 408, 429 или 5xx", "Повторить только безопасный запрос чтения с увеличением паузы; для записи сначала проверить состояние заявки"], ["Сеть оборвалась после POST", "Не создавать новую заявку и не отправлять действие повторно вслепую; сначала прочитать состояние по applicationId"], ["Опрос не завершился", "Остановить polling по лимиту страницы, сохранить applicationId и показать понятный следующий шаг"], ["Ошибка проверки поля", "Привязать ошибку к полю формы; не отправлять анкету снова до исправления"]] }
+    ];
+
+    Object.assign(documents, {
+      "section-api": {
+        path: ["Insapp", "30. API для подключения"],
+        title: "30. API для подключения",
+        summary: "Три самостоятельные страницы по продуктам. Каждую можно сохранить отдельно: внутри есть доступ, продуктовый App/New, справочники, методы полного сценария, запросы, ответы, ошибки и правила повторов.",
+        meta: [["Страниц", "3"], ["Проверено", "26.08.2026"], ["Основа", "Public API + frontend"], ["Формат", "Одна страница на продукт"]],
+        sections: [
+          { type: "table", title: "Страницы", headers: ["Страница", "Что внутри"], rows: [["30.01. API ОСАГО", "Создание заявки, автомобильные справочники, анкета, расчет, продление, офферы, оплата, документы и кэш"], ["30.02. API КАСКО", "Создание заявки, автомобиль, SMS, расчет, офферы, черновик, файлы, документы, оплата и кэш"], ["30.03. API ипотеки", "Создание заявки, банки и продукты, предварительный расчет, анкета, офферы, одобрение, оплата, документы и кэш"]] },
+          { type: "callout", body: "<strong>Правило раздела.</strong> Общего App/New и отдельной страницы справочников нет: тело создания и набор вспомогательных методов показаны внутри того продукта, где они нужны." }
+        ]
+      },
+      "api-osago": {
+        path: ["Insapp", "30. API для подключения", "30.01. API ОСАГО"],
+        title: "API ОСАГО",
+        summary: "Полная страница для подключения ОСАГО: от создания заявки и заполнения автомобиля до расчета, выбора, оплаты, получения документов и восстановления состояния.",
+        meta: [["Продукт", "ОСАГО"], ["Проверено", "26.08.2026"], ["Методы", "App, Dictionaries, Client, File, Enrichment, Partner"], ["Обновлять", "При изменении route или DTO"]],
+        sections: [
+          ...productApiBasics,
+          { type: "text", title: "Порядок подключения", body: "<ol><li>Получить адрес контура и ключ партнера.</li><li>Создать ОСАГО-заявку через <code>App/New</code> и сохранить <code>applicationId</code>.</li><li>Загрузить справочники или заполнить автомобиль через обогащение.</li><li>Отправить анкету, при необходимости подтвердить телефон и запустить расчет.</li><li>Читать офферы до <code>allOffersReceived=true</code>, сохранить выбранный <code>offerId</code>.</li><li>Получить платежную ссылку или запустить прямую оплату.</li><li>После оплаты читать статус и документы; для возврата клиента использовать тот же <code>applicationId</code>.</li></ol>" },
+          { type: "code", title: "POST App/New - ОСАГО", body: "{\n  \"apiKey\": \"***\",\n  \"applicationType\": \"New\",\n  \"productType\": \"Osago\",\n  \"channelType\": \"Widget\",\n  \"clientId\": \"client-uuid\",\n  \"sessionId\": \"session-uuid\",\n  \"successPaymentUrl\": \"https://partner.example/success\",\n  \"source\": \"partner-site\",\n  \"localTime\": \"2026-08-26T12:00:00+03:00\"\n}" },
+          { type: "table", title: "App/New для ОСАГО", headers: ["Поле", "Нужно", "Описание"], rows: [["apiKey", "Да", "Ключ партнера"], ["applicationType", "Да", "Обычно <code>New</code>; продление задается отдельным согласованным сценарием"], ["productType", "Да", "Точное значение <code>Osago</code>"], ["channelType", "Да", "Канал запуска, для текущего виджета <code>Widget</code>"], ["clientId", "Да", "Стабильный ID клиента на стороне партнера"], ["sessionId", "Желательно", "ID сессии для связи запросов"], ["successPaymentUrl", "По сценарию", "Куда вернуть клиента после оплаты"], ["source, UTM, cpaClientUid", "По сценарию", "Источник и атрибуция без секретов"], ["Ответ", "-", "<code>value.applicationId</code>, <code>value.skipAuth</code> и возможные AB-настройки"]] },
+          { type: "table", title: "Справочники и данные автомобиля", headers: ["Метод", "Запрос", "Ответ и назначение", "Повтор"], rows: [["POST <code>Dictionaries/GetAllBrands</code>", "apiKey, name?, offset?, size?", "<code>BrandResponse</code>; поиск марки", "Безопасно"], ["POST <code>Dictionaries/GetAllModels</code>", "apiKey, brandId, name?, offset?, size?", "<code>ModelResponse</code>; модели выбранной марки", "Безопасно"], ["POST <code>Dictionaries/GetBrandsModels</code>", "apiKey", "Марки с моделями одним ответом", "Безопасно"], ["POST <code>Dictionaries/GetBrandModelById</code>", "apiKey, modelId", "Точная пара марки и модели", "Безопасно"], ["POST <code>Dictionaries/GetBrandModelByName</code>", "apiKey, partnerBrandName, partnerModelName, carCategoryEnum", "Сопоставление названий партнера", "Безопасно"], ["POST <code>Dictionaries/GetYears</code>", "apiKey, modelId", "Массив годов выпуска", "Безопасно"], ["POST <code>Dictionaries/GetPowers</code>", "apiKey, modelId, productionYear", "Доступные мощности", "Безопасно"], ["POST <code>Dictionaries/GetModifications</code>", "apiKey, modelId, productionYear", "Модификации автомобиля", "Безопасно"], ["POST <code>Dictionaries/GetAllCountries</code>", "apiKey", "Страны выдачи водительского удостоверения", "Безопасно"], ["POST <code>Dictionaries/GetOsagoPreliminaryCost</code>", "Параметры предварительной оценки", "Предварительная стоимость; в текущем backend метод открыт без partner auth", "Безопасно"]] },
+          { type: "table", title: "Основной сценарий заявки", headers: ["Метод", "Запрос", "Успешный результат", "Повтор и действие"], rows: [["POST <code>App/SetStatusWidgetDisplayed</code>", "apiKey, applicationId", "result=true", "Безопасная установка статуса"], ["POST <code>App/SendOsagoApplication</code>", "apiKey, applicationId, carData, drivers, owner, insured?, policyParameters, consents", "Анкета сохранена", "Перезаписывает данные"], ["POST <code>App/SendVerificationCode</code>", "apiKey, applicationId, clientName, clientPhone", "<code>value.confirmed</code>", "Может отправить новое SMS"], ["POST <code>App/VerifyCode</code>", "apiKey, applicationId, smsCode", "Телефон подтвержден", "Повтор проверки допустим"], ["POST <code>App/SendToInsurers</code>", "apiKey, applicationId", "Расчет запущен", "Не повторять автоматически: внешнее действие"], ["POST <code>App/GetOffers</code>", "apiKey, applicationId, fullList?", "<code>offers[]</code>, <code>allOffersReceived</code>", "Read-only; текущий frontend опрашивает примерно раз в 2 секунды"], ["POST <code>App/SelectOffer</code>", "apiKey, applicationId, offerId", "Оффер выбран", "Повтор меняет выбор"], ["POST <code>App/GetApplicationInfo</code>", "private apiKey, applicationId", "Состояние и данные заявки", "Read-only; нужен приватный ключ"], ["POST <code>App/GetInfoForRedirect</code>", "apiKey, applicationId", "Данные доступных переходов", "Read-only"], ["POST <code>App/GetDataCheckingLink</code>", "apiKey, applicationId", "Ссылка проверки данных", "Read-only"], ["POST <code>App/SetReturnChannel</code>", "apiKey, applicationId, returnChannel", "Канал возврата сохранен", "Перезаписывает значение"], ["POST <code>App/SetWidgetStatus</code>", "apiKey, applicationId, status", "Статус сохранен", "Не ставить произвольный статус"], ["POST <code>App/SetStatusBuyButtonPressed</code>", "apiKey, applicationId", "Начало оплаты зафиксировано", "Безопасная установка статуса"]] },
+          { type: "table", title: "Обогащение и продление", headers: ["Метод", "Что передать", "Что получить", "Важно"], rows: [["POST <code>Enrichment/CreateCarCharacteristicsReport</code>", "apiKey и идентификаторы автомобиля", "requestId", "Создает платный запрос; не повторять create"], ["POST <code>Enrichment/GetCarCharacteristicsReport</code>", "apiKey, requestId", "Характеристики или статус", "Повторять get до конечного состояния"], ["POST <code>Enrichment/CreateKbmReport</code>", "apiKey, applicationId и данные водителя", "requestId", "Создает проверку KBM"], ["POST <code>Enrichment/GetKbmReport</code>", "apiKey, requestId", "KBM или конечная ошибка", "Read-only"], ["POST <code>Enrichment/CreateOsagoReport</code>", "apiKey и данные прошлого полиса", "requestId", "Старт поиска данных продления"], ["POST <code>Enrichment/GetOsagoReport</code>", "apiKey, requestId", "Данные прошлого полиса", "Read-only"], ["<code>Enrichment/EnrichOsagoProlongation</code>", "Данные продления", "Заполненная модель", "Так вызывает frontend; в текущем backend action найден в группе EnrichmentWidget, поэтому публичный route через gateway нужно подтвердить"]] },
+          { type: "table", title: "Оплата", headers: ["Метод", "Запрос", "Ответ", "Повтор"], rows: [["POST <code>App/GetOsagoPaymentLink</code>", "apiKey, applicationId, offerId, selectedUpsales?, sbp?, skipNotification?", "Статус подготовки и платежная ссылка", "Опрос до Received; frontend ограничивает ожидание 75 попытками или 180 секундами"], ["POST <code>App/GetNewOsagoPaymentLink</code>", "apiKey, applicationId, offerId", "Новая платежная ссылка", "Создает новую ссылку"], ["POST <code>App/SendOsagoPaymentLink</code>", "apiKey, applicationId, sendSms?, sendEmail?", "result=true", "Повторно отправляет уведомление"], ["POST <code>App/GetOsagoPaymentStatus</code>", "apiKey, applicationId", "Статус оплаты", "Read-only"], ["POST <code>App/InitOsagoDirectPayment</code>", "apiKey, applicationId, offerId", "Данные для прямой оплаты", "Создает платежное действие"], ["POST <code>App/SetOsagoDirectPayment</code>", "apiKey, applicationId, offerId и данные оплаты", "Результат прямой оплаты", "Не повторять без проверки статуса"]] },
+          { type: "table", title: "Документы", headers: ["Метод", "Запрос", "Ответ", "Доступ"], rows: [["POST <code>App/GetOsagoDocuments</code>", "apiKey, applicationId", "DocumentsResponse", "Partner key"], ["POST <code>App/GetOsagoPolicyDocuments</code>", "apiKey, applicationId, typesOfDocuments?", "Документы полиса с фильтром", "Partner key"], ["POST <code>App/GetUpsaleDocuments</code>", "apiKey, applicationId, upsaleId, typesOfDocuments?", "Документы доппродукта", "Partner key"], ["POST <code>App/GetOsagoDocumentsByPolicyNumber</code>", "apiKey и номер полиса", "DocumentsResponse", "Partner key и отдельный Authorization header"], ["POST <code>File/InsappUserAgreement</code>", "apiKey и данные согласия", "PDF", "Partner key"], ["POST <code>File/InsappMarketAgreement</code>", "apiKey и данные согласия", "PDF", "Partner key"]] },
+          { type: "table", title: "Кэш, быстрые и служебные сценарии", headers: ["Метод", "Назначение", "Запрос", "Повтор"], rows: [["POST <code>Client/GetCache</code>", "Прочитать JSON состояния формы", "apiKey, clientId", "Read-only"], ["POST <code>Client/UpdateCache</code>", "Сохранить JSON формы", "apiKey, clientId, data", "Перезапись"], ["POST <code>Client/GetOsagoCacheByApplicationId</code>", "Восстановить ОСАГО по applicationId", "apiKey, applicationId", "Read-only"], ["POST <code>Client/GetOsagoCacheByPartnerApplicationId</code>", "Найти по ID партнера", "apiKey, partnerApplicationId", "Read-only"], ["POST <code>App/CreateFullOsagoApplication</code>", "Создать полную заявку и сразу получить офферы", "FullOsagoApplicationRequest", "Каждый вызов создает заявку"], ["POST <code>App/CreateFullOsagoApplicationNoOffers</code>", "Создать полную заявку без расчета", "FullOsagoApplicationRequest", "Каждый вызов создает заявку"], ["POST <code>App/SaveOfflineOsagoApplication</code>", "Передать заявку в офлайн-обработку", "OfflineOsagoRequest", "Перезапись"], ["POST <code>App/GetDraft</code>", "Получить черновик выбранного оффера", "apiKey, applicationId, offerId", "Read-only"], ["POST <code>Partner/GetApiKeySettings</code>", "Прочитать настройки ключа без секретов", "private apiKey", "Read-only"], ["POST <code>Partner/GetReturnToOfferUrlRequest</code>", "Получить URL возврата к офферу", "private apiKey и applicationId", "Read-only"]] },
+          { type: "callout", body: "<strong>Не использовать для новой интеграции.</strong> <code>App/GetOffersOld</code> и <code>App/PrepareOffer</code> помечены устаревшими. Для новых подключений нужны <code>App/GetOffers</code> и <code>App/InitOsagoDirectPayment</code>." }
+        ]
+      },
+      "api-kasko": {
+        path: ["Insapp", "30. API для подключения", "30.02. API КАСКО"],
+        title: "API КАСКО",
+        summary: "Полная страница для подключения КАСКО: создание заявки, автомобиль, подтверждение клиента, расчет, офферы, черновик, файлы, документы, оплата и восстановление формы.",
+        meta: [["Продукт", "КАСКО"], ["Проверено", "26.08.2026"], ["Методы", "App, Dictionaries, Client, File, Enrichment"], ["Обновлять", "При изменении route или DTO"]],
+        sections: [
+          ...productApiBasics,
+          { type: "text", title: "Порядок подключения", body: "<ol><li>Создать заявку через продуктовый <code>App/New</code>.</li><li>Получить марку и модель либо обогатить данные автомобиля.</li><li>Сохранить автомобиль и полную анкету, подтвердить телефон, если это требуется настройками.</li><li>Запустить расчет и читать три группы офферов до завершения.</li><li>Выбрать оффер; если нужны документы - загрузить комплект и отправить его.</li><li>Получить черновик и платежную ссылку, проверить оплату и документы полиса.</li></ol>" },
+          { type: "code", title: "POST App/New - КАСКО", body: "{\n  \"apiKey\": \"***\",\n  \"applicationType\": \"New\",\n  \"productType\": \"Kasko\",\n  \"channelType\": \"Widget\",\n  \"clientId\": \"client-uuid\",\n  \"sessionId\": \"session-uuid\",\n  \"sourceUrl\": \"https://partner.example/kasko\",\n  \"successPaymentUrl\": \"https://partner.example/success\",\n  \"utm\": {},\n  \"cpaClientUid\": \"partner-client-id\"\n}" },
+          { type: "table", title: "App/New для КАСКО", headers: ["Поле", "Нужно", "Описание"], rows: [["apiKey", "Да", "Ключ партнера"], ["applicationType", "Да", "Обычно <code>New</code>"], ["productType", "Да", "Точное значение <code>Kasko</code>"], ["channelType", "Да", "Для виджета <code>Widget</code>"], ["clientId", "Да", "ID клиента партнера"], ["sessionId", "Желательно", "ID сессии"], ["sourceUrl, source, utm", "По сценарию", "Источник запуска и атрибуция"], ["platformId, loyalty, cpaClientUid", "По настройкам", "Партнерские варианты входа"], ["Ответ", "-", "<code>value.applicationId</code>, <code>skipAuth</code>, настройки и AB-группы"]] },
+          { type: "table", title: "Автомобиль и обогащение", headers: ["Метод", "Запрос", "Ответ", "Повтор"], rows: [["POST <code>Dictionaries/GetAllBrands</code>", "apiKey, name?, offset?, size?", "Марки", "Безопасно"], ["POST <code>Dictionaries/GetAllModels</code>", "apiKey, brandId, name?, offset?, size?", "Модели", "Безопасно"], ["POST <code>App/SaveClientCarData</code>", "apiKey, applicationId, автомобиль и клиент", "Данные сохранены", "Перезапись"], ["POST <code>Enrichment/CreateTechDataReport</code>", "apiKey и идентификаторы автомобиля", "requestId", "Платный create не повторять"], ["POST <code>Enrichment/GetTechDataReport</code>", "apiKey, requestId", "Технические данные", "Read-only до конечного состояния"], ["POST <code>Enrichment/CreateCarCharacteristicsReport</code>", "apiKey и идентификаторы авто", "requestId", "В backend подтверждена группа Enrichment; старый вызов frontend через App требует исправления"], ["POST <code>Enrichment/GetAlfaIdUrl</code>", "apiKey, applicationId и returnUrl", "URL AlfaId", "Создает сессию идентификации"], ["POST <code>Enrichment/AlfaId</code>", "apiKey и результат AlfaId", "Данные клиента", "Не повторять без проверки сессии"]] },
+          { type: "table", title: "Заявка, подтверждение и офферы", headers: ["Метод", "Запрос", "Успешный результат", "Повтор и действие"], rows: [["POST <code>App/SetStatusWidgetDisplayed</code>", "apiKey, applicationId", "result=true", "Безопасная установка статуса"], ["POST <code>App/SendKaskoApplication</code>", "apiKey, applicationId, carData, drivers, owner, insured, policyParameters, previousPolicy?", "Анкета сохранена", "Перезапись"], ["POST <code>App/SendVerificationCode</code>", "apiKey, applicationId, clientName, clientPhone, fromOsago?", "<code>value.confirmed</code>", "Может отправить SMS"], ["POST <code>App/VerifyCode</code>", "apiKey, applicationId, smsCode", "Телефон подтвержден", "Повтор проверки допустим"], ["POST <code>App/SendToInsurers</code>", "apiKey, applicationId", "Расчет запущен", "Не повторять автоматически"], ["POST <code>App/GetKaskoOffers</code>", "apiKey, applicationId", "<code>kaskoOffers</code>, <code>miniKaskoOffers</code>, <code>offlineOffers</code>, <code>allOffersReceived</code>", "Read-only; опрос до завершения"], ["POST <code>App/SelectOffer</code>", "apiKey, applicationId, offerId", "Оффер выбран", "Повтор меняет выбор"], ["POST <code>App/GetSpecialOffers</code>", "apiKey, clientId", "Готовые к оплате специальные предложения", "Read-only"], ["POST <code>App/GetApplicationInfo</code>", "private apiKey, applicationId", "Состояние заявки", "Read-only; приватный ключ"]] },
+          { type: "code", title: "POST App/GetKaskoOffers - ответ", body: "{\n  \"result\": true,\n  \"value\": {\n    \"allOffersReceived\": false,\n    \"kaskoOffers\": [],\n    \"miniKaskoOffers\": [],\n    \"offlineOffers\": []\n  },\n  \"error\": null\n}" },
+          { type: "table", title: "Файлы, документы и черновик", headers: ["Метод", "Формат и запрос", "Результат", "Повтор"], rows: [["POST <code>File/DocumentList</code>", "JSON: apiKey, applicationId, offerId?", "Требуемые и загруженные документы, <code>hasFullDocuments</code>", "Read-only"], ["POST <code>File/UploadDocument</code>", "multipart: ApiKey, ApplicationId, DocumentType, file, PersonType?, OfferId?", "ID документа", "Каждый вызов загружает файл"], ["POST <code>File/DeleteDocument</code>", "apiKey, applicationId, documentId, offerId?", "Подтверждение удаления", "Удаляет документ"], ["POST <code>File/SendDocuments</code>", "apiKey, applicationId, offerId", "Processing, Received или Error", "Не отправлять комплект повторно без проверки"], ["POST <code>App/GetDraft</code>", "apiKey, applicationId, offerId", "policyDraft, policyDraftUrl и статус", "Frontend опрашивает примерно раз в 2 секунды до статуса 2 или 3"], ["POST <code>App/CopyApplicationDocuments</code>", "apiKey, applicationId, sourceApplicationId", "Документы скопированы", "Каждый вызов копирует"], ["POST <code>App/GetKaskoDocuments</code>", "apiKey, applicationId", "DocumentsResponse", "Read-only"], ["POST <code>App/GetKaskoDocumentsByPolicyNumber</code>", "apiKey и номер полиса", "DocumentsResponse", "Нужны partner key и отдельный Authorization header"], ["POST <code>File/InsappUserAgreement</code>", "apiKey и данные согласия", "PDF", "Read-only"], ["POST <code>File/InsappMarketAgreement</code>", "apiKey и данные согласия", "PDF", "Read-only"]] },
+          { type: "table", title: "Оплата", headers: ["Метод", "Запрос", "Ответ", "Повтор"], rows: [["POST <code>App/GetKaskoPaymentLink</code>", "apiKey, applicationId, offerId", "Статус и payment link", "Frontend опрашивает примерно раз в 2 секунды до Received"], ["POST <code>App/GetKaskoPaymentStatus</code>", "apiKey, applicationId", "PaymentStatusResponse", "Read-only"]] },
+          { type: "table", title: "Кэш и восстановление", headers: ["Метод", "Запрос", "Назначение", "Повтор"], rows: [["POST <code>Client/GetCache</code>", "apiKey, clientId", "Прочитать JSON формы", "Read-only"], ["POST <code>Client/UpdateCache</code>", "apiKey, clientId, data", "Перезаписать JSON формы", "Перезапись"], ["POST <code>Client/GetKaskoCacheByApplicationId</code>", "apiKey, applicationId", "Восстановить КАСКО-заявку", "Read-only"]] },
+          { type: "callout", body: "<strong>Нужно проверить перед публикацией.</strong> Frontend вызывает <code>App/Authorize</code>, но такого route нет в текущем ApplicationController и в матрице Public API. Пока backend или gateway не подтвердит маршрут, использовать его как внешний контракт нельзя." }
+        ]
+      },
+      "api-mortgage": {
+        path: ["Insapp", "30. API для подключения", "30.03. API ипотеки"],
+        title: "API ипотеки",
+        summary: "Полная страница для подключения ипотечного страхования: создание заявки, продукты и банки, предварительный расчет, анкета, предложения, одобрение, оплата, документы и восстановление.",
+        meta: [["Продукт", "Ипотека"], ["Проверено", "26.08.2026"], ["Методы", "App, Dictionaries, Client, File"], ["Обновлять", "При изменении route или DTO"]],
+        sections: [
+          ...productApiBasics,
+          { type: "text", title: "Порядок подключения", body: "<ol><li>Создать ипотечную заявку через продуктовый <code>App/New</code>.</li><li>Получить доступные продукты, банки, профессии и поля выбранного продукта.</li><li>Отправить данные для предварительного расчета и читать предложения.</li><li>Выбрать предварительное предложение, заполнить и сохранить полную анкету.</li><li>Запустить окончательное одобрение и читать предложения до Approved или Rejected.</li><li>Получить платежную ссылку, проверить оплату и получить документы.</li><li>Если онлайн-путь недоступен, сохранить офлайн-заявку и контакты.</li></ol>" },
+          { type: "code", title: "POST App/New - ипотека", body: "{\n  \"apiKey\": \"***\",\n  \"applicationType\": \"New\",\n  \"productType\": \"Mortgage\",\n  \"channelType\": \"Widget\",\n  \"clientId\": \"client-uuid\",\n  \"sessionId\": \"session-uuid\",\n  \"successPaymentUrl\": \"https://partner.example/success\",\n  \"returnClientChannelType\": \"partner-site\",\n  \"sourceUrl\": \"https://partner.example/mortgage\",\n  \"source\": \"partner-site\"\n}" },
+          { type: "table", title: "App/New для ипотеки", headers: ["Поле", "Нужно", "Описание"], rows: [["apiKey", "Да", "Ключ партнера"], ["applicationType", "Да", "Обычно <code>New</code>"], ["productType", "Да", "Точное значение <code>Mortgage</code>"], ["channelType", "Да", "Для виджета <code>Widget</code>"], ["clientId", "Да", "ID клиента партнера"], ["sessionId", "Желательно", "ID сессии"], ["successPaymentUrl", "По сценарию", "Возврат после оплаты"], ["returnClientChannelType", "По сценарию", "Канал возврата клиента"], ["sourceUrl, source, UTM/CPA", "По сценарию", "Источник запуска"], ["Ответ", "-", "<code>value.applicationId</code> и настройки созданной заявки"]] },
+          { type: "table", title: "Продукты, банки и поля", headers: ["Метод", "Запрос", "Ответ", "Повтор"], rows: [["POST <code>Dictionaries/GetMortgageProducts</code>", "apiKey", "Доступные партнеру страховые продукты", "Безопасно"], ["POST <code>Dictionaries/GetBanks</code>", "apiKey", "Банки с учетом настроек партнера", "Безопасно"], ["POST <code>Dictionaries/GetProfessions</code>", "apiKey", "Профессии для анкеты", "Безопасно"], ["POST <code>Dictionaries/GetProductDetails</code>", "apiKey, productId", "Поля и настройки выбранного продукта", "Безопасно; неизвестный продукт дает result=false"]] },
+          { type: "code", title: "POST App/PreapproveMortgageApplication", body: "{\n  \"apiKey\": \"***\",\n  \"applicationId\": \"application-uuid\",\n  \"insurerProductId\": \"product-uuid\",\n  \"creditRemain\": 3200000,\n  \"insuredBirthDate\": \"01.01.1990\",\n  \"insuredGender\": \"Female\",\n  \"mortgagePropertyType\": \"Flat\",\n  \"mortgageObjectPararms\": {\n    \"withoutCreditNumber\": false,\n    \"withoutOwnership\": false,\n    \"withWood\": false,\n    \"withGas\": false,\n    \"withIllegalRedevelopment\": false\n  },\n  \"consents\": {\n    \"consentPageUrl\": \"https://partner.example/consent\",\n    \"insappUserAgreement\": true\n  }\n}" },
+          { type: "table", title: "Предварительный расчет и выбор", headers: ["Метод", "Запрос", "Успешный результат", "Повтор и действие"], rows: [["POST <code>App/SetStatusWidgetDisplayed</code>", "apiKey, applicationId", "result=true", "Безопасная установка статуса"], ["POST <code>App/PreapproveMortgageApplication</code>", "apiKey, applicationId, insurerProductId, creditRemain, данные клиента и объекта", "Предварительный расчет запущен", "Перезаписывает данные"], ["POST <code>App/GetOffers</code>", "apiKey, applicationId", "offers и allOffersReceived", "Read-only; опрос примерно раз в 2 секунды"], ["POST <code>App/SelectOffer</code>", "apiKey, applicationId, offerId", "Предварительный оффер выбран", "Повтор меняет выбор"], ["POST <code>App/GetApplicationInfo</code>", "private apiKey, applicationId", "Состояние заявки", "Read-only; приватный ключ"]] },
+          { type: "table", title: "Полная анкета", headers: ["Блок", "Что передается в App/SaveMortgageApplication"], rows: [["Заявка", "apiKey, applicationId, выбранный insurerProductId и offerId"], ["insured", "ФИО, дата рождения, контакты, профессия и продуктовые ответы"], ["passport", "Серия, номер, дата и орган выдачи, код подразделения, регистрация"], ["mortgageLoan", "Банк, сумма и остаток, ставка, платеж, номер и даты договора"], ["addressData", "Адрес объекта и структурированные данные адреса"], ["mortgageObject", "Тип, год постройки, этажность, площадь и продуктовые признаки"], ["consents", "Версия и URL согласия, подтвержденные флаги"], ["Ответ", "<code>SaveMortgageApplicationResponse</code>; данные заявки сохранены"]] },
+          { type: "table", title: "Сохранение, одобрение и офлайн-путь", headers: ["Метод", "Запрос", "Результат", "Повтор"], rows: [["POST <code>App/SaveContacts</code>", "apiKey, applicationId, ФИО, телефон, email", "Контакты сохранены", "Перезапись"], ["POST <code>App/SaveMortgageApplication</code>", "Полная анкета", "SaveMortgageApplicationResponse", "Перезапись; не дублировать после разрыва сети без проверки"], ["POST <code>App/ApproveMortgageOffer</code>", "apiKey, applicationId", "Окончательное одобрение запущено", "Не повторять автоматически"], ["POST <code>App/GetOffers</code>", "apiKey, applicationId", "Выбранный оффер становится Approved или Rejected", "Read-only до конечного состояния"], ["POST <code>App/SaveOfflineMortgageApplication</code>", "apiKey, applicationId, ФИО, email, phone, addressData", "Офлайн-заявка сохранена", "Перезапись"]] },
+          { type: "table", title: "Оплата и документы", headers: ["Метод", "Запрос", "Ответ", "Повтор"], rows: [["POST <code>App/GetMortgagePaymentLink</code>", "apiKey, applicationId, offerId, skipNotification?", "Статус и платежная ссылка", "Опрос до конечного состояния"], ["POST <code>App/SendMortgagePaymentLink</code>", "apiKey, applicationId, sendSms?, sendEmail?", "Ссылка отправлена", "Повтор отправляет уведомление снова"], ["POST <code>App/GetMortgagePaymentStatus</code>", "apiKey, applicationId", "PaymentStatusResponse", "Read-only"], ["POST <code>App/SetStatusBuyButtonPressed</code>", "apiKey, applicationId", "Начало оплаты зафиксировано", "Безопасная установка статуса"], ["POST <code>App/GetMortgageDocuments</code>", "apiKey, applicationId", "DocumentsResponse", "Read-only"], ["GET <code>File/draft/{draftId}</code>", "draftId из ответа оффера", "PDF-черновик", "Read-only; ссылка содержит идентификатор, не писать его в открытый лог"]] },
+          { type: "table", title: "Кэш и восстановление", headers: ["Метод", "Запрос", "Назначение", "Повтор"], rows: [["POST <code>Client/GetMortgageCacheByApplicationId</code>", "apiKey, applicationId", "Восстановить ипотечную форму", "Read-only; при пустых insured/mortgageLoan API возвращает result=false"], ["POST <code>Client/GetCache</code>", "apiKey, clientId", "Прочитать общий JSON-кэш", "Read-only"], ["POST <code>Client/UpdateCache</code>", "apiKey, clientId, data", "Сохранить JSON состояния формы", "Перезапись"]] },
+          { type: "callout", body: "<strong>Чувствительные данные.</strong> Ипотечная анкета содержит паспорт, адрес, телефон и сведения, зависящие от страхового продукта. В примерах используются только вымышленные значения; полное тело нельзя писать в клиентский лог." }
+        ]
+      }
+    });
+
     delete documents["section-code"];
     delete documents["backend-code"];
     delete documents["frontend-apps"];
     delete documents["frontend-services"];
+    delete documents["api-rules"];
+    delete documents["api-application"];
+    delete documents["api-common"];
+    delete documents["api-dictionaries"];
+    delete documents["api-client-cache"];
+    delete documents["api-documents"];
+    delete documents["api-enrichment"];
 
-    documents["api-rules"].path = ["Insapp", "30. Справочник HTTP API", "30.01. Общие правила API"];
-    documents["api-rules"].title = "Общие правила API";
-    documents["api-osago"].path = ["Insapp", "30. Справочник HTTP API", "30.02. API заявок и офферов", "30.02.02. API ОСАГО"];
-    documents["api-osago"].title = "API ОСАГО";
-    documents["api-kasko"].path = ["Insapp", "30. Справочник HTTP API", "30.02. API заявок и офферов", "30.02.03. API КАСКО"];
-    documents["api-kasko"].title = "API КАСКО";
-    documents["api-mortgage"].path = ["Insapp", "30. Справочник HTTP API", "30.02. API заявок и офферов", "30.02.04. API ипотеки"];
-    documents["api-mortgage"].title = "API ипотеки";
-    documents["api-documents"].path = ["Insapp", "30. Справочник HTTP API", "30.05. API файлов и документов"];
-    documents["api-documents"].title = "API файлов и документов";
     documents["osago-api"].path = ["Insapp", "20. Продукты и бизнес-правила", "20.01. ОСАГО", "20.01.01. Путь клиента и статусы"];
     documents["osago-fields"].path = ["Insapp", "20. Продукты и бизнес-правила", "20.01. ОСАГО", "20.01.02. Поля и проверки"];
     documents["kasko-api-offers"].path = ["Insapp", "20. Продукты и бизнес-правила", "20.02. КАСКО", "20.02.01. Путь клиента и офферы"];
     documents["kasko-fields"].path = ["Insapp", "20. Продукты и бизнес-правила", "20.02. КАСКО", "20.02.02. Поля и проверки"];
     documents["mortgage-api"].path = ["Insapp", "20. Продукты и бизнес-правила", "20.03. Ипотека", "20.03.01. Путь клиента и офферы"];
     documents["mortgage-fields"].path = ["Insapp", "20. Продукты и бизнес-правила", "20.03. Ипотека", "20.03.02. Поля и офлайн-сценарий"];
-    documents["section-start"].sections[0].body = "<ul><li><strong>10. Архитектура и платформа</strong> - устройство системы, отдельно frontend и backend.</li><li><strong>20. Продукты и бизнес-правила</strong> - путь клиента, решения, ограничения и результаты.</li><li><strong>30. Справочник HTTP API</strong> - request, response, доступ и ошибки.</li><li><strong>40. Интеграции и партнеры</strong> - внешние участники и обмен данными.</li><li><strong>50 и 60</strong> - ARM, эксплуатация и инциденты.</li></ul>";
-    documents.map.sections[0].rows = [["Как устроена система", "10. Архитектура и платформа"], ["Что делает клиент и какие правила действуют", "20. Продукты и бизнес-правила"], ["Как вызвать HTTP-метод", "30. Справочник HTTP API"], ["Как идет обмен с внешней системой", "40. Интеграции и партнеры"], ["Что делает оператор", "50. ARM и работа операторов"], ["Как разбирать сбой", "60. Эксплуатация и безопасность"]];
+    documents["section-start"].sections[0].body = "<ul><li><strong>10. Архитектура и платформа</strong> - устройство системы, отдельно frontend и backend.</li><li><strong>20. Продукты и бизнес-правила</strong> - путь клиента, решения, ограничения и результаты.</li><li><strong>30. API для подключения</strong> - самостоятельные страницы ОСАГО, КАСКО и ипотеки.</li><li><strong>40. Интеграции и партнеры</strong> - внешние участники и обмен данными.</li><li><strong>50 и 60</strong> - ARM, эксплуатация и инциденты.</li></ul>";
+    documents.map.sections[0].rows = [["Как устроена система", "10. Архитектура и платформа"], ["Что делает клиент и какие правила действуют", "20. Продукты и бизнес-правила"], ["Как подключить продукт по API", "30. API для подключения"], ["Как идет обмен с внешней системой", "40. Интеграции и партнеры"], ["Что делает оператор", "50. ARM и работа операторов"], ["Как разбирать сбой", "60. Эксплуатация и безопасность"]];
 
     let currentDocumentKey = "section-start";
 
@@ -1582,21 +1643,19 @@
     }
 
     function sectionTitle(section) {
-      if (section.type === "sources") return "Связанные источники";
+      if (section.type === "sources" || section.title === "Структура") return "";
       return section.title || "";
     }
 
     function renderSection(section, index) {
       const id = `section-${index}`;
+      if (section.type === "sources" || section.title === "Структура") return "";
       if (section.type === "callout") return `<section class="section" id="${id}"><div class="callout">${section.body}</div></section>`;
       if (section.type === "code") return `<section class="section" id="${id}"><h2>${section.title}</h2><pre>${section.body.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</pre></section>`;
       if (section.type === "table") {
         const head = section.headers.map((header) => `<th>${formatInline(header)}</th>`).join("");
         const rows = section.rows.map((row) => `<tr>${row.map((cell) => `<td>${formatInline(cell)}</td>`).join("")}</tr>`).join("");
         return `<section class="section" id="${id}"><h2>${section.title}</h2><table class="field-table"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table></section>`;
-      }
-      if (section.type === "sources") {
-        return `<section class="section" id="${id}"><h2>Связанные источники</h2><div class="source-list">${section.items.map(([label, value]) => `<div class="source"><span>${label}</span><strong>${formatInline(value)}</strong></div>`).join("")}</div></section>`;
       }
       return `<section class="section" id="${id}"><h2>${section.title}</h2>${section.body}</section>`;
     }
@@ -1632,7 +1691,8 @@
       const styles = document.querySelector("style").textContent;
       const exported = `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${escapeHtml(doc.title)}</title><style>${styles}\nbody{min-height:100vh}.reader-content{width:100%;max-width:none;margin:0 auto}.reader-content::before{content:"INSAPP";display:block;margin-bottom:26px;color:var(--green);font-size:12px;font-weight:800;letter-spacing:.12em}</style></head><body><main class="reader-content">${article.innerHTML}</main></body></html>`;
       const blob = new Blob([exported], { type: "text/html;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
+      const canUseObjectUrl = typeof URL.createObjectURL === "function";
+      const url = canUseObjectUrl ? URL.createObjectURL(blob) : `data:text/html;charset=utf-8,${encodeURIComponent(exported)}`;
       const link = document.createElement("a");
       const fileName = doc.path[doc.path.length - 1].replace(/[<>:"/\\|?*]+/g, "-").replace(/\s+/g, " ").trim();
       link.href = url;
@@ -1640,7 +1700,7 @@
       document.body.appendChild(link);
       link.click();
       link.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      if (canUseObjectUrl) setTimeout(() => URL.revokeObjectURL(url), 1000);
 
       const button = document.getElementById("save-document");
       const label = button.textContent;
