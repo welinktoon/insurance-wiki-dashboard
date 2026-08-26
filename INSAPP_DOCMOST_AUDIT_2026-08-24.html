@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Проверенный отчет по DocMost Insapp: структура, кодовая база, API-файлы, результаты и понятное дерево страниц.">
-  <title>Insapp: DocMost - отчет и полная структура</title>
+  <title>Insapp: отчет по документации DocMost</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap');
 
@@ -128,6 +128,16 @@
     .target-tree ul { margin: 12px 0 0; padding-left: 21px; }
     .target-tree li { margin: 7px 0; color: #a9d9ba; font-size: 13px; }
     .target-tree strong { color: #63e49a; }
+    .comparison-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; }
+    .comparison-table { width: 100%; min-width: 880px; border-collapse: collapse; background: var(--white); font-size: 13px; }
+    .comparison-table th, .comparison-table td { padding: 15px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    .comparison-table th { color: var(--muted); background: var(--fog); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+    .comparison-table td { color: #dce5e7; line-height: 1.55; }
+    .comparison-table tr:last-child td { border-bottom: 0; }
+    .comparison-table strong { color: var(--navy); }
+    .comparison-table code { color: #87d9ff; font: 12px "Cascadia Mono", Consolas, monospace; }
+    .layer-key { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 22px; }
+    .layer-key span { padding: 6px 9px; border: 1px solid #617078; border-radius: 7px; color: #dbe7ea; background: #41494f; font-size: 11px; font-weight: 700; }
     .rules { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
     .rule { padding: 21px; border-top: 3px solid var(--blue); background: var(--fog); }
     .rule:nth-child(2) { border-top-color: var(--green); }
@@ -175,14 +185,15 @@
   <main class="page">
     <header class="hero">
       <p class="eyebrow">Insapp / DocMost / Git-кодовая база / 24-25.08.2026</p>
-      <h1>DocMost: отчет и полная структура Insapp</h1>
-      <p class="hero-copy">Материал сформирован: техническая ветка содержит 77 записей экспорта, 76 детальных документов и 806 тематических разделов. Нужно не писать все с нуля, а навести порядок в переходах к уже собранным основным страницам.</p>
+      <h1>DocMost: отчет по документации Insapp</h1>
+      <p class="hero-copy">Повторно проверены выгрузка DocMost, карта Public API и локальные кодовые базы ОСАГО, КАСКО и ипотеки. Результат ниже разделяет продуктовые сценарии, frontend, backend и реальные HTTP-контракты.</p>
     </header>
 
     <nav class="contents" aria-label="Содержание">
       <a href="#result">Результат</a>
       <a href="#model">Модель работы</a>
-      <a href="#snapshot">Структура Insapp</a>
+      <a href="#snapshot">Текущая структура</a>
+      <a href="#comparison">Сравнение</a>
       <a href="#target">Целевое дерево</a>
       <a href="INSAPP_DOCMOST_DOCUMENTATION_EXAMPLE_2026-08-25.html">План документации</a>
       <a href="#page-content">Что писать в страницах</a>
@@ -196,14 +207,15 @@
       </div>
       <div class="analysis-grid">
         <article class="analysis-card"><h3>Что действительно покрыто DocMost</h3><p>Сервисы и state machines, рантайм и DI, Public API, DataAccess, модели и БД, Quartz, интеграции и колбэки, ARM, безопасность, deploy, тесты, PII, наблюдаемость и инциденты. Это рабочий технический слой, а не пустая заготовка.</p></article>
-        <article class="analysis-card"><h3>Что подтверждено кодом и API</h3><p>Срез Git от 21.08.2026: `Insapp.Services` - 2 428 C#-файлов, `Insapp.DataAccess` - 986, `Insapp.Models` - 882. Исходники ОСАГО, КАСКО и ипотеки добавляют реальные поля, проверки ввода и API-вызовы.</p></article>
-        <article class="analysis-card"><h3>Проверка фронтовых контрактов</h3><p>ОСАГО содержит 102 конфигурации полей, КАСКО - 51, ипотека - 47. В КАСКО отдельно подтверждена цепочка `app`, `dictionaries`, `file`, кэш, enrichment, DaData и AlfaId: заявка, офферы, документы и платежная ссылка.</p></article>
+        <article class="analysis-card"><h3>Что подтверждено кодом и API</h3><p>Frontend ОСАГО, КАСКО и ипотеки подтверждает реальные маршруты, поля формы, request/response, polling и обработку ошибок. Backend-матрица подтверждает маршруты контроллеров, доступ и побочные действия.</p></article>
+        <article class="analysis-card"><h3>Что исправлено в предлагаемой структуре</h3><p>Продуктовые статьи описывают путь клиента. Frontend и backend получили отдельные страницы кода. HTTP API вынесен в 40.01.* с телами запросов, ответами, ошибками, повтором и ссылками на реализацию.</p></article>
         <article class="analysis-card"><h3>Актуальность материалов</h3><p>В метаданных экспорта: 15 страниц обновлены в мае, 23 - в июне, 18 - в июле и 21 - в августе. Последние изменения 24.08.2026 затронули каталог сервисов, модель данных, ARM-endpoints и deploy/миграции.</p></article>
       </div>
       <div class="findings">
         <article class="finding"><span class="severity">P1</span><div><h3>Две разные карты</h3><p>У технической ветки нет одной понятной точки входа.</p></div></article>
         <article class="finding"><span class="severity">P1</span><div><h3>Номер не является адресом</h3><p>Внутри `20. Монолит и разработка` используются дочерние номера `10-80`.</p></div></article>
-        <article class="finding"><span class="severity">P1</span><div><h3>Канон смешан с управлением документацией</h3><p>`80.*` содержит аудит, backlog и freshness рядом с техническими runbook.</p></div></article>
+        <article class="finding"><span class="severity">P1</span><div><h3>Описание системы смешано с работой над документацией</h3><p>`80.*` содержит аудит, список пробелов и даты проверки рядом с техническими инструкциями.</p></div></article>
+        <article class="finding"><span class="severity">P1</span><div><h3>API был смешан с кодом frontend</h3><p>Название Angular-метода не описывает HTTP-контракт. В новой структуре эти слои разведены между `20.03`, `20.04` и `40.01.*`.</p></div></article>
         <article class="finding"><span class="severity p2">P2</span><div><h3>Повторяются смыслы `40` и `50`</h3><p>Одни номера используются внутри монолита, другие - на уровне Insapp.</p></div></article>
         <article class="finding"><span class="severity p2">P2</span><div><h3>Нет паспорта актуальности</h3><p>На странице должны быть тип, дата проверки, owner, Git evidence и trigger обновления.</p></div></article>
         <article class="finding"><span class="severity p2">P2</span><div><h3>Дублируются title и H1</h3><p>Это ухудшает оглавление, поиск и чтение длинных веток.</p></div></article>
@@ -213,40 +225,62 @@
     <section id="model">
       <div class="section-head">
         <h2>Модель работы</h2>
-        <span class="section-kicker">DocMost - канон; Git - обязательный источник первого этапа</span>
+        <span class="section-kicker">DocMost - основная документация; Git - обязательный источник первого этапа</span>
       </div>
       <div class="model-grid">
         <article class="model-card"><span class="role-no">01</span><h3>Git, Tracker, Wiki</h3><p>Подтвержденные источники изменения. <strong>Git-кодовая база</strong> обязательна в первой волне проверки.</p></article>
         <article class="model-card"><span class="role-no">02</span><h3>Hermes</h3><p>Собирает нужные источники, исключает секреты и PII, находит страницы для обновления и <strong>создает черновик</strong>.</p></article>
         <article class="model-card"><span class="role-no">03</span><h3>Человек: review</h3><p>Сверяет API, порядок действий, ограничения и смысл изменения. При ошибке уточняет правила Hermes.</p></article>
-        <article class="model-card"><span class="role-no">04</span><h3>Человек: publish</h3><p>После согласования <strong>публикует через Hermes</strong>. Обновленная страница в DocMost становится каноном.</p></article>
+        <article class="model-card"><span class="role-no">04</span><h3>Человек: публикация</h3><p>После согласования <strong>публикует через Hermes</strong>. Обновленная страница в DocMost становится основной версией.</p></article>
       </div>
       <figure class="process-diagram"><img src="INSAPP_HERMES_DOCMOST_PROCESS_SOURCE.png" alt="Git, Tracker и Wiki передают изменение Hermes; человек проверяет и публикует актуальную версию в DocMost"></figure>
     </section>
 
     <section id="snapshot">
       <div class="section-head">
-        <h2>Разделы Insapp</h2>
-        <span class="section-kicker">Названия приведены к понятной рабочей структуре</span>
-      </div>
-      <div class="scope-grid">
-        <article class="panel">
-          <h3>Логика разделов</h3>
-          <p>Основная база собрана в <strong>Insapp</strong>. Продукты, разработка, партнеры, ARM и инструкции по эксплуатации лежат в отдельных понятных разделах. Входящие материалы остаются отдельно от основной базы.</p>
-          <p>Типы страниц: <strong>основная</strong> - проверенная страница; <strong>черновик</strong> - до проверки; <strong>срез кода</strong> - данные из Git; <strong>ссылка</strong> - переход к основной странице; <strong>архив</strong> - старый или сырой материал.</p>
-        </article>
+        <h2>Текущая структура DocMost</h2>
+        <span class="section-kicker">Снимок навигации 24.08.2026</span>
       </div>
       <div class="root-tree" style="margin-top:24px">
-        <article class="root-item"><strong>00. Старт и правила</strong><span>Карта базы, глоссарий и правила обновления.</span></article>
-        <article class="root-item"><strong>10. Платформа и общая часть</strong><span>Архитектура, общие API, настройки и справочники.</span></article>
-        <article class="root-item"><strong>20. Код и backend</strong><span>Сервисы, данные, API, задачи Quartz и тесты.</span></article>
-        <article class="root-item"><strong>30. Продукты</strong><span>ОСАГО, КАСКО, ипотека и другие продуктовые пути.</span></article>
-        <article class="root-item"><strong>40. Партнеры и внешние API</strong><span>Страховые, интеграции, виджеты и методы API.</span></article>
-        <article class="root-item"><strong>50. ARM и работа операторов</strong><span>Работа с заявками, настройками и комиссиями.</span></article>
-        <article class="root-item"><strong>60. Эксплуатация и безопасность</strong><span>Deploy, доступы, логи, PII и инструкции по инцидентам.</span></article>
-        <article class="root-item"><strong>70. Как обновляется документация</strong><span>Git, Hermes, проверка человеком и публикация.</span></article>
-        <article class="root-item"><strong>90. Архив и исходные материалы <span class="tag archive">не основное</span></strong><span>Старые страницы, выгрузки и материалы для разбора.</span></article>
-        <article class="root-item"><strong>99. Срезы из кода <span class="tag">Git</span></strong><span>Автоматические данные для сверки документации.</span></article>
+        <article class="root-item"><strong>00, 01, 02 отдельными страницами</strong><span>Главная карта, операционная модель и гайд находятся рядом, но не собраны в один стартовый раздел.</span></article>
+        <article class="root-item"><strong>10. Платформа и архитектура</strong><span>Архитектура, продукты, глоссарий, справочники, URL, правила и план развертывания.</span></article>
+        <article class="root-item"><strong>20. Монолит и разработка</strong><span>Внутри повторная нумерация `10-80`: сервисы, runtime, API, интеграции, ARM, эксплуатация, продукты и аудит.</span></article>
+        <article class="root-item"><strong>30. Продукты и домены</strong><span>ОСАГО, КАСКО, ипотека, FinProduct и ссылки на MFO, HR и страховую вертикаль.</span></article>
+        <article class="root-item"><strong>40. Партнеры, API и ARM</strong><span>Виджеты, общие методы API, комиссии, ARM, настройки партнера и онбординг.</span></article>
+        <article class="root-item"><strong>50. Команда и процессы</strong><span>Структура команды, сотрудники, календари и почта.</span></article>
+        <article class="root-item"><strong>90. Архив, сырые источники и generated</strong><span>Старые и входящие материалы собраны вместе с машинными данными.</span></article>
+        <article class="root-item"><strong>99. Generated from code</strong><span>Отдельный второй вход в машинные срезы кода.</span></article>
+        <article class="root-item"><strong>Ссылка на FinProduct</strong><span>Отдельная xref-страница рядом с основным деревом.</span></article>
+        <article class="root-item"><strong>Review drafts</strong><span>Черновики docs-sync лежат в корне пространства.</span></article>
+      </div>
+    </section>
+
+    <section id="comparison">
+      <div class="section-head">
+        <h2>Текущая и предлагаемая структура</h2>
+        <span class="section-kicker">Что переносится и зачем</span>
+      </div>
+      <div class="layer-key">
+        <span>30.* - путь клиента</span>
+        <span>20.02-20.03 - frontend-код</span>
+        <span>20.01 и 20.04 - backend-код</span>
+        <span>40.01.* - HTTP-контракты</span>
+      </div>
+      <div class="comparison-wrap">
+        <table class="comparison-table">
+          <thead><tr><th>Сейчас</th><th>Проблема</th><th>Предлагается</th><th>Что происходит с материалом</th></tr></thead>
+          <tbody>
+            <tr><td><strong>00, 01, 02</strong> в корне</td><td>Три разных входа в базу.</td><td><strong>00. Старт и правила</strong></td><td>Карта и процесс становятся дочерними страницами одного входного раздела.</td></tr>
+            <tr><td><strong>10. Платформа и архитектура</strong></td><td>Общие правила смешаны с планом развертывания самой документации.</td><td><strong>10. Платформа и общая часть</strong></td><td>Архитектура и общие API остаются; процесс документации уходит в <code>70</code>.</td></tr>
+            <tr><td><strong>20. Монолит и разработка</strong> с дочерними <code>10-80</code></td><td>Вложенные номера выглядят как новые корневые разделы. Frontend и backend не разделены.</td><td><strong>20. Кодовая база</strong></td><td>Backend, frontend-приложения, frontend-сервисы, реализация Public API и Quartz получают разные страницы.</td></tr>
+            <tr><td><strong>30. Продукты и домены</strong></td><td>В продуктовой статье легко смешать экран, Angular-метод и HTTP API.</td><td><strong>30. Продукты</strong></td><td>Остаются путь клиента, статусы, поля, документы и оплата. Контракты методов переносятся в <code>40.01.*</code>.</td></tr>
+            <tr><td><strong>40. Партнеры, API и ARM</strong></td><td>В одном месте лежат виджеты, API, комиссии и операторская работа.</td><td><strong>40. Партнеры и HTTP API</strong></td><td>Здесь остаются внешние контракты и интеграции; ARM уходит в <code>50</code>.</td></tr>
+            <tr><td><strong>50. Команда и процессы</strong></td><td>Номер нужен для большого технического блока ARM.</td><td><strong>50. ARM и работа операторов</strong></td><td>Операторские инструкции собираются вместе. Командные ссылки остаются в отдельном служебном входе, не в техническом дереве.</td></tr>
+            <tr><td><strong>60</strong> внутри монолита</td><td>Эксплуатация спрятана на втором уровне.</td><td><strong>60. Эксплуатация и безопасность</strong></td><td>Инциденты, deploy, логи, PII и тесты становятся отдельным корневым разделом.</td></tr>
+            <tr><td><strong>80. Матрица покрытия</strong> внутри монолита</td><td>Работа над документацией смешана с описанием системы.</td><td><strong>70. Как обновляется документация</strong></td><td>Hermes, проверка человеком и список обновлений вынесены из основной технической документации.</td></tr>
+            <tr><td><strong>90</strong> и <strong>99</strong> частично повторяются</td><td>Машинные срезы встречаются и в архиве, и отдельно.</td><td><strong>90. Архив</strong> и <strong>99. Срезы из кода</strong></td><td>Старое хранится в 90; автоматически полученные факты для проверки - только в 99.</td></tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
@@ -256,20 +290,20 @@
         <h2>Как должна выглядеть структура</h2>
         <span class="section-kicker">Десятки - крупные разделы; страницы внутри них: 20.01, 20.02</span>
       </div>
-      <p class="tree-intro">Так обычно нумеруют большую техническую базу: `00` для старта, `10` для общей части, затем блоки по десяткам. Номер дочерней страницы всегда начинается с номера ее раздела: внутри `20` могут быть только `20.01`, `20.02` и дальше.</p>
+      <p class="tree-intro">Дерево совпадает с интерактивной страницей документации. В `30.*` описано поведение продукта, в `20.*` - код, в `40.01.*` - реальные HTTP-методы.</p>
       <div class="target-tree">
         <strong>Insapp</strong>
         <ul>
-          <li><strong>00. Старт и правила</strong><ul><li>00.01. Карта документации</li><li>00.02. Глоссарий</li><li>00.03. Как найти нужную страницу</li><li>00.04. Как обновлять документацию</li><li>00.05. Гайд для разработчика, аналитика и агента</li></ul></li>
-          <li><strong>10. Платформа и общая часть</strong><ul><li>10.01. Архитектура Insapp</li><li>10.02. Состав приложений и связи между ними</li><li>10.03. Общие правила API</li><li>10.04. Справочники, базовые URL и настройки</li><li>10.05. Feature flags и GrowthBook</li></ul></li>
-          <li><strong>20. Код и backend</strong><ul><li>20.01. Структура solution, DI и middleware</li><li>20.02. Сервисы и порядок обработки заявки</li><li>20.03. Машины состояний</li><li>20.04. Public API и контроллеры</li><li>20.05. DataAccess, модели, миграции и базы данных</li><li>20.06. Файлы, кэш, настройки и жизненный цикл данных</li><li>20.07. Фоновые задачи и Quartz</li></ul></li>
-          <li><strong>30. Продукты</strong><ul><li>30.01. ОСАГО</li><li>30.02. КАСКО</li><li>30.03. Ипотека</li><li>30.04. FinProduct</li><li>30.05. MFO</li><li>30.06. Страховая вертикаль</li><li>Для каждого продукта: `30.01.01` обзор и границы; `30.01.02` путь клиента и статусы; `30.01.03` поля и проверки; `30.01.04` API и данные; `30.01.05` офферы, комиссии и страховые; `30.01.06` документы и оплата; `30.01.07` ошибки и ссылки на код.</li></ul></li>
-          <li><strong>40. Партнеры и внешние API</strong><ul><li>40.01. Общие методы API</li><li>40.02. Страховые интеграции</li><li>40.03. Колбэки, постбэки и повторная обработка запросов</li><li>40.04. Виджеты ОСАГО, КАСКО и ипотеки</li><li>40.05. Partner, API key, доступ и настройки</li><li>40.06. Онбординг партнера и тестовый контур</li><li>40.07. Комиссии, КВ и отчеты</li></ul></li>
-          <li><strong>50. ARM и работа операторов</strong><ul><li>50.01. Роли и доступы</li><li>50.02. Работа с заявкой</li><li>50.03. Работа с офферами, документами и оплатой</li><li>50.04. Комиссии и настройки партнера</li><li>50.05. Инструкции для оператора</li></ul></li>
-          <li><strong>60. Эксплуатация и безопасность</strong><ul><li>60.01. Deploy, конфигурация и миграции</li><li>60.02. Тесты и проверка перед выпуском</li><li>60.03. Логи, метрики и алерты</li><li>60.04. Работа с PII и правами доступа</li><li>60.05. Инструкции по инцидентам: продажи, оплата, колбэки, Quartz</li></ul></li>
-          <li><strong>70. Как обновляется документация</strong><ul><li>70.01. Источники: Git, Tracker и Wiki</li><li>70.02. Hermes: сбор данных и черновик</li><li>70.03. Проверка и публикация человеком</li><li>70.04. Список страниц на обновление</li><li>70.05. Дата следующей проверки страницы</li></ul></li>
-          <li><strong>90. Архив и сырые материалы</strong><ul><li>90.01. Старые страницы</li><li>90.02. Черновики review</li><li>90.03. Сырые выгрузки и исследования</li></ul></li>
-          <li><strong>99. Generated from code</strong><ul><li>99.01. Карта кода</li><li>99.02. Выгрузки API и моделей</li><li>99.03. Отчеты о проверке документации</li></ul></li>
+          <li><strong>00. Старт и правила</strong><ul><li>00.01. Карта документации</li><li>00.04. Как обновлять документацию</li></ul></li>
+          <li><strong>10. Платформа и общая часть</strong><ul><li>10.01. Архитектура Insapp</li><li>10.03. Общие правила API</li></ul></li>
+          <li><strong>20. Кодовая база</strong><ul><li>20.01. Backend: монолит и слои сервисов</li><li>20.02. Frontend: приложения и маршруты</li><li>20.03. Frontend: сервисы, состояние и HTTP-вызовы</li><li>20.04. Backend: реализация Public API</li><li>20.07. Фоновые задачи и Quartz</li></ul></li>
+          <li><strong>30. Продукты</strong><ul><li>30.01. ОСАГО<ul><li>30.01.01. Путь клиента и статусы ОСАГО</li><li>30.01.02. Поля ОСАГО</li><li>30.01.03. Продление и оплата ОСАГО</li></ul></li><li>30.02. КАСКО<ul><li>30.02.01. Путь клиента и офферы КАСКО</li><li>30.02.02. Документы: путь клиента</li><li>30.02.03. Поля и проверки КАСКО</li><li>30.02.04. Оплата: путь клиента</li></ul></li><li>30.03. Ипотека<ul><li>30.03.01. Путь клиента и офферы ипотеки</li><li>30.03.02. Поля и офлайн-сценарий</li></ul></li></ul></li>
+          <li><strong>40. Партнеры и HTTP API</strong><ul><li>40.01. Правила HTTP API<ul><li>40.01.01. HTTP API ОСАГО</li><li>40.01.02. HTTP API КАСКО</li><li>40.01.03. HTTP API ипотеки</li><li>40.01.04. HTTP API файлов и документов</li></ul></li><li>40.02. Страховые интеграции</li><li>40.03. Кэш и API обогащения данных</li></ul></li>
+          <li><strong>50. ARM и работа операторов</strong><ul><li>50.02. Работа с заявкой</li></ul></li>
+          <li><strong>60. Эксплуатация и безопасность</strong><ul><li>60.05. Инцидент: платежная ссылка</li><li>60.06. Инцидент: нет офферов</li><li>60.07. Инцидент: документы</li><li>60.08. Инцидент: данные автомобиля</li></ul></li>
+          <li><strong>70. Как обновляется документация</strong><ul><li>70.02. Hermes: сбор данных и черновик</li></ul></li>
+          <li><strong>90. Архив и исходные материалы</strong></li>
+          <li><strong>99. Срезы из кода</strong></li>
         </ul>
       </div>
       <a class="example-link" href="INSAPP_DOCMOST_DOCUMENTATION_EXAMPLE_2026-08-25.html">Открыть пример документации Insapp</a>
@@ -282,10 +316,11 @@
       </div>
       <div class="page-types">
         <article class="page-type"><h3>На любой основной странице</h3><ul><li>Что описывает страница и для кого она нужна.</li><li>Кто отвечает за страницу.</li><li>Дата последней проверки.</li><li>Ссылки на Git, задачу, API и связанные страницы.</li><li>Когда страницу нужно пересмотреть.</li></ul></article>
-        <article class="page-type"><h3>Страница продукта</h3><ul><li>Что продаем и кому.</li><li>Путь клиента и статусы заявки.</li><li>Поля формы, обязательность и проверки.</li><li>Офферы, комиссии, документы и оплата.</li><li>Ошибки, ограничения и что видит клиент.</li></ul></article>
-        <article class="page-type"><h3>Страница API</h3><ul><li>Зачем нужен метод, URL и HTTP-метод.</li><li>Авторизация и права доступа.</li><li>Поля запроса и ответа с примерами.</li><li>Ошибки, повторный вызов и ограничения.</li><li>Версия API, тестовый контур и пример запроса.</li></ul></article>
+        <article class="page-type"><h3>Страница продукта</h3><ul><li>Путь клиента, экраны и условия перехода.</li><li>Статусы заявки и что видит клиент.</li><li>Поля формы, обязательность и проверки.</li><li>Офферы, документы и оплата как продуктовые шаги.</li><li>Ссылки на HTTP API и код без копии их содержания.</li></ul></article>
+        <article class="page-type"><h3>Страница HTTP API</h3><ul><li>Назначение, точный path и HTTP-метод.</li><li>Тип доступа и место передачи ключа.</li><li>Request и response с типами и примерами.</li><li>`result=false`, сетевые ошибки и конечные статусы.</li><li>Повтор, лимит, идемпотентность и побочные действия.</li></ul></article>
         <article class="page-type"><h3>Страница интеграции</h3><ul><li>Кто с кем обменивается данными.</li><li>Порядок вызовов и колбэки.</li><li>Какие данные передаем и как их сопоставляем.</li><li>Ключи доступа, тестовый контур и контакт.</li><li>Повторная отправка, ошибки и проверка работы.</li></ul></article>
-        <article class="page-type"><h3>Страница кода и backend</h3><ul><li>Где находится код и за что он отвечает.</li><li>Сервисы, модели, таблицы и миграции.</li><li>Правила обработки данных и фоновые задачи.</li><li>Настройки, логи, метрики и тесты.</li><li>Что изменится при правке и какие страницы обновить.</li></ul></article>
+        <article class="page-type"><h3>Страница frontend-кода</h3><ul><li>Приложение, маршрут, компонент и Angular-сервис.</li><li>Как собирается request из формы.</li><li>Состояние, кэш и восстановление заявки.</li><li>Polling, timeout и обработка `result=false`.</li><li>Ссылка на внешний контракт в `40.01.*`.</li></ul></article>
+        <article class="page-type"><h3>Страница backend-кода</h3><ul><li>Controller action, route, атрибуты и request DTO.</li><li>Сервисный слой, state machine и DataAccess.</li><li>Смена статуса, внешняя отправка или Quartz.</li><li>Логи, тесты и риск повторного вызова.</li><li>Ссылка на внешний контракт в `40.01.*`.</li></ul></article>
         <article class="page-type"><h3>Инструкция по инциденту</h3><ul><li>Как понять, что случилась проблема.</li><li>На кого влияет проблема.</li><li>Где посмотреть логи и метрики.</li><li>Пошаговые действия для исправления.</li><li>Кому передать проблему и что записать после исправления.</li></ul></article>
       </div>
     </section>
