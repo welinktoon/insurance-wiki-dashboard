@@ -45,7 +45,6 @@
     .tree-panel { display: flex; flex-direction: column; min-height: 0; overflow: hidden; color: #e9f1f4; background: var(--bar); }
     .tree-header { padding: 26px 24px 20px; border-bottom: 1px solid rgba(255,255,255,.12); }
     .tree-header h1 { margin: 0 0 8px; color: #f7fbfc; font-size: 29px; line-height: 1.1; letter-spacing: -.035em; }
-    .tree-header p { margin: 0; color: #c4d0d4; font-size: 12px; line-height: 1.55; }
     .tree-scroll { flex: 1; min-height: 0; padding: 15px 12px 24px; overflow-y: auto; }
     .tree-group { margin: 0 0 5px; }
     .tree-group summary { display: flex; align-items: center; gap: 5px; min-height: 38px; padding: 4px 0; color: #e0eaed; font-size: 12px; font-weight: 800; list-style: none; cursor: pointer; }
@@ -65,11 +64,9 @@
     .tree-item.tree-subitem { padding-left: 23px; color: #b9cdd3; font-size: 11.5px; }
     .tree-item:hover { border-color: #617078; color: #fff; background: #41494f; }
     .tree-item.is-active { border-color: var(--blue); color: #fff; background: #235c80; box-shadow: inset 3px 0 0 #b2e6ff; }
-    .tree-footer { padding: 16px 24px; border-top: 1px solid rgba(255,255,255,.12); color: #bdc9cc; font-size: 11px; line-height: 1.5; }
 
     .reader { min-width: 0; min-height: 0; overflow-y: auto; background: var(--paper); }
-    .reader-bar { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 64px; padding: 0 44px; border-bottom: 1px solid var(--line); background: rgba(52,60,65,.94); backdrop-filter: blur(12px); }
-    .reader-bar p { margin: 0; color: var(--muted); font-size: 12px; font-weight: 700; }
+    .reader-bar { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; justify-content: flex-end; gap: 20px; min-height: 64px; padding: 0 44px; border-bottom: 1px solid var(--line); background: rgba(52,60,65,.94); backdrop-filter: blur(12px); }
     .reader-actions { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
     .reader-action { display: inline-flex; align-items: center; justify-content: center; min-height: 36px; padding: 0 13px; border: 1px solid #617078; border-radius: 8px; color: #e7eef0; background: #41494f; font-size: 12px; font-weight: 800; }
     .reader-action:hover { border-color: var(--blue); color: #fff; background: #235c80; }
@@ -128,9 +125,7 @@
       .tree-header { padding: 20px 20px 15px; }
       .tree-header h1 { font-size: 25px; }
       .tree-scroll { max-height: 280px; padding: 11px 10px 16px; }
-      .tree-footer { display: none; }
       .reader-bar { position: static; min-height: 52px; padding: 0 20px; }
-      .reader-bar p { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
       .reader-action { min-height: 34px; padding: 0 10px; white-space: nowrap; }
       .reader { overflow: visible; }
       .reader-content { padding: 34px 20px 52px; }
@@ -154,7 +149,6 @@
     <aside class="tree-panel" aria-label="Дерево документации">
       <header class="tree-header">
         <h1>Структура и страницы</h1>
-        <p>Выберите раздел или страницу. Справа откроется планируемая документация на основе локальных источников.</p>
       </header>
       <nav class="tree-scroll" aria-label="Разделы Insapp">
         <details class="tree-group" open>
@@ -255,12 +249,10 @@
           <summary><span class="tree-toggle" aria-hidden="true"></span><button type="button" class="tree-section-item" data-doc="section-generated">99. Срезы из кода</button></summary>
         </details>
       </nav>
-      <footer class="tree-footer">Пример построен по текущим материалам DocMost, Git и фронтовым API-файлам Insapp.</footer>
     </aside>
 
     <main class="reader">
       <header class="reader-bar">
-        <p id="reader-path">Insapp / документация</p>
         <div class="reader-actions">
           <button class="reader-action" id="save-document" type="button">Сохранить страницу</button>
         </div>
@@ -1618,7 +1610,6 @@
     function renderDocument(key) {
       const doc = documents[key] || documents.map;
       currentDocumentKey = documents[key] ? key : "map";
-      document.getElementById("reader-path").textContent = doc.path.join(" / ");
       document.getElementById("document").innerHTML = [
         `<div class="crumbs">${doc.path.map((item) => `<span>${item}</span>`).join("")}</div>`,
         `<h1 class="document-title">${doc.title}</h1>`,
