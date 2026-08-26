@@ -160,49 +160,62 @@
           </ul>
         </details>
         <details class="tree-group" open>
-          <summary><span class="tree-toggle" aria-hidden="true"></span><button type="button" class="tree-section-item" data-doc="section-platform">10. Платформа и общая часть</button></summary>
+          <summary><span class="tree-toggle" aria-hidden="true"></span><button type="button" class="tree-section-item" data-doc="section-platform">10. Архитектура и платформа</button></summary>
           <ul class="tree-list">
-            <li><button class="tree-item" data-doc="architecture">10.01. Архитектура Insapp</button></li>
-            <li><button class="tree-item" data-doc="api-rules">10.03. Общие правила API</button></li>
+            <li><button class="tree-item" data-doc="architecture">10.01. Обзор системы</button></li>
+            <li><button class="tree-item" data-doc="system-flow">10.02. Компоненты и потоки данных</button></li>
+            <li><button class="tree-item" data-doc="frontend-architecture">10.03. Frontend-архитектура</button></li>
+            <li><button class="tree-item tree-subitem" data-doc="front-osago">10.03.01. Frontend ОСАГО</button></li>
+            <li><button class="tree-item tree-subitem" data-doc="front-kasko">10.03.02. Frontend КАСКО</button></li>
+            <li><button class="tree-item tree-subitem" data-doc="front-mortgage">10.03.03. Frontend ипотеки</button></li>
+            <li><button class="tree-item" data-doc="backend-architecture">10.04. Backend-архитектура</button></li>
+            <li><button class="tree-item tree-subitem" data-doc="backend-api-impl">10.04.01. Public API и middleware</button></li>
+            <li><button class="tree-item tree-subitem" data-doc="backend-services">10.04.02. Сервисы и состояния заявки</button></li>
+            <li><button class="tree-item tree-subitem" data-doc="data-storage">10.04.03. Данные и хранилища</button></li>
+            <li><button class="tree-item tree-subitem" data-doc="jobs">10.04.04. Фоновые задачи и Quartz</button></li>
           </ul>
         </details>
         <details class="tree-group" open>
-          <summary><span class="tree-toggle" aria-hidden="true"></span><button type="button" class="tree-section-item" data-doc="section-code">20. Кодовая база</button></summary>
+          <summary><span class="tree-toggle" aria-hidden="true"></span><button type="button" class="tree-section-item" data-doc="section-products">20. Продукты и сценарии</button></summary>
           <ul class="tree-list">
-            <li><button class="tree-item" data-doc="backend-code">20.01. Backend: монолит и слои сервисов</button></li>
-            <li><button class="tree-item" data-doc="frontend-apps">20.02. Frontend: приложения и маршруты</button></li>
-            <li><button class="tree-item" data-doc="frontend-services">20.03. Frontend: сервисы, состояние и HTTP-вызовы</button></li>
-            <li><button class="tree-item" data-doc="backend-api-impl">20.04. Backend: реализация Public API</button></li>
-            <li><button class="tree-item" data-doc="jobs">20.07. Фоновые задачи и Quartz</button></li>
+            <li><button class="tree-item" data-doc="osago">20.01. ОСАГО</button></li>
+            <li><button class="tree-item tree-subitem" data-doc="osago-api">20.01.01. Путь клиента и статусы</button></li>
+            <li><button class="tree-item tree-subitem" data-doc="osago-fields">20.01.02. Поля и проверки</button></li>
+            <li><button class="tree-item tree-subitem" data-doc="osago-prolongation">20.01.03. Продление полиса</button></li>
+            <li><button class="tree-item tree-subitem" data-doc="osago-offers-payment">20.01.04. Офферы и оплата</button></li>
+            <li><button class="tree-item" data-doc="kasko">20.02. КАСКО</button></li>
+            <li><button class="tree-item tree-subitem" data-doc="kasko-api-offers">20.02.01. Путь клиента и офферы</button></li>
+            <li><button class="tree-item tree-subitem" data-doc="kasko-fields">20.02.02. Поля и проверки</button></li>
+            <li><button class="tree-item tree-subitem" data-doc="kasko-documents">20.02.03. Документы</button></li>
+            <li><button class="tree-item tree-subitem" data-doc="kasko-payment">20.02.04. Оплата</button></li>
+            <li><button class="tree-item" data-doc="mortgage">20.03. Ипотека</button></li>
+            <li><button class="tree-item tree-subitem" data-doc="mortgage-api">20.03.01. Путь клиента и офферы</button></li>
+            <li><button class="tree-item tree-subitem" data-doc="mortgage-fields">20.03.02. Поля и офлайн-сценарий</button></li>
+            <li><button class="tree-item tree-subitem" data-doc="mortgage-payment">20.03.03. Одобрение и оплата</button></li>
           </ul>
         </details>
         <details class="tree-group" open>
-          <summary><span class="tree-toggle" aria-hidden="true"></span><button type="button" class="tree-section-item" data-doc="section-products">30. Продукты</button></summary>
+          <summary><span class="tree-toggle" aria-hidden="true"></span><button type="button" class="tree-section-item" data-doc="section-api">30. Справочник HTTP API</button></summary>
           <ul class="tree-list">
-            <li><button class="tree-item" data-doc="osago">30.01. ОСАГО</button></li>
-            <li><button class="tree-item" data-doc="osago-api">30.01.01. Путь клиента и статусы ОСАГО</button></li>
-            <li><button class="tree-item" data-doc="osago-fields">30.01.02. Поля ОСАГО</button></li>
-            <li><button class="tree-item" data-doc="osago-prolongation">30.01.03. Продление и оплата ОСАГО</button></li>
-            <li><button class="tree-item" data-doc="kasko">30.02. КАСКО</button></li>
-            <li><button class="tree-item" data-doc="kasko-api-offers">30.02.01. Путь клиента и офферы КАСКО</button></li>
-            <li><button class="tree-item" data-doc="kasko-documents">30.02.02. Документы: путь клиента</button></li>
-            <li><button class="tree-item" data-doc="kasko-fields">30.02.03. Поля и проверки КАСКО</button></li>
-            <li><button class="tree-item" data-doc="kasko-payment">30.02.04. Оплата: путь клиента</button></li>
-            <li><button class="tree-item" data-doc="mortgage">30.03. Ипотека</button></li>
-            <li><button class="tree-item" data-doc="mortgage-api">30.03.01. Путь клиента и офферы ипотеки</button></li>
-            <li><button class="tree-item" data-doc="mortgage-fields">30.03.02. Поля и офлайн-сценарий</button></li>
+            <li><button class="tree-item" data-doc="api-rules">30.01. Общие правила API</button></li>
+            <li><button class="tree-item" data-doc="api-application">30.02. API заявок и офферов</button></li>
+            <li><button class="tree-item tree-subitem" data-doc="api-common">30.02.01. Общие методы заявки</button></li>
+            <li><button class="tree-item tree-subitem" data-doc="api-osago">30.02.02. API ОСАГО</button></li>
+            <li><button class="tree-item tree-subitem" data-doc="api-kasko">30.02.03. API КАСКО</button></li>
+            <li><button class="tree-item tree-subitem" data-doc="api-mortgage">30.02.04. API ипотеки</button></li>
+            <li><button class="tree-item" data-doc="api-dictionaries">30.03. API справочников</button></li>
+            <li><button class="tree-item" data-doc="api-client-cache">30.04. API клиентского кэша</button></li>
+            <li><button class="tree-item" data-doc="api-documents">30.05. API файлов и документов</button></li>
+            <li><button class="tree-item" data-doc="api-enrichment">30.06. API обогащения данных</button></li>
           </ul>
         </details>
         <details class="tree-group" open>
-          <summary><span class="tree-toggle" aria-hidden="true"></span><button type="button" class="tree-section-item" data-doc="section-partners">40. Партнеры и HTTP API</button></summary>
+          <summary><span class="tree-toggle" aria-hidden="true"></span><button type="button" class="tree-section-item" data-doc="section-integrations">40. Интеграции и партнеры</button></summary>
           <ul class="tree-list">
-            <li><button class="tree-item" data-doc="partner-api">40.01. Правила HTTP API</button></li>
-            <li><button class="tree-item tree-subitem" data-doc="api-osago">40.01.01. HTTP API ОСАГО</button></li>
-            <li><button class="tree-item tree-subitem" data-doc="api-kasko">40.01.02. HTTP API КАСКО</button></li>
-            <li><button class="tree-item tree-subitem" data-doc="api-mortgage">40.01.03. HTTP API ипотеки</button></li>
-            <li><button class="tree-item tree-subitem" data-doc="api-documents">40.01.04. HTTP API файлов и документов</button></li>
-            <li><button class="tree-item" data-doc="integration">40.02. Страховые интеграции</button></li>
-            <li><button class="tree-item" data-doc="cache-enrichment">40.03. Кэш и API обогащения данных</button></li>
+            <li><button class="tree-item" data-doc="integration">40.01. Интеграции со страховыми</button></li>
+            <li><button class="tree-item" data-doc="partner-widgets">40.02. Партнерские виджеты и настройки</button></li>
+            <li><button class="tree-item" data-doc="callbacks">40.03. Колбэки и постбэки</button></li>
+            <li><button class="tree-item" data-doc="external-services">40.04. Внешние сервисы данных</button></li>
           </ul>
         </details>
         <details class="tree-group" open>
@@ -1126,11 +1139,388 @@
       }
     });
 
-    documents.jobs.path = ["Insapp", "20. Кодовая база", "20.07. Фоновые задачи и Quartz"];
-    documents.integration.path = ["Insapp", "40. Партнеры и HTTP API", "40.02. Страховые интеграции"];
-    documents["cache-enrichment"].path = ["Insapp", "40. Партнеры и HTTP API", "40.03. Кэш и API обогащения данных"];
-    documents["section-start"].sections[0].body = "<ul><li><strong>30. Продукты</strong> - путь клиента, поля и статусы.</li><li><strong>20. Кодовая база</strong> - отдельно frontend и backend.</li><li><strong>40. Партнеры и HTTP API</strong> - реальные контракты запросов и интеграции.</li><li><strong>50 и 60</strong> - работа оператора, эксплуатация и инциденты.</li></ul>";
-    documents.map.sections[0].rows = [["Путь клиента, поля или экран", "30. Продукты"], ["HTTP-метод, body, response или авторизация", "40. Партнеры и HTTP API"], ["Frontend-маршрут, компонент, сервис или polling", "20.02-20.03. Frontend"], ["Controller, DTO, сервис, SQL или backend-статус", "20.01 и 20.04. Backend"], ["Действие оператора", "50. ARM и работа операторов"], ["Релиз, PII, лог или инцидент", "60. Эксплуатация и безопасность"]];
+    Object.assign(documents, {
+      "section-platform": {
+        path: ["Insapp", "10. Архитектура и платформа"],
+        title: "10. Архитектура и платформа",
+        summary: "Раздел объясняет устройство Insapp: какие приложения участвуют в работе, как движутся данные и где проходят границы frontend, backend и внешних систем.",
+        meta: [["Тип", "Архитектура"], ["Проверено", "26.08.2026"], ["Источник", "DocMost + Git"], ["Пересмотр", "Новый компонент или поток"]],
+        sections: [
+          { type: "table", title: "Состав раздела", headers: ["Страница", "Ответ на вопрос"], rows: [["10.01. Обзор системы", "Из каких частей состоит Insapp"], ["10.02. Компоненты и потоки данных", "Как заявка проходит от браузера до страховой и обратно"], ["10.03. Frontend-архитектура", "Как устроены клиентские приложения"], ["10.04. Backend-архитектура", "Как устроены Public API, сервисы, данные и фоновые задачи"]] },
+          { type: "callout", body: "<strong>Граница.</strong> Пользовательские сценарии находятся в 20, точные HTTP-контракты - в 30, внешние системы - в 40. Архитектурный раздел только объясняет устройство и связи." },
+          { type: "sources", items: [["Backend", "Экспорт DocMost: 20. Монолит и разработка"], ["ОСАГО frontend", "insapp-front-osago-develop"], ["КАСКО frontend", "insapp-front-kasko-develop"], ["Ипотека frontend", "insapp-front-mortgage-develop"]] }
+        ]
+      },
+      architecture: {
+        path: ["Insapp", "10. Архитектура и платформа", "10.01. Обзор системы"],
+        title: "Обзор системы Insapp",
+        summary: "Insapp принимает клиентские данные из продуктовых frontend-приложений, хранит заявку в общем backend, запускает расчеты и возвращает предложения, документы и платежные ссылки.",
+        meta: [["Тип", "Обзор"], ["Проверено", "26.08.2026"], ["Источник", "DocMost + три frontend"], ["Пересмотр", "Изменение состава системы"]],
+        sections: [
+          { type: "table", title: "Основные части", headers: ["Часть", "Ответственность", "Граница"], rows: [["Frontend ОСАГО", "Форма, продление, офферы и переход к оплате", "Не принимает решение страховой"], ["Frontend КАСКО", "Автомобиль, водители, офферы, документы и оплата", "Не хранит основную версию заявки"], ["Frontend ипотеки", "Предварительный расчет, анкета, выбор и оплата", "Не реализует правила одобрения"], ["Public API", "Принимает запросы, проверяет доступ и возвращает ApiResponse", "Не отвечает за отображение экрана"], ["Сервисы монолита", "Правила заявки, статусы, расчеты и интеграции", "Не определяют верстку frontend"], ["DataAccess и хранилища", "Заявки, офферы, настройки, документы и журналы", "Доступ только через backend-слои"], ["Страховые и внешние сервисы", "Расчеты, данные автомобиля, подсказки, документы и оплата", "Собственные контракты и время ответа"]] },
+          { type: "text", title: "Главные идентификаторы", body: "<p><code>applicationId</code> связывает путь клиента, HTTP API, backend и ARM. После выбора предложения добавляется <code>offerId</code>. <code>apiKey</code> определяет партнера и доступные настройки, но его значение не публикуется.</p>" },
+          { type: "sources", items: [["Frontend routes", "app.routes.ts и kasko.routes.ts"], ["Backend", "Карта Public API и сервисного слоя из DocMost"], ["API", "Контрактная матрица Public API"], ["Данные", "Модель Application, Offer и Partner/API key из DocMost"]] }
+        ]
+      },
+      "system-flow": {
+        path: ["Insapp", "10. Архитектура и платформа", "10.02. Компоненты и потоки данных"],
+        title: "Компоненты и потоки данных",
+        summary: "Страница показывает движение заявки между браузером, Public API, сервисами, хранилищами и внешними системами без повторения продуктовых полей и endpoint-контрактов.",
+        meta: [["Тип", "Архитектурный поток"], ["Проверено", "26.08.2026"], ["Источник", "Frontend + DocMost"], ["Пересмотр", "Изменение связи компонентов"]],
+        sections: [
+          { type: "table", title: "Путь заявки", headers: ["Шаг", "Откуда", "Куда", "Что передается"], rows: [["1", "Frontend", "Public API", "Данные шага и идентификаторы заявки"], ["2", "Public API", "Сервисный слой", "Проверенный request и metadata партнера"], ["3", "Сервисный слой", "DataAccess", "Чтение или изменение заявки, оффера и настроек"], ["4", "Сервисный слой", "Страховая или другой провайдер", "Расчет, документ, проверка или платежная операция"], ["5", "Фоновая обработка", "Хранилище и интеграция", "Повторная проверка статуса или доставка результата"], ["6", "Public API", "Frontend или ARM", "ApiResponse, статус, офферы, документ или ссылка"]] },
+          { type: "table", title: "Отдельные потоки", headers: ["Поток", "Особенность"], rows: [["Кэш формы", "Frontend сохраняет черновое состояние через Client API, основная заявка остается в backend"], ["Обогащение", "Создание отчета и отдельное чтение результата по requestId"], ["Офферы", "Результаты приходят не одновременно; клиент читает накопленный список до признака завершения"], ["Документы", "Загрузка идет multipart, состояние комплекта читается отдельным запросом"], ["Оплата", "Ссылка может готовиться асинхронно; клиент повторяет чтение до конечного статуса"]] },
+          { type: "sources", items: [["Клиентский поток", "Сервисы и компоненты трех frontend"], ["Backend flow", "DocMost: сервисный слой и runtime"], ["HTTP", "30. Справочник HTTP API"], ["Интеграции", "40. Интеграции и партнеры"]] }
+        ]
+      },
+      "frontend-architecture": {
+        path: ["Insapp", "10. Архитектура и платформа", "10.03. Frontend-архитектура"],
+        title: "Frontend-архитектура",
+        summary: "Три Angular-приложения реализуют разные продуктовые пути. Общими остаются создание заявки, работа с идентификаторами, сохранение формы и обработка единой обертки ответа.",
+        meta: [["Слой", "Frontend"], ["Проверено", "26.08.2026"], ["Источник", "Локальные frontend-репозитории"], ["Пересмотр", "Новый frontend или общий механизм"]],
+        sections: [
+          { type: "table", title: "Приложения", headers: ["Страница", "Корень", "Назначение"], rows: [["10.03.01. Frontend ОСАГО", "<code>insapp-front-osago-develop/src/app</code>", "ОСАГО, продление, офферы и оплата"], ["10.03.02. Frontend КАСКО", "<code>projects/kaskoV2/src/app</code>", "КАСКО, документы и оплата"], ["10.03.03. Frontend ипотеки", "<code>.../src/app</code>", "Ипотечная форма, офферы и оплата"]] },
+          { type: "text", title: "Общие правила frontend", body: "<ul><li>Маршрут отвечает за шаг клиента, а не за бизнес-решение backend.</li><li>Angular-сервис собирает request и обрабатывает ответ, но точный HTTP-контракт описан только в разделе 30.</li><li>Для асинхронных операций фиксируются интервал, конечный статус и ограничение ожидания.</li><li>В лог не попадают apiKey, паспорт, телефон, адрес и содержимое документа.</li></ul>" },
+          { type: "sources", items: [["Маршруты", "app.routes.ts и kasko.routes.ts"], ["Сервисы", "app.service.ts, osago.service.ts, kasko.service.ts, mortgage.service.ts"], ["Формы", "property-controls.json и form components"], ["API", "30. Справочник HTTP API"]] }
+        ]
+      },
+      "front-osago": {
+        path: ["Insapp", "10. Архитектура и платформа", "10.03. Frontend-архитектура", "10.03.01. Frontend ОСАГО"],
+        title: "Frontend ОСАГО",
+        summary: "Angular-приложение ОСАГО ведет клиента через форму, предложения, проверку данных, выпуск и продление. Здесь описана только организация frontend-кода.",
+        meta: [["Слой", "Frontend"], ["Проверено", "26.08.2026"], ["Источник", "insapp-front-osago-develop"], ["Пересмотр", "Маршрут, компонент или сервис"]],
+        sections: [
+          { type: "table", title: "Структура", headers: ["Часть", "Расположение", "Ответственность"], rows: [["Маршруты", "<code>src/app/app.routes.ts</code>", "Экраны формы, офферов, продления, выпуска и результата"], ["Общие действия", "<code>shared/services/app.service.ts</code>", "Создание заявки, параметры входа и справочники"], ["ОСАГО", "<code>shared/services/osago.service.ts</code>", "Состояние расчета, выбор и оплата"], ["Request models", "<code>shared/interface/application.interface.ts</code>", "Типы анкеты и согласий"], ["Offer models", "<code>shared/interface/offers.interface.ts</code>", "Офферы, доппродукты и СБП"], ["Поля", "<code>assets/data/property-controls.json</code>", "Настройки полей и проверок"]] },
+          { type: "table", title: "Frontend-состояние", headers: ["Состояние", "Использование"], rows: [["applicationId", "Восстановление и все действия по заявке"], ["selectedOffer", "Выбранный оффер, доппродукты и способ оплаты"], ["appStatus", "Решение: повторно отправлять форму или только читать офферы"], ["cache", "Возврат к незавершенной анкете"], ["polling", "Ожидание отчетов, офферов и платежной ссылки"]] },
+          { type: "callout", body: "<strong>Не повторять.</strong> Путь клиента описан в 20.01, а request/response - в 30.02.02. Эта страница остается картой frontend-реализации." },
+          { type: "sources", items: [["Код", "insapp-front-osago-develop/src/app"], ["Продукт", "20.01. ОСАГО"], ["API", "30.02.02. API ОСАГО"], ["Поля", "property-controls.json"]] }
+        ]
+      },
+      "front-kasko": {
+        path: ["Insapp", "10. Архитектура и платформа", "10.03. Frontend-архитектура", "10.03.02. Frontend КАСКО"],
+        title: "Frontend КАСКО",
+        summary: "КАСКО разделено на core, общие сервисы и продуктовый модуль kaskoV2. Отдельный сервис документов отвечает за multipart-загрузку и состояние комплекта.",
+        meta: [["Слой", "Frontend"], ["Проверено", "26.08.2026"], ["Источник", "insapp-front-kasko-develop"], ["Пересмотр", "Модуль, маршрут или сервис"]],
+        sections: [
+          { type: "table", title: "Структура", headers: ["Часть", "Расположение", "Ответственность"], rows: [["Маршруты", "<code>modules/kasko/kasko.routes.ts</code>", "Экраны автомобиля, людей, офферов, документов и оплаты"], ["Core AppService", "<code>core/services/app.service.ts</code>", "Создание заявки, URL-параметры, настройки и обогащение"], ["KaskoService", "<code>shared/services/kasko.service.ts</code>", "Анкета, SMS, расчет, офферы и оплата"], ["DocumentsService", "<code>shared/services/documents.service.ts</code>", "Список, загрузка, удаление и отправка документов"], ["CacheService", "<code>core/services/cache.service.ts</code>", "Сохранение и восстановление формы"], ["Конфигурация полей", "<code>assets/data/property-controls.json</code>", "Базовые и партнерские отличия формы"]] },
+          { type: "text", title: "Важное отличие", body: "<p>После выбора оффера frontend может перейти сразу к ожиданию оплаты или сначала запросить документы. Эти ветки принадлежат продуктовому сценарию 20.02; здесь фиксируются только компоненты и сервисы, которые их реализуют.</p>" },
+          { type: "sources", items: [["Код", "projects/kaskoV2/src/app"], ["Карта экранов", "docs/PAGES_AND_API_ENDPOINTS.md"], ["Продукт", "20.02. КАСКО"], ["API", "30.02.03 и 30.05"]] }
+        ]
+      },
+      "front-mortgage": {
+        path: ["Insapp", "10. Архитектура и платформа", "10.03. Frontend-архитектура", "10.03.03. Frontend ипотеки"],
+        title: "Frontend ипотеки",
+        summary: "Ипотечное приложение имеет короткое дерево маршрутов, но сложную форму и последовательность предварительного и окончательного одобрения.",
+        meta: [["Слой", "Frontend"], ["Проверено", "26.08.2026"], ["Источник", "insapp-front-mortgage-develop"], ["Пересмотр", "Форма или сервис"]],
+        sections: [
+          { type: "table", title: "Структура", headers: ["Часть", "Расположение", "Ответственность"], rows: [["Маршруты", "<code>src/app/app.routes.ts</code>", "Старт, форма и результат"], ["Форма", "<code>components/form/form.component.ts</code>", "Шаги объекта, кредита, заемщика и контактов"], ["Оффер", "<code>shared/components/offer-item</code>", "Выбор предложения и повтор расчета"], ["MortgageService", "<code>shared/services/mortgage.service.ts</code>", "Справочники, расчет, сохранение, одобрение и оплата"], ["DTO", "<code>shared/interface/mortgage-application.interface.ts</code>", "Типы предварительной и полной анкеты"]] },
+          { type: "callout", body: "<strong>Персональные данные.</strong> Полная форма содержит паспорт, адрес, телефон и сведения о здоровье. Frontend не должен писать полное тело запроса в клиентский лог." },
+          { type: "sources", items: [["Код", "insapp-front-mortgage-develop/.../src/app"], ["Продукт", "20.03. Ипотека"], ["API", "30.02.04. API ипотеки"], ["Поля", "property-controls.json"]] }
+        ]
+      },
+      "backend-architecture": {
+        path: ["Insapp", "10. Архитектура и платформа", "10.04. Backend-архитектура"],
+        title: "Backend-архитектура",
+        summary: "Backend Insapp - монолит с Public API и ARM, общим сервисным слоем, DataAccess, моделями, интеграциями и Quartz-задачами.",
+        meta: [["Слой", "Backend"], ["Проверено", "24.08.2026"], ["Источник", "Экспорт DocMost"], ["Пересмотр", "Изменение backend-слоя"]],
+        sections: [
+          { type: "table", title: "Слои", headers: ["Страница", "Что находится внутри"], rows: [["10.04.01. Public API и middleware", "Контроллеры, маршруты, проверка request и доступ"], ["10.04.02. Сервисы и состояния заявки", "Application services, state machines и обработчики"], ["10.04.03. Данные и хранилища", "DataAccess, модели, SQL, миграции и файлы"], ["10.04.04. Фоновые задачи и Quartz", "Планировщик, job-классы, расписания и риски повтора"]] },
+          { type: "text", title: "Путь выполнения", body: "<p>Controller принимает request, middleware проверяет доступ и модель, сервисный слой выполняет правило, DataAccess читает или меняет данные, а интеграция или Quartz доводит асинхронную операцию до результата.</p>" },
+          { type: "sources", items: [["Сервисы", "DocMost: 10. Сервисный слой монолита"], ["Runtime", "DocMost: 20. Рантайм и архитектура"], ["Данные", "DocMost: 30. API, данные и модели"], ["Задачи", "DocMost: 40. Интеграции и фоновые задачи"]] }
+        ]
+      },
+      "backend-api-impl": {
+        path: ["Insapp", "10. Архитектура и платформа", "10.04. Backend-архитектура", "10.04.01. Public API и middleware"],
+        title: "Public API и middleware",
+        summary: "C#-контроллеры реализуют HTTP-контракты, а атрибуты проверяют модель, partner key, специальные заголовки и metadata запроса.",
+        meta: [["Слой", "Backend"], ["Проверено", "24.08.2026"], ["Источник", "Матрица Public API"], ["Пересмотр", "Controller, Route или middleware"]],
+        sections: [
+          { type: "table", title: "Основные контроллеры", headers: ["Контроллер", "Route", "Ответственность"], rows: [["ApplicationController", "App", "Заявки, офферы, выбор, документы продукта и оплата"], ["ClientController", "Client", "Кэш и восстановление клиентских данных"], ["DictionariesController", "Dictionaries", "Общие и продуктовые справочники"], ["EnrichmentController", "Enrichment", "Отчеты по автомобилю, полису и коэффициентам"], ["EnrichmentWidgetController", "EnrichmentWidget", "Обогащение для виджетов с двойной проверкой доступа"], ["FileController", "File", "Список, загрузка, удаление и выдача файлов"]] },
+          { type: "table", title: "Проверки запроса", headers: ["Механизм", "Что делает"], rows: [["RequestValidate", "Проверяет ModelState; часто возвращает HTTP 200 с result=false вместо HTTP 400"], ["AuthorizePartner", "Читает apiKey из body и заполняет RequestMetadata"], ["PrivatePartnerAuthorize", "Требует отдельный приватный ключ"], ["AuthtorizationHeader", "Проверяет специальное значение Authorization"], ["ExtractMetadata", "Извлекает applicationId, requestId и use case для логирования"], ["PostbackLogging", "Записывает входящий и исходящий callback"]] },
+          { type: "callout", body: "<strong>Не повторять контракт.</strong> Поля request и response находятся в разделе 30. Здесь описана backend-реализация и проверка доступа." },
+          { type: "sources", items: [["Контроллеры", "30.01. Карта Public API и контроллеров.md"], ["Матрица", "30.08. Контрактная матрица Public API эндпоинтов.md"], ["Middleware", "AuthorizePartnerAttribute и связанные классы по данным экспорта"], ["HTTP reference", "30. Справочник HTTP API"]] }
+        ]
+      },
+      "backend-services": {
+        path: ["Insapp", "10. Архитектура и платформа", "10.04. Backend-архитектура", "10.04.02. Сервисы и состояния заявки"],
+        title: "Сервисы и состояния заявки",
+        summary: "Сервисный слой выполняет правила продукта и переводит заявку между состояниями. Повторный вызов допустим только если текущий статус разрешает соответствующий переход.",
+        meta: [["Слой", "Backend"], ["Проверено", "24.08.2026"], ["Источник", "Сервисный слой DocMost"], ["Пересмотр", "Service или state machine"]],
+        sections: [
+          { type: "table", title: "Ответственность", headers: ["Часть", "Что делает"], rows: [["Application services", "Создают и изменяют заявку, выбирают сценарий продукта"], ["State machines", "Разрешают переходы между Filled, SentToInsurers, OfferChosen, Paid и другими состояниями"], ["Offer services", "Собирают и сортируют предложения, применяют настройки партнера"], ["Payment services", "Создают или читают платежную ссылку и статус"], ["Document services", "Хранят состав и состояние документов"], ["Integration services", "Преобразуют внутреннюю модель в контракт страховой или провайдера"]] },
+          { type: "text", title: "Правило повтора", body: "<p>Frontend сначала читает состояние заявки. Если анкета уже отправлена, повторная отправка может быть недопустима для state machine; в таком случае продолжается только чтение результата. Это подтверждено сценариями ОСАГО и КАСКО.</p>" },
+          { type: "sources", items: [["Каталог", "DocMost: 10.01. Каталог сервисов"], ["State machines", "DocMost: страницы машин состояний"], ["Frontend evidence", "OffersComponent ОСАГО и КАСКО"], ["API", "30.02. API заявок и офферов"]] }
+        ]
+      },
+      "data-storage": {
+        path: ["Insapp", "10. Архитектура и платформа", "10.04. Backend-архитектура", "10.04.03. Данные и хранилища"],
+        title: "Данные и хранилища",
+        summary: "Основные данные связаны вокруг Application, Offer и Partner/API key. Отдельно хранятся документы, клиентский кэш, настройки, журналы и результаты интеграций.",
+        meta: [["Слой", "Backend data"], ["Проверено", "24.08.2026"], ["Источник", "Модель данных DocMost"], ["Пересмотр", "Модель, миграция или хранилище"]],
+        sections: [
+          { type: "table", title: "Основные группы", headers: ["Группа", "Назначение", "Ключевая связь"], rows: [["Application", "Заявка, продукт, партнер и текущий статус", "applicationId"], ["Offer / FinOffer", "Предложение, страховая, цена и состояние", "offerId + applicationId"], ["Partner / API key", "Доступ, настройки и доступные функции", "partnerId / apiKeyId"], ["Client cache", "Черновое состояние формы для возврата", "clientId или applicationId"], ["Documents", "Файлы и metadata комплекта", "applicationId, offerId, documentId"], ["Logs", "Технические и бизнес-события", "время, serviceName и безопасные идентификаторы"]] },
+          { type: "text", title: "Изменение схемы", body: "<p>При изменении модели нужно проверить DataAccess, SQL, JSON-контракты, enum, миграции и страницы API. История миграций и точные таблицы остаются в техническом разделе экспорта DocMost и не копируются сюда.</p>" },
+          { type: "sources", items: [["DataAccess", "30.02. Карта DataAccess и persistence.md"], ["Модель", "30.03. Модель данных монолита и контракты.md"], ["Application", "30.03.01. Словарь агрегата Application.md"], ["Offer и Partner", "30.03.02-30.03.03"]] }
+        ]
+      },
+      jobs: {
+        path: ["Insapp", "10. Архитектура и платформа", "10.04. Backend-архитектура", "10.04.04. Фоновые задачи и Quartz"],
+        title: "Фоновые задачи и Quartz",
+        summary: "Quartz работает внутри процессов монолита. Реальное выполнение определяется связкой job-класса, записи QuartzOptions, процесса-владельца и deployed-конфигурации.",
+        meta: [["Слой", "Backend runtime"], ["Проверено", "24.08.2026"], ["Источник", "Карта Quartz DocMost"], ["Пересмотр", "Job, расписание или процесс"]],
+        sections: [
+          { type: "table", title: "Как запускается задача", headers: ["Элемент", "Роль"], rows: [["QuartzOptions:Jobs", "Словарь настроек по имени job"], ["Type", "Класс задачи"], ["Enabled", "Разрешен ли запуск"], ["CronExpression", "Расписание cron; имеет приоритет над interval"], ["OffsetMinutes / IntervalMinutes", "Задержка первого запуска и период"], ["Процесс", "PublicAPI, ARM или Console, где поднят scheduler"], ["BackgroundTaskRunner", "Внутрипроцессная обработка после запуска job"]] },
+          { type: "table", title: "Подтвержденные примеры", headers: ["Job", "Что делает", "Особенность"], rows: [["ApplicationExportCleanupJob", "Удаляет просроченные ARM-экспорты", "Запускается в ARM; интервал 1 минута"], ["ImportModificationsJob", "Импортирует модификации и сбрасывает кэш", "Учитывает отдельное время внутри job"], ["YandexExportJob", "Формирует CSV по оплаченным заявкам", "Cron утром; выгрузка в S3"], ["DocumentsRefreshJob", "Обновляет документы", "Частая интервальная задача"], ["AlfaAutoProlongationJob", "Готовит заявки продления", "Тяжелая параллельная задача в 03:00"]] },
+          { type: "callout", body: "<strong>Риск повтора.</strong> Scheduler хранится в памяти процесса. DisallowConcurrentExecution защищает только внутри одного экземпляра; одинаковая job в нескольких процессах может выполниться параллельно." },
+          { type: "sources", items: [["Карта", "40.01. Карта фоновых задач и Quartz.md"], ["Матрица", "40.05. Операционная матрица фоновых задач Quartz.md"], ["Инцидент", "60.09.3. Инцидент - Quartz и фоновые задачи.md"], ["Настройки", "QuartzOptions и appsettings по данным экспорта"]] }
+        ]
+      },
+      "section-products": {
+        path: ["Insapp", "20. Продукты и сценарии"],
+        title: "20. Продукты и сценарии",
+        summary: "Здесь описано только поведение продукта: шаги клиента, статусы, поля, проверки, офферы, документы и оплата. Техническая реализация и HTTP-контракты вынесены в другие разделы.",
+        meta: [["Тип", "Продуктовая документация"], ["Проверено", "26.08.2026"], ["Источник", "Frontend + DocMost"], ["Пересмотр", "Изменение клиентского сценария"]],
+        sections: [
+          { type: "table", title: "Продукты", headers: ["Продукт", "Страницы"], rows: [["ОСАГО", "Путь и статусы; поля; продление; офферы и оплата"], ["КАСКО", "Путь и офферы; поля; документы; оплата"], ["Ипотека", "Путь и офферы; поля и offline; одобрение и оплата"]] },
+          { type: "callout", body: "<strong>Не повторять.</strong> В продуктовой статье нет JSON body, контроллеров и путей к исходникам. Вместо этого стоят ссылки на 10.03, 10.04 и 30." },
+          { type: "sources", items: [["Frontend", "Маршруты и компоненты трех приложений"], ["API", "30. Справочник HTTP API"], ["Архитектура", "10. Архитектура и платформа"], ["Инциденты", "60. Эксплуатация и безопасность"]] }
+        ]
+      },
+      osago: {
+        path: ["Insapp", "20. Продукты и сценарии", "20.01. ОСАГО"],
+        title: "ОСАГО",
+        summary: "ОСАГО включает обычное оформление и продление: клиент заполняет данные, получает предложения, выбирает вариант и переходит к оплате и выпуску полиса.",
+        meta: [["Тип", "Продукт"], ["Проверено", "26.08.2026"], ["Источник", "Frontend ОСАГО"], ["Пересмотр", "Изменение сценария"]],
+        sections: [
+          { type: "table", title: "Страницы продукта", headers: ["Страница", "Содержание"], rows: [["20.01.01", "Путь клиента и статусы заявки"], ["20.01.02", "Поля автомобиля, водителей, собственника и страхователя"], ["20.01.03", "Поиск старого полиса и перенос данных"], ["20.01.04", "Ожидание предложений, выбор, доппродукты и оплата"]] },
+          { type: "text", title: "Границы", body: "<p>Frontend-устройство описано в 10.03.01, backend - в 10.04, HTTP API - в 30.02.02. Эта страница остается входом в продукт и не повторяет их содержание.</p>" },
+          { type: "sources", items: [["Frontend", "10.03.01"], ["API", "30.02.02"], ["Поля", "property-controls.json"], ["Инциденты", "60.05-60.08"]] }
+        ]
+      },
+      "osago-prolongation": {
+        path: ["Insapp", "20. Продукты и сценарии", "20.01. ОСАГО", "20.01.03. Продление полиса"],
+        title: "ОСАГО: продление полиса",
+        summary: "Продление начинается с поиска прежнего полиса по данным автомобиля или полиса. Найденные данные переносятся в новую заявку и обязательно показываются клиенту для проверки.",
+        meta: [["Тип", "Продуктовый сценарий"], ["Проверено", "26.08.2026"], ["Источник", "Компоненты fast-prolongation"], ["Пересмотр", "Изменение продления"]],
+        sections: [
+          { type: "table", title: "Порядок", headers: ["Шаг", "Действие", "Результат"], rows: [["1", "Клиент вводит госномер или данные старого полиса", "Можно запустить поиск"], ["2", "Система ищет данные автомобиля и прежнего договора", "Получен отчет или конечная ошибка"], ["3", "Найденные данные переносятся в новую заявку", "Форма предварительно заполнена"], ["4", "Клиент проверяет людей, автомобиль, документ и дату начала", "Исправлены устаревшие данные"], ["5", "Заявка идет в обычный расчет", "Клиент переходит к предложениям"]] },
+          { type: "text", title: "Ошибки", body: "<ul><li>Полис не найден - перейти к обычному заполнению.</li><li>Данные неполные - показать конкретные незаполненные поля.</li><li>Отчет долго готовится - ограничить ожидание и предложить повтор.</li><li>Найденный полис не должен автоматически подтверждать актуальность паспорта, водителей или документа автомобиля.</li></ul>" },
+          { type: "sources", items: [["Frontend", "fast-prolongation components"], ["Поля", "20.01.02"], ["API", "30.06. API обогащения данных"], ["Расчет", "20.01.04"]] }
+        ]
+      },
+      "osago-offers-payment": {
+        path: ["Insapp", "20. Продукты и сценарии", "20.01. ОСАГО", "20.01.04. Офферы и оплата"],
+        title: "ОСАГО: офферы и оплата",
+        summary: "После отправки анкеты предложения приходят постепенно. Клиент выбирает оффер, дополнительные продукты и способ оплаты, после чего ждет готовую платежную ссылку.",
+        meta: [["Тип", "Продуктовый сценарий"], ["Проверено", "26.08.2026"], ["Источник", "Offers и CreatePolicy"], ["Пересмотр", "Оффер, доппродукт или оплата"]],
+        sections: [
+          { type: "table", title: "Состояния экрана", headers: ["Состояние", "Что видит клиент"], rows: [["Расчет идет", "Уже полученные предложения и признак ожидания"], ["Расчет завершен", "Полный доступный список"], ["Нет предложений", "Понятная причина или следующий путь"], ["Оффер выбран", "Цена, страховая, доппродукты и способ оплаты"], ["Ссылка готовится", "Ограниченное ожидание"], ["Ссылка получена", "Переход к оплате"], ["Время вышло", "Безопасный повтор или передача в поддержку"]] },
+          { type: "text", title: "СБП и доппродукты", body: "<p>Доступность СБП зависит от оффера и настроек партнера. Несовместимые доппродукты могут блокировать СБП. Если способ оплаты уже закреплен готовой ссылкой, frontend не должен разрешать его смену.</p>" },
+          { type: "sources", items: [["Путь", "20.01.01"], ["Frontend", "offers и create-policy components"], ["API", "30.02.02"], ["Инцидент", "60.05. Платежная ссылка"]] }
+        ]
+      },
+      kasko: {
+        path: ["Insapp", "20. Продукты и сценарии", "20.02. КАСКО"],
+        title: "КАСКО",
+        summary: "КАСКО собирает данные автомобиля, водителей и собственника, показывает онлайн, mini и offline-предложения и ведет клиента к документам или оплате.",
+        meta: [["Тип", "Продукт"], ["Проверено", "26.08.2026"], ["Источник", "kaskoV2"], ["Пересмотр", "Изменение сценария"]],
+        sections: [
+          { type: "table", title: "Страницы продукта", headers: ["Страница", "Содержание"], rows: [["20.02.01", "Путь клиента и группы офферов"], ["20.02.02", "Поля автомобиля, людей и контактов"], ["20.02.03", "Список, загрузка и отправка документов как клиентский путь"], ["20.02.04", "Черновик полиса, платежная ссылка и результаты"]] },
+          { type: "text", title: "Границы", body: "<p>Frontend-структура находится в 10.03.02, API заявки - в 30.02.03, файловый API - в 30.05. На продуктовой странице остаются только действия и результаты для клиента.</p>" },
+          { type: "sources", items: [["Frontend", "10.03.02"], ["API", "30.02.03 и 30.05"], ["Карта экранов", "PAGES_AND_API_ENDPOINTS.md"], ["Поля", "property-controls.json"]] }
+        ]
+      },
+      "kasko-documents": {
+        path: ["Insapp", "20. Продукты и сценарии", "20.02. КАСКО", "20.02.03. Документы"],
+        title: "КАСКО: документы",
+        summary: "После выбора оффера система определяет нужный комплект. Клиент видит документы по ролям, загружает недостающие файлы и отправляет полный набор.",
+        meta: [["Тип", "Продуктовый сценарий"], ["Проверено", "26.08.2026"], ["Источник", "DocumentsComponent"], ["Пересмотр", "Тип документа или порядок загрузки"]],
+        sections: [
+          { type: "table", title: "Путь клиента", headers: ["Шаг", "Результат"], rows: [["Открыть страницу", "Получен список обязательных и уже загруженных документов"], ["Выбрать файл", "Проверены допустимый тип и размер"], ["Загрузить", "Файл появился в нужном блоке с возможностью просмотра"], ["Удалить", "Ошибочно загруженный файл убран, если редактирование разрешено"], ["Проверить комплект", "Все обязательные блоки заполнены"], ["Отправить", "Началась обработка; клиент видит результат, а не повторно отправляет набор"]] },
+          { type: "callout", body: "<strong>Безопасность.</strong> Страница не должна показывать чужие документы при смене applicationId или offerId. Полный файл и preview нельзя помещать в журнал ошибки." },
+          { type: "sources", items: [["Frontend", "DocumentsComponent"], ["Типы", "documents.interface.ts"], ["API", "30.05. API файлов и документов"], ["Инцидент", "60.07. Инцидент: документы"]] }
+        ]
+      },
+      "kasko-payment": {
+        path: ["Insapp", "20. Продукты и сценарии", "20.02. КАСКО", "20.02.04. Оплата"],
+        title: "КАСКО: оплата",
+        summary: "После выбора оффера система готовит черновик полиса и платежную ссылку. В зависимости от условий оффера перед оплатой могут потребоваться документы.",
+        meta: [["Тип", "Продуктовый сценарий"], ["Проверено", "26.08.2026"], ["Источник", "CreatePolicy и PaymentProcessing"], ["Пересмотр", "Изменение выпуска или оплаты"]],
+        sections: [
+          { type: "table", title: "Варианты", headers: ["Условие", "Путь"], rows: [["Документы не нужны", "Выбор оффера -> подготовка черновика -> платежная ссылка"], ["Документы нужны", "Выбор оффера -> комплект документов -> обработка -> черновик -> платежная ссылка"], ["Черновик не готов", "Продолжать ограниченное ожидание"], ["Платежная ссылка не готова", "Показать ожидание, затем ошибку и безопасный повтор"], ["Конечная ошибка", "Не возвращать клиента в бесконечный цикл"]] },
+          { type: "sources", items: [["Frontend", "CreatePolicyComponent и PaymentProcessingComponent"], ["Документы", "20.02.03"], ["API", "30.02.03"], ["Инцидент", "60.05"]] }
+        ]
+      },
+      mortgage: {
+        path: ["Insapp", "20. Продукты и сценарии", "20.03. Ипотека"],
+        title: "Ипотека",
+        summary: "Ипотечный продукт выполняет предварительный расчет, собирает полную анкету, получает окончательное решение и готовит оплату. При невозможности онлайн-оформления используется offline-заявка.",
+        meta: [["Тип", "Продукт"], ["Проверено", "26.08.2026"], ["Источник", "Frontend ипотеки"], ["Пересмотр", "Изменение сценария"]],
+        sections: [
+          { type: "table", title: "Страницы продукта", headers: ["Страница", "Содержание"], rows: [["20.03.01", "Путь клиента, предварительный расчет и офферы"], ["20.03.02", "Поля полной анкеты и offline-сценарий"], ["20.03.03", "Окончательное одобрение и оплата"]] },
+          { type: "text", title: "Границы", body: "<p>Frontend описан в 10.03.03, HTTP API - в 30.02.04. В продуктовой ветке нет JSON с паспортом, адресом или сведениями о здоровье.</p>" },
+          { type: "sources", items: [["Frontend", "10.03.03"], ["API", "30.02.04"], ["Поля", "mortgage property-controls.json"], ["Инцидент оплаты", "60.05"]] }
+        ]
+      },
+      "mortgage-payment": {
+        path: ["Insapp", "20. Продукты и сценарии", "20.03. Ипотека", "20.03.03. Одобрение и оплата"],
+        title: "Ипотека: одобрение и оплата",
+        summary: "После выбора предварительного предложения полная анкета сохраняется, выбранное предложение проходит окончательное одобрение, затем клиент получает платежную ссылку.",
+        meta: [["Тип", "Продуктовый сценарий"], ["Проверено", "26.08.2026"], ["Источник", "MortgageService"], ["Пересмотр", "Одобрение или оплата"]],
+        sections: [
+          { type: "table", title: "Порядок", headers: ["Шаг", "Успех", "Остановка"], rows: [["Сохранить полную анкету", "Данные приняты", "Показать ошибку конкретного блока"], ["Запустить окончательное одобрение", "Предложение перешло в обработку", "Не начинать оплату"], ["Проверять предложения", "Выбранное предложение стало Approved", "Rejected или завершение без выбранного предложения"], ["Получить платежную ссылку", "Статус перестал быть Processing и ссылка готова", "Конечная ошибка"], ["Отправить ссылку", "Выбран SMS и/или email", "Не повторять автоматически без действия пользователя"]] },
+          { type: "sources", items: [["Путь", "20.03.01"], ["Поля", "20.03.02"], ["Frontend", "mortgage.service.ts"], ["API", "30.02.04"]] }
+        ]
+      },
+      "section-api": {
+        path: ["Insapp", "30. Справочник HTTP API"],
+        title: "30. Справочник HTTP API",
+        summary: "Единственное место с внешними контрактами Insapp: HTTP-метод, route, доступ, request, response, ошибки, повтор и побочные действия.",
+        meta: [["Тип", "API reference"], ["Проверено", "26.08.2026"], ["Источник", "Backend matrix + frontend"], ["Пересмотр", "Изменение endpoint или DTO"]],
+        sections: [
+          { type: "table", title: "Разделы API", headers: ["Страница", "Контракты"], rows: [["30.01", "Обертка ответа, доступ, ошибки и повтор"], ["30.02", "Заявки, SMS, офферы, выбор и оплата"], ["30.03", "Справочники автомобилей, банков и продуктов"], ["30.04", "Клиентский кэш"], ["30.05", "Файлы и документы"], ["30.06", "Асинхронное обогащение данных"]] },
+          { type: "callout", body: "<strong>Не смешивать с кодом.</strong> Angular-метод и C# action указываются как ссылки на реализацию. Описание контракта живет только здесь." },
+          { type: "sources", items: [["Backend", "30.08. Контрактная матрица Public API"], ["Frontend", "Сервисы трех приложений"], ["Архитектура", "10. Архитектура и платформа"], ["Продукты", "20. Продукты и сценарии"]] }
+        ]
+      },
+      "api-application": {
+        path: ["Insapp", "30. Справочник HTTP API", "30.02. API заявок и офферов"],
+        title: "API заявок и офферов",
+        summary: "Группа App объединяет общий жизненный цикл заявки и продуктовые действия ОСАГО, КАСКО и ипотеки.",
+        meta: [["Тип", "API group"], ["Проверено", "26.08.2026"], ["Backend", "ApplicationController"], ["Пересмотр", "App route или DTO"]],
+        sections: [
+          { type: "table", title: "Подразделы", headers: ["Страница", "Содержание"], rows: [["30.02.01", "Создание, статус виджета, информация о заявке, SMS и выбор"], ["30.02.02", "Анкета, предложения и оплата ОСАГО"], ["30.02.03", "Анкета, предложения, черновик и оплата КАСКО"], ["30.02.04", "Предварительный расчет, анкета, одобрение и оплата ипотеки"]] },
+          { type: "text", title: "Общий жизненный цикл", body: "<p>Сначала создается applicationId. Затем продукт сохраняет анкету и запускает расчет. Предложения читаются до завершения, выбранный offerId сохраняется, после чего продукт готовит документы или платежную ссылку.</p>" },
+          { type: "sources", items: [["Backend", "ApplicationController"], ["Common", "30.02.01"], ["Products", "30.02.02-30.02.04"], ["Правила", "30.01"]] }
+        ]
+      },
+      "api-common": {
+        path: ["Insapp", "30. Справочник HTTP API", "30.02. API заявок и офферов", "30.02.01. Общие методы заявки"],
+        title: "Общие методы заявки",
+        summary: "Методы используются несколькими продуктами для создания заявки, фиксации входа, чтения состояния, подтверждения телефона и выбора оффера.",
+        meta: [["Тип", "HTTP API"], ["Проверено", "26.08.2026"], ["Backend", "ApplicationController"], ["Пересмотр", "Общий App method"]],
+        sections: [
+          { type: "table", title: "Методы", headers: ["HTTP", "Route", "Доступ", "Назначение", "Повтор"], rows: [["POST", "<code>App/New</code>", "Partner key", "Создать applicationId", "Создает новую заявку каждый раз"], ["POST", "<code>App/SetStatusWidgetDisplayed</code>", "Partner key", "Зафиксировать показ виджета", "Безопасная установка статуса"], ["POST", "<code>App/GetApplicationInfo</code>", "Private partner key", "Получить состояние и данные заявки", "Read-only"], ["POST", "<code>App/SendVerificationCode</code>", "Partner key", "Отправить SMS", "Может повторно отправить сообщение"], ["POST", "<code>App/VerifyCode</code>", "Partner key", "Проверить код", "Повторная проверка"], ["POST", "<code>App/SelectOffer</code>", "Partner key", "Сохранить offerId", "Перевыбор меняет выбор"], ["POST", "<code>App/SetStatusBuyButtonPressed</code>", "Partner key", "Зафиксировать начало оплаты", "Безопасная установка статуса"]] },
+          { type: "code", title: "App/New - минимальный пример", body: "{\n  \"apiKey\": \"***\",\n  \"applicationType\": \"Default\",\n  \"productType\": \"Osago\",\n  \"channelType\": \"Widget\",\n  \"clientId\": \"client-uuid\",\n  \"sessionId\": \"session-uuid\"\n}" },
+          { type: "code", title: "Успешный ответ App/New", body: "{\n  \"result\": true,\n  \"value\": {\n    \"applicationId\": \"application-uuid\",\n    \"skipAuth\": false\n  },\n  \"error\": null\n}" },
+          { type: "sources", items: [["Backend", "ApplicationController matrix"], ["Frontend ОСАГО", "app.service.ts"], ["Frontend КАСКО", "core/app.service.ts и kasko.service.ts"], ["Правила", "30.01"]] }
+        ]
+      },
+      "api-dictionaries": {
+        path: ["Insapp", "30. Справочник HTTP API", "30.03. API справочников"],
+        title: "API справочников",
+        summary: "Dictionaries API отдает марки, модели, годы, мощности, банки, профессии и настройки ипотечных продуктов.",
+        meta: [["Тип", "HTTP API"], ["Проверено", "26.08.2026"], ["Backend", "DictionariesController"], ["Пересмотр", "Справочник или фильтр"]],
+        sections: [
+          { type: "table", title: "Автомобиль", headers: ["HTTP", "Route", "Body", "Ответ"], rows: [["POST", "<code>Dictionaries/GetAllBrands</code>", "apiKey", "BrandResponse"], ["POST", "<code>Dictionaries/GetAllModels</code>", "apiKey, brandId", "ModelResponse"], ["POST", "<code>Dictionaries/GetBrandsModels</code>", "apiKey", "BrandsModelsResponse"], ["POST", "<code>Dictionaries/GetYears</code>", "apiKey и данные модели", "int[]"], ["POST", "<code>Dictionaries/GetPowers</code>", "apiKey и данные модели", "GetPowersResponse[]"], ["POST", "<code>Dictionaries/GetModifications</code>", "apiKey, modelId, year", "EnrichmentModification[]"]] },
+          { type: "table", title: "Ипотека", headers: ["HTTP", "Route", "Назначение"], rows: [["POST", "<code>Dictionaries/GetMortgageProducts</code>", "Продукты партнера"], ["POST", "<code>Dictionaries/GetBanks</code>", "Банки"], ["POST", "<code>Dictionaries/GetProfessions</code>", "Профессии"], ["POST", "<code>Dictionaries/GetProductDetails</code>", "Динамические поля продукта"]] },
+          { type: "callout", body: "<strong>Точное имя route.</strong> Метод backend называется GetBrandModels, но route - <code>GetBrandsModels</code>. В справочнике API сохраняется route, который реально вызывает клиент." },
+          { type: "sources", items: [["Backend", "DictionariesController matrix"], ["ОСАГО", "app.service.ts"], ["КАСКО", "kasko.service.ts"], ["Ипотека", "mortgage.service.ts"]] }
+        ]
+      },
+      "api-client-cache": {
+        path: ["Insapp", "30. Справочник HTTP API", "30.04. API клиентского кэша"],
+        title: "API клиентского кэша",
+        summary: "Client API сохраняет черновое состояние формы и позволяет восстановить заявку по clientId, applicationId или партнерскому идентификатору.",
+        meta: [["Тип", "HTTP API"], ["Проверено", "26.08.2026"], ["Backend", "ClientController"], ["Пересмотр", "Cache route или формат data"]],
+        sections: [
+          { type: "table", title: "Методы", headers: ["HTTP", "Route", "Body", "Назначение"], rows: [["POST", "<code>Client/GetCache</code>", "apiKey, clientId", "Получить общий клиентский кэш"], ["POST", "<code>Client/UpdateCache</code>", "apiKey, clientId, data", "Перезаписать JSON-строку формы"], ["POST", "<code>Client/GetOsagoCacheByApplicationId</code>", "apiKey, applicationId", "Восстановить ОСАГО"], ["POST", "<code>Client/GetOsagoCacheByPartnerApplicationId</code>", "apiKey, partnerApplicationId", "Найти ОСАГО по ID партнера"], ["POST", "<code>Client/GetKaskoCacheByApplicationId</code>", "apiKey, applicationId", "Восстановить КАСКО"]] },
+          { type: "text", title: "Ограничения", body: "<p><code>data</code> может быть произвольным JSON. Это черновое состояние интерфейса, а не основная модель Application. При отсутствии значения API возвращает result=false с сообщением о ненайденном кэше.</p>" },
+          { type: "sources", items: [["Backend", "ClientController matrix"], ["ОСАГО frontend", "cache services"], ["КАСКО frontend", "core/services/cache.service.ts"], ["Архитектура", "10.02. Компоненты и потоки данных"]] }
+        ]
+      },
+      "api-enrichment": {
+        path: ["Insapp", "30. Справочник HTTP API", "30.06. API обогащения данных"],
+        title: "API обогащения данных",
+        summary: "Обогащение работает парой create/get: первый запрос создает платный отчет и возвращает requestId, второй читает состояние и данные до конечного результата.",
+        meta: [["Тип", "HTTP API"], ["Проверено", "26.08.2026"], ["Backend", "Enrichment controllers"], ["Пересмотр", "Report type или доступ"]],
+        sections: [
+          { type: "table", title: "Отчеты", headers: ["Создание", "Чтение", "Назначение"], rows: [["CreateCarCharacteristicsReport", "GetCarCharacteristicsReport", "Характеристики автомобиля"], ["CreateTechDataReport", "GetTechDataReport", "Технические данные КАСКО"], ["CreateDiagnosticCardReport", "GetDiagnosticCardReport", "Диагностическая карта"], ["CreateOsagoReport", "GetOsagoReport", "Данные прежнего полиса для продления"], ["CreateDriverLicenseReport", "GetDriverLicenseReport", "Водительское удостоверение"], ["CreateKbmReport", "GetKbmReport", "Коэффициент KBM"]] },
+          { type: "table", title: "Доступ", headers: ["Route group", "Правило"], rows: [["Enrichment", "Partner key; для большинства методов дополнительно включенный enrichment-доступ"], ["EnrichmentWidget", "Partner key и специальный WidgetKey в Authorization"], ["Widget get methods", "Часть ответов принудительно возвращается с UseMasks=true"], ["Повтор", "Create может создать новый платный запрос; повторять нужно Get по существующему requestId"]] },
+          { type: "code", title: "Общая форма create/get", body: "POST Enrichment/CreateTechDataReport\n{ \"apiKey\": \"***\", \"applicationId\": \"application-uuid\", \"licensePlate\": \"A000AA00\" }\n\nPOST Enrichment/GetTechDataReport\n{ \"apiKey\": \"***\", \"requestId\": \"request-uuid\", \"UseMasks\": true }" },
+          { type: "sources", items: [["Backend", "EnrichmentController и EnrichmentWidgetController matrix"], ["ОСАГО", "enrichment services"], ["КАСКО", "Create/GetTechDataReport"], ["Продукт", "20.01.03 и 20.02.01"]] }
+        ]
+      },
+      "section-integrations": {
+        path: ["Insapp", "40. Интеграции и партнеры"],
+        title: "40. Интеграции и партнеры",
+        summary: "Раздел описывает обмен с внешними участниками: страховыми, партнерскими виджетами, callback-получателями и сервисами данных.",
+        meta: [["Тип", "Интеграции"], ["Проверено", "26.08.2026"], ["Источник", "DocMost + frontend"], ["Пересмотр", "Новый внешний участник"]],
+        sections: [
+          { type: "table", title: "Страницы", headers: ["Страница", "Содержание"], rows: [["40.01", "Отправка в страховые, предложения, документы и платежи"], ["40.02", "Запуск виджета, настройки API key и возврат партнеру"], ["40.03", "Входящие callback и postback, повтор и журналирование"], ["40.04", "DaData, AlfaId и другие внешние источники данных"]] },
+          { type: "callout", body: "<strong>Граница.</strong> Точный контракт Public API Insapp находится в 30. Здесь описывается внешний участник, последовательность обмена, повтор и разбор сбоя." },
+          { type: "sources", items: [["Backend integrations", "DocMost: 40. Интеграции и фоновые задачи"], ["Widgets", "Текущий DocMost 40.10"], ["Callbacks", "Контрактная матрица колбэков"], ["API", "30. Справочник HTTP API"]] }
+        ]
+      },
+      integration: {
+        path: ["Insapp", "40. Интеграции и партнеры", "40.01. Интеграции со страховыми"],
+        title: "Интеграции со страховыми",
+        summary: "Расчет, выпуск, документы и оплата зависят от внешних систем страховых. Ответ может прийти сразу, через повторное чтение или callback.",
+        meta: [["Тип", "Интеграция"], ["Проверено", "24.08.2026"], ["Источник", "DocMost integration matrix"], ["Пересмотр", "Страховая или способ обмена"]],
+        sections: [
+          { type: "table", title: "Потоки", headers: ["Поток", "Отправка", "Возврат", "Риск"], rows: [["Расчет", "Данные заявки", "Оффер или отказ", "Разное время ответа страховых"], ["Выбор", "applicationId и offerId", "Подтверждение выбора", "Оффер мог устареть"], ["Документы", "Файлы и metadata", "Статус обработки", "Неполный комплект или повтор"], ["Оплата", "Запрос платежной ссылки", "Ссылка или статус", "Долгая подготовка и повтор"], ["Полис", "Подтвержденная оплата", "Документ и статус", "Callback может прийти повторно"]] },
+          { type: "text", title: "Что фиксировать для каждой страховой", body: "<ul><li>Поддерживаемые продукты и операции.</li><li>Способ доступа и тестовый контур без значения секрета.</li><li>Сопоставление applicationId, offerId и внешнего ID.</li><li>Время ожидания, повтор и конечные ошибки.</li><li>Callback, его идемпотентность и журнал.</li><li>Runbook и владелец интеграции.</li></ul>" },
+          { type: "sources", items: [["Карта", "DocMost: карта интеграций со страховыми"], ["Callbacks", "40.03"], ["API", "30.02"], ["Инциденты", "60.05-60.08"]] }
+        ]
+      },
+      "partner-widgets": {
+        path: ["Insapp", "40. Интеграции и партнеры", "40.02. Партнерские виджеты и настройки"],
+        title: "Партнерские виджеты и настройки",
+        summary: "Партнер открывает нужный продукт с apiKey и параметрами входа. Настройки ключа определяют доступные продукты, страховые, возврат, авторизацию и отдельные возможности интерфейса.",
+        meta: [["Тип", "Партнерская интеграция"], ["Проверено", "26.08.2026"], ["Источник", "Frontend settings + DocMost"], ["Пересмотр", "Параметр запуска или API key setting"]],
+        sections: [
+          { type: "table", title: "Группы настроек", headers: ["Группа", "Что определяет"], rows: [["Вход", "apiKey, product, applicationId, source и session"], ["Внешний вид", "Партнерская сборка, логотипы, тексты и доступные поля"], ["Продукт", "Страховые, доппродукты, offline и продление"], ["Авторизация", "Нужен ли SMS-код и можно ли использовать skipAuth"], ["Возврат", "Куда перевести клиента после оформления или ошибки"], ["Оплата", "Разрешенные способы, уведомления и ARM-сценарий"]] },
+          { type: "callout", body: "<strong>Секрет.</strong> В документации указывается имя настройки и ее смысл, но не значение apiKey, закрытый URL или специальный Authorization header." },
+          { type: "sources", items: [["DocMost", "40.10. Виджеты продуктов и 50.02. Настройки Partner/API key"], ["Frontend", "environment и settings services"], ["API access", "30.01"], ["Products", "20.01-20.03"]] }
+        ]
+      },
+      callbacks: {
+        path: ["Insapp", "40. Интеграции и партнеры", "40.03. Колбэки и постбэки"],
+        title: "Колбэки и постбэки",
+        summary: "Входящие уведомления меняют состояние оплаты, полиса или внешней заявки. Один и тот же callback может прийти повторно, поэтому обработка должна быть идемпотентной.",
+        meta: [["Тип", "Интеграция"], ["Проверено", "24.08.2026"], ["Источник", "Callback matrix DocMost"], ["Пересмотр", "Новый callback или auth"]],
+        sections: [
+          { type: "table", title: "Группы", headers: ["Источник", "Контроллер", "Особенность"], rows: [["Страховые", "InsurerController", "Часть методов без partner auth; ответ может быть не в ApiResponse"], ["Финансовые организации", "FinOrgController", "GET/POST postback, часть маршрутов открыта"], ["FinProduct", "FinApplicationController", "AllowAnonymousPartner и PostbackLogging"], ["Партнерские системы", "Partner/Internal controllers и jobs", "Возможна повторная доставка из фоновой задачи"]] },
+          { type: "table", title: "Проверка callback", headers: ["Шаг", "Требование"], rows: [["Идентификация", "Сопоставить внешний ID с applicationId или offerId"], ["Повтор", "Не выполнять оплату, статус или уведомление дважды"], ["Порядок", "Не откатывать заявку в более раннее состояние"], ["Журнал", "Сохранить безопасный request/response и время"], ["Ответ", "Вернуть формат, который ожидает отправитель"], ["Ошибка", "Разрешить контролируемый повтор или ручную обработку"]] },
+          { type: "sources", items: [["Матрица", "40.04. Контрактная матрица колбэков и постбэков.md"], ["Идемпотентность", "40.04.01. Матрица колбэков и идемпотентности.md"], ["Backend", "InsurerController и FinOrgController matrix"], ["Инциденты", "60. Эксплуатация"]] }
+        ]
+      },
+      "external-services": {
+        path: ["Insapp", "40. Интеграции и партнеры", "40.04. Внешние сервисы данных"],
+        title: "Внешние сервисы данных",
+        summary: "Frontend и backend используют внешние источники для подсказок адреса и ФИО, данных автомобиля и отдельных способов подтверждения клиента.",
+        meta: [["Тип", "Интеграция"], ["Проверено", "26.08.2026"], ["Источник", "Frontend services"], ["Пересмотр", "Провайдер или контракт"]],
+        sections: [
+          { type: "table", title: "Сервисы", headers: ["Сервис", "Назначение", "Где используется", "Fallback"], rows: [["DaData", "Подсказки адреса и ФИО", "КАСКО и ипотека", "Ручной ввод и проверка формата"], ["AlfaId", "Отдельный сценарий идентификации", "Партнерские КАСКО-сценарии", "Обычная форма и SMS, если разрешено"], ["Car enrichment", "Характеристики по госномеру или ID", "ОСАГО и КАСКО", "Ручное заполнение автомобиля"], ["KBM", "Коэффициент водителя", "ОСАГО", "Конечная ошибка и ручная проверка"], ["Локальный log endpoint", "Клиентские технические ошибки", "Frontend", "Не блокировать основной путь"]] },
+          { type: "text", title: "Правила", body: "<p>Для внешнего сервиса фиксируются timeout, retry, лимит, данные запроса, маскирование, fallback и владелец. Токен DaData, apiKey и полное тело с PII не публикуются.</p>" },
+          { type: "sources", items: [["КАСКО", "dadata.service.ts и app.service.ts"], ["Ипотека", "address services"], ["Enrichment API", "30.06"], ["Инцидент", "60.08. Данные автомобиля"]] }
+        ]
+      }
+    });
+
+    delete documents["section-code"];
+    delete documents["backend-code"];
+    delete documents["frontend-apps"];
+    delete documents["frontend-services"];
+
+    documents["api-rules"].path = ["Insapp", "30. Справочник HTTP API", "30.01. Общие правила API"];
+    documents["api-rules"].title = "Общие правила API";
+    documents["api-osago"].path = ["Insapp", "30. Справочник HTTP API", "30.02. API заявок и офферов", "30.02.02. API ОСАГО"];
+    documents["api-osago"].title = "API ОСАГО";
+    documents["api-kasko"].path = ["Insapp", "30. Справочник HTTP API", "30.02. API заявок и офферов", "30.02.03. API КАСКО"];
+    documents["api-kasko"].title = "API КАСКО";
+    documents["api-mortgage"].path = ["Insapp", "30. Справочник HTTP API", "30.02. API заявок и офферов", "30.02.04. API ипотеки"];
+    documents["api-mortgage"].title = "API ипотеки";
+    documents["api-documents"].path = ["Insapp", "30. Справочник HTTP API", "30.05. API файлов и документов"];
+    documents["api-documents"].title = "API файлов и документов";
+    documents["osago-api"].path = ["Insapp", "20. Продукты и сценарии", "20.01. ОСАГО", "20.01.01. Путь клиента и статусы"];
+    documents["osago-fields"].path = ["Insapp", "20. Продукты и сценарии", "20.01. ОСАГО", "20.01.02. Поля и проверки"];
+    documents["kasko-api-offers"].path = ["Insapp", "20. Продукты и сценарии", "20.02. КАСКО", "20.02.01. Путь клиента и офферы"];
+    documents["kasko-fields"].path = ["Insapp", "20. Продукты и сценарии", "20.02. КАСКО", "20.02.02. Поля и проверки"];
+    documents["mortgage-api"].path = ["Insapp", "20. Продукты и сценарии", "20.03. Ипотека", "20.03.01. Путь клиента и офферы"];
+    documents["mortgage-fields"].path = ["Insapp", "20. Продукты и сценарии", "20.03. Ипотека", "20.03.02. Поля и офлайн-сценарий"];
+    documents["section-start"].sections[0].body = "<ul><li><strong>10. Архитектура и платформа</strong> - устройство системы, отдельно frontend и backend.</li><li><strong>20. Продукты и сценарии</strong> - путь клиента, поля и результаты.</li><li><strong>30. Справочник HTTP API</strong> - request, response, доступ и ошибки.</li><li><strong>40. Интеграции и партнеры</strong> - внешние участники и обмен данными.</li><li><strong>50 и 60</strong> - ARM, эксплуатация и инциденты.</li></ul>";
+    documents.map.sections[0].rows = [["Как устроена система", "10. Архитектура и платформа"], ["Что делает клиент", "20. Продукты и сценарии"], ["Как вызвать HTTP-метод", "30. Справочник HTTP API"], ["Как идет обмен с внешней системой", "40. Интеграции и партнеры"], ["Что делает оператор", "50. ARM и работа операторов"], ["Как разбирать сбой", "60. Эксплуатация и безопасность"]];
 
     function formatInline(value) {
       return String(value).replace(/`([^`]+)`/g, "<code>$1</code>");
@@ -1194,7 +1584,7 @@
       });
     });
 
-    renderDocument("section-code");
+    renderDocument("section-start");
   </script>
 </body>
 </html>
