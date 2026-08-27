@@ -42,6 +42,30 @@
     .brand-context { color: #c1cccf; font-weight: 500; letter-spacing: 0; }
     .back { display: inline-flex; align-items: center; min-height: 36px; padding: 0 13px; border: 1px solid #617078; border-radius: 8px; color: #e7eef0; background: #41494f; font-size: 13px; font-weight: 700; text-decoration: none; }
     .back:hover { border-color: var(--blue); color: #fff; background: #235c80; }
+
+    .password-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: rgba(16, 22, 26, .82);
+      backdrop-filter: blur(12px);
+    }
+    body:not(.locked) .password-gate { display: none; }
+    body.locked .sitebar, body.locked .app { filter: blur(10px); pointer-events: none; user-select: none; }
+    .password-card { width: min(420px, 100%); padding: 30px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); box-shadow: var(--shadow); }
+    .password-card h2 { margin: 0 0 8px; color: var(--navy); font-size: 26px; }
+    .password-card > p { margin: 0 0 20px; color: var(--muted); line-height: 1.55; }
+    .password-form { display: grid; gap: 12px; }
+    .password-form label { color: var(--muted); font-size: 12px; font-weight: 700; }
+    .password-form input { width: 100%; min-height: 46px; padding: 0 13px; border: 1px solid var(--line); border-radius: 10px; color: var(--ink); background: var(--canvas); font: inherit; }
+    .password-form button { min-height: 44px; border: 1px solid var(--green); border-radius: 10px; color: #102015; background: var(--green); font: inherit; font-weight: 800; cursor: pointer; }
+    .password-form button:hover { background: #7ce2a4; }
+    .password-error { min-height: 18px; margin: 0; color: #ff9b9b; font-size: 12px; }
+    :focus-visible { outline: 3px solid rgba(90, 173, 235, .55); outline-offset: 2px; }
+
     .app { width: 100%; display: grid; grid-template-columns: 320px minmax(0, 1fr); height: calc(100vh - var(--header-height)); min-height: 560px; background: var(--paper); box-shadow: var(--shadow); }
     .tree-panel { display: flex; flex-direction: column; min-height: 0; overflow: hidden; color: #e9f1f4; background: var(--bar); }
     .tree-header { padding: 26px 24px 20px; border-bottom: 1px solid rgba(255,255,255,.12); }
@@ -131,7 +155,19 @@
     }
   </style>
 </head>
-<body>
+<body class="locked">
+  <section class="password-gate" id="passwordGate" aria-labelledby="passwordTitle">
+    <div class="password-card">
+      <h2 id="passwordTitle">Доступ к документации</h2>
+      <p>Введите код доступа, чтобы открыть план документации Insapp.</p>
+      <form class="password-form" id="passwordForm">
+        <label for="passwordInput">Код доступа</label>
+        <input id="passwordInput" type="password" inputmode="numeric" autocomplete="off" required autofocus>
+        <p class="password-error" id="passwordError" role="alert"></p>
+        <button type="submit">Открыть</button>
+      </form>
+    </div>
+  </section>
   <header class="sitebar">
     <div class="brand">
       <span class="brand-mark">IN</span>
@@ -1724,6 +1760,37 @@
     document.getElementById("save-document").addEventListener("click", saveCurrentDocument);
 
     renderDocument("section-start");
+  </script>
+  <script>
+    const accessHash = "5dc3c3700c46499d89e7e810366d9d873e4da6b54c072f8ce515d47d7926878c";
+
+    async function hashAccessCode(value) {
+      const bytes = new TextEncoder().encode(value);
+      const digest = await crypto.subtle.digest("SHA-256", bytes);
+      return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
+    }
+
+    function unlockDocumentation() {
+      document.body.classList.remove("locked");
+      document.getElementById("passwordGate").setAttribute("aria-hidden", "true");
+    }
+
+    if (sessionStorage.getItem("insappDocmostDocumentationAccess") === accessHash) unlockDocumentation();
+
+    document.getElementById("passwordForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const input = document.getElementById("passwordInput");
+      const error = document.getElementById("passwordError");
+      const submittedHash = await hashAccessCode(input.value.trim());
+      if (submittedHash === accessHash) {
+        sessionStorage.setItem("insappDocmostDocumentationAccess", accessHash);
+        error.textContent = "";
+        unlockDocumentation();
+      } else {
+        error.textContent = "Неверный код доступа";
+        input.select();
+      }
+    });
   </script>
 </body>
 </html>
